@@ -1,8 +1,9 @@
 import React from 'react'
 
-const Header = () => {
+const Header = async () => {
+  const menu = await getMenu("New-Updated_Menu-Aujla");
   return (
-    <div>Header</div>
+    <nav>Header</nav>
   )
 }
 
