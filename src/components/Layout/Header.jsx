@@ -1,7 +1,9 @@
-import React from "react";
+import React from 'react'
 
-const Header = async () => {
-  return <nav>Header</nav>;
-};
+const Header = () => {
+  return (
+    <div>Header</div>
+  )
+}
 
-export default Header;
+export default Header
