@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../Layout/Layout";
 import { GET_PRODUCTS } from "../../lib/shopify/queries";
 import shopifyApi from "../../lib/shopify/shopifyApi";
+import UniqayaLoader from "../snippets/UniqayaLoader";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -31,7 +32,9 @@ const HomePage = () => {
 
   // Render loading, error, or product list
   if (loading) {
-    return <Layout title={"Uniqaya Lifestyle | Shop Now"}>Loading...</Layout>;
+    return <Layout title={"Uniqaya Lifestyle | Shop Now"}>
+      <UniqayaLoader />
+    </Layout>;
   }
 
   if (error) {
@@ -40,14 +43,17 @@ const HomePage = () => {
 
   return (
     <Layout title={"Uniqaya Lifestyle | Shop Now"}>
-      <section className="max-w-[1130px] mx-auto px-4 border-2">
+      <section className="max-w-[1130px] mx-auto px-4 border-2 justify-self-center">
         <div className="product-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 ">
           {products.map((product) => (
-            <div key={product.node.id} className="product-item border-2 align-center ">
+            <div
+              key={product.node.id}
+              className="product-item border-2 align-center"
+            >
               <img
                 src={product.node.images.edges[0]?.node.src}
                 alt={product.node.images.edges[0]?.node.altText}
-                className="product-image w-[200px] aspect-square  justify-self-center" 
+                className="product-image w-[200px] aspect-square  justify-self-center"
               />
               <h3>{product.node.title}</h3>
               <p>Rs. {product.node.priceRange.minVariantPrice.amount}</p>

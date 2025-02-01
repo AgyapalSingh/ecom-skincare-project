@@ -1,1 +1,80 @@
 @import "tailwindcss";
+
+
+:root {
+    --bg-dark: #fcfcfc;
+    --bg-light: #dbdbdb;
+    --acc-p: #95d5b2;
+    --acc-s: ;
+    --highlight: ;
+  }
+  
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .uniqaya-loader {
+    height: 100vh;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    overflow-x: hidden;
+  }
+  
+  .uniqaya-loader_container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+    height: 25rem;
+    width: 25rem;
+    border-radius: 2rem;
+    padding: 4rem 2.5rem 4rem 2.5rem;
+    background: var(--bg-dark);
+  }
+  
+  .uniqaya-loader_line {
+    display: block;
+    height: 2rem;
+    border-radius: 0.75rem;
+    background: linear-gradient(to right, var(--bg-light) 60%,rgba(255,255,255,0.4) 80%,var(--bg-light) 100%);
+    background-size: 200%;
+    background-position: 0% 0%;
+    animation: pulse 1s ease-in-out infinite;
+  }
+  
+  .uniqaya-loader_box {
+    display: block;
+    height: 100%;
+    width: 100%;
+    border-radius: 0.75rem;
+    background: linear-gradient(to right, var(--bg-light) 50%,rgba(255,255,255,0.4) 75%,var(--bg-light) 100%);
+    background-size: 200%;
+    background-position: 0% 0%;
+    animation: pulse 1s ease-in-out infinite;
+  }
+  
+  #uniqaya-loader_l1 {
+    width: 100%;
+  }
+  
+  #uniqaya-loader_l2 {
+    width: 8rem;
+  }
+  
+  #uniqaya-loader_l3 {
+    width: 15rem;
+  }
+  
+  #uniqaya-loader_l4 {
+    width: 10rem;
+  }
+  
+  @keyframes pulse {
+    100% {
+      background-position: 200% 0%;
+    }
+  }
