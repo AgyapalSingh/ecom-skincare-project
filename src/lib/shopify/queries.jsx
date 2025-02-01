@@ -1,6 +1,6 @@
 export const GET_PRODUCTS = `
   {
-    products(first: 15) {
+    products(first:70) {
       edges {
         node {
           id

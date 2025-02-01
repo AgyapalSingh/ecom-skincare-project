@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../Layout/Layout";
 import { GET_PRODUCTS } from "../../lib/shopify/queries";
-import  shopifyApi  from "../../lib/shopify/shopifyApi";
+import shopifyApi from "../../lib/shopify/shopifyApi";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -40,21 +40,21 @@ const HomePage = () => {
 
   return (
     <Layout title={"Uniqaya Lifestyle | Shop Now"}>
-      <div className="product-list">
-        {products.map((product) => (
-          <div key={product.node.id} className="product-item">
-            <h3>{product.node.title}</h3>
-            <p>{product.node.descriptionHtml}</p>
-            <img
-              style={{ width: "200px" }}
-              src={product.node.images.edges[0]?.node.src}
-              alt={product.node.images.edges[0]?.node.altText}
-              className="product-image"
-            />
-            <p>Price: ${product.node.priceRange.minVariantPrice.amount}</p>
-          </div>
-        ))}
-      </div>
+      <section className="max-w-[1130px] mx-auto px-4 border-2">
+        <div className="product-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 ">
+          {products.map((product) => (
+            <div key={product.node.id} className="product-item border-2 align-center ">
+              <img
+                src={product.node.images.edges[0]?.node.src}
+                alt={product.node.images.edges[0]?.node.altText}
+                className="product-image w-[200px] aspect-square  justify-self-center" 
+              />
+              <h3>{product.node.title}</h3>
+              <p>Rs. {product.node.priceRange.minVariantPrice.amount}</p>
+            </div>
+          ))}
+        </div>
+      </section>
     </Layout>
   );
 };
