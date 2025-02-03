@@ -1,6 +1,5 @@
 import "../../index.css";
 
-console.log("UNN");
 
 const UniqayaLoader = () => (
   <div className="uniqaya-loader">

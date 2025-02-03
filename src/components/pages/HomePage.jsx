@@ -43,12 +43,12 @@ const HomePage = () => {
 
   return (
     <Layout title={"Uniqaya Lifestyle | Shop Now"}>
-      <section className="max-w-[1130px] mx-auto px-4 border-2 justify-self-center">
+      <section className="max-w-[1130px] mx-auto px-4 sm:px-6 lg:px-0  justify-self-center">
         <div className="product-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 ">
           {products.map((product) => (
             <div
               key={product.node.id}
-              className="product-item border-2 align-center"
+              className="product-item align-center"
             >
               <img
                 src={product.node.images.edges[0]?.node.src}
