@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useCart } from "../../context/CartContext";
-import { ShoppingCart, User } from "lucide-react";
 import AnnounceMentBar from "../snippets/AnnounceMentBar";
 import CartDrawer from "./CartDrawer";
+import { PiShoppingCartLight } from "react-icons/pi";
 
 const Header = () => {
   const { cart } = useCart(); // Access cart state from the context
@@ -32,7 +32,7 @@ const Header = () => {
 
           {/* Cart Icon */}
           <div className="relative mx-4 cursor-pointer" onClick={toggleDrawer}>
-            <ShoppingCart className="text-white text-2xl" />
+          <PiShoppingCartLight className="text-white text-5xl" />
             {/* Display item count (show 0 if the cart is empty) */}
             <span className="absolute top-0 right-0 bg-red-600 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
               {totalItems}
@@ -40,9 +40,9 @@ const Header = () => {
           </div>
 
           {/* Account Icon */}
-          <div className="mx-4">
+          {/* <div className="mx-4">
             <User className="text-white text-2xl" />
-          </div>
+          </div> */}
         </div>
 
         <CartDrawer isOpen={isDrawerOpen} closeDrawer={toggleDrawer} />

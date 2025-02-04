@@ -79,7 +79,7 @@ const HomePage = () => {
   return (
     <Layout title="Uniqaya Lifestyle | Shop Now">
       {/* All Products Section */}
-      <section className="max-w-[1130px] mx-auto px-4 sm:px-6 lg:px-0">
+      <section className="max-w-[1130px] mx-auto px-4 sm:px-6 lg:px-0 justify-self-center">
         <h2 className="text-2xl font-bold text-center my-8">All Products</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {products.map(({ node }) => (
@@ -103,7 +103,7 @@ const HomePage = () => {
       </section>
 
       {/* Collections Section */}
-      <section className="max-w-[1130px] mx-auto px-4 sm:px-6 lg:px-0">
+      <section className="max-w-[1130px] mx-auto px-4 sm:px-6 lg:px-0 justify-self-center">
         <h2 className="text-2xl font-bold text-center my-8">Collections</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {collections.map(({ node }) => (
@@ -120,7 +120,7 @@ const HomePage = () => {
       </section>
 
       {/* Best Seller Collection Section */}
-      <section className="max-w-[1130px] mx-auto px-4 sm:px-6 lg:px-0">
+      <section className="max-w-[1130px] mx-auto px-4 sm:px-6 lg:px-0 justify-self-center">
         <h2 className="text-2xl font-bold text-center my-8">Best Seller</h2>
         {selectCollection.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
