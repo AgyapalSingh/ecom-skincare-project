@@ -92,7 +92,7 @@ const HomePage = () => {
               <h3 className="mt-2 font-semibold">{node.title}</h3>
               <p className="text-gray-600">Rs. {node.priceRange.minVariantPrice.amount}</p>
               <button
-                onClick={() => addToCart({ id: node.id, title: node.title, price: node.priceRange.minVariantPrice.amount })}
+                onClick={() => addToCart({ id: node.id, title: node.title, price: node.priceRange.minVariantPrice.amount , image: node.images.edges[0]?.node.src})}
                 className="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
               >
                 Add to Cart
@@ -133,7 +133,7 @@ const HomePage = () => {
                 />
                 <h3 className="text-lg font-semibold">{node.title}</h3>
                 <button
-                  onClick={() => addToCart({ id: node.id, title: node.title, price: node.priceRange?.minVariantPrice?.amount })}
+                  onClick={() => addToCart({ id: node.id, title: node.title, price: node.priceRange?.minVariantPrice?.amount , image: node.featuredImage.url})}
                   className="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
                 >
                   Add to Cart

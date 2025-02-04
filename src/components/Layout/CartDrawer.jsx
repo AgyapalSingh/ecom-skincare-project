@@ -1,6 +1,5 @@
 import React from "react";
 import { useCart } from "../../context/CartContext"; // Import cart context
-import { ShoppingCart } from "lucide-react"; // Import ShoppingCart from lucide-react
 
 const CartDrawer = ({ isOpen, closeDrawer }) => {
   const { cart, removeFromCart, clearCart } = useCart();
@@ -12,7 +11,7 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
 
   return (
     <div
-      className={`fixed inset-0 bg-black bg-opacity-50 z-50 transition-all duration-300 ${
+      className={`fixed inset-0 bg-black/50 z-50 transition-all duration-300 ${
         isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
       onClick={closeDrawer}
@@ -23,13 +22,14 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
         } transition-transform duration-300`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex justify-between items-center">
-          <h2 className="text-xl font-bold">Your Cart</h2>
-          <button onClick={closeDrawer}>Close</button>
+        <div className="flex justify-between bg-amber-400 items-center">
+          <h2 className="text-xl font-bold ">Your Cart</h2>
+          <button className="cursor-pointer" onClick={closeDrawer}>Close</button>
         </div>
 
         {/* Cart items list */}
-        <div className="mt-4">
+        <div className="mt-4 text-black">
+          
           {cart.length > 0 ? (
             cart.map((item) => (
               <div
@@ -65,7 +65,7 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
 
         {/* Cart summary */}
         {cart.length > 0 && (
-          <div className="mt-4">
+          <div className="mt-4 text-black">
             <div className="flex justify-between items-center">
               <p className="font-semibold">Total</p>
               <p className="font-semibold">Rs. {totalPrice}</p>
