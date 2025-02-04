@@ -30,7 +30,7 @@ const CollectionPage = () => {
   }, []);
   if (loading) {
     return (
-      <Layout title="Uniqaya Lifestyle | Shop Now">
+      <Layout title="All Collections | Uniqaya">
         <UniqayaLoader />
       </Layout>
     );
@@ -38,7 +38,7 @@ const CollectionPage = () => {
 
   // Render error state
   if (error) {
-    return <Layout title="Uniqaya Lifestyle | Shop Now">{error}</Layout>;
+    return <Layout title="All Collections | Uniqaya">{error}</Layout>;
   }
 
   return (
