@@ -31,16 +31,24 @@ export const CartProvider = ({ children }) => {
 
   // Remove item from cart
   const removeFromCart = (id) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+    setCart((prevCart) => {
+      const updatedCart = prevCart.filter((item) => item.id !== id);
+      // Persist the updated cart in localStorage
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      return updatedCart;
+    });
   };
 
   // Clear the cart
   const clearCart = () => {
     setCart([]);
+    // Clear the cart in localStorage as well
+    localStorage.setItem("cart", JSON.stringify([]));
   };
 
   // Persist cart to localStorage whenever it changes
   useEffect(() => {
+    // Only persist if there are items in the cart
     if (cart.length > 0) {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
