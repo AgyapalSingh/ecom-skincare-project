@@ -41,7 +41,7 @@ export const CartProvider = ({ children }) => {
 
   // Persist cart to localStorage whenever it changes
   useEffect(() => {
-    if (cart.length > -1) {
+    if (cart.length > 0) {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
   }, [cart]);
