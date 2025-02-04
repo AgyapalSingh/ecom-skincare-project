@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import AnnounceMentBar from "../snippets/AnnounceMentBar";
 import CartDrawer from "./CartDrawer";
 import { PiShoppingCartLight } from "react-icons/pi";
+import { LuSearch } from "react-icons/lu";
+import { LuUserRound } from "react-icons/lu";
 
 const Header = () => {
   const { cart } = useCart(); // Access cart state from the context
@@ -19,20 +22,47 @@ const Header = () => {
     <header className="h-28 bg-[#183457] text-amber-50  px-4 fixed top-0 right-0 left-0">
       <AnnounceMentBar />
 
-      <div className="container mx-auto flex items-center justify-between h-full px-4">
+      <nav className="container mx-auto flex items-center justify-between h-full px-4">
         <div className="flex items-center">
-          <div className="text-3xl font-semibold text-white">Uniqaya</div>
+          <div className="text-3xl font-semibold text-white">
+            <Link to="/" className="navbar-brand">
+              <img
+                className=" h-8"
+                src="https://cdn.shopify.com/s/files/1/0589/0192/1956/files/Uniqaya_Logo_Wide_Clean_Functional.png?v=1724408288"
+              />
+            </Link>
+          </div>
+        </div>
+
+        <div>
+          {/* Menu (You can add this as you prefer) */}
+          <div className="mx-4">
+            <ul>
+              <li>
+                <Link
+                  className="nav-link dropdown-toggle"
+                  to={"/All-Collections"}
+                  data-bs-toggle="dropdown"
+                >
+                  All Collections
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div className="flex items-center">
-          {/* Menu (You can add this as you prefer) */}
-          <div className="mx-4">
-            <span className="text-white">Menu</span>
+          <div className="relative mx-4 cursor-pointer">
+            <LuSearch className="text-white text-5xl" />
+          </div>
+
+          <div className="relative mx-4 cursor-pointer">
+            <LuUserRound className="text-white text-5xl" />
           </div>
 
           {/* Cart Icon */}
           <div className="relative mx-4 cursor-pointer" onClick={toggleDrawer}>
-          <PiShoppingCartLight className="text-white text-5xl" />
+            <PiShoppingCartLight className="text-white text-5xl" />
             {/* Display item count (show 0 if the cart is empty) */}
             <span className="absolute top-0 right-0 bg-red-600 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
               {totalItems}
@@ -46,7 +76,7 @@ const Header = () => {
         </div>
 
         <CartDrawer isOpen={isDrawerOpen} closeDrawer={toggleDrawer} />
-      </div>
+      </nav>
     </header>
   );
 };
