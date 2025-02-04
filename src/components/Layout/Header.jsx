@@ -1,38 +1,43 @@
-import React, { useState } from "react";
-import AnnounceMentBar from "../snippets/AnnounceMentBar";
-import NavigationMenu from "../snippets/NavigationMenu";
+import React from "react";
+import { useCart } from "../../context/CartContext";
 import { ShoppingCart, User } from "lucide-react";
+import AnnounceMentBar from "../snippets/AnnounceMentBar";
 
 const Header = () => {
-  const [cartCount, setCartCount] = useState(0); // Replace with actual cart state
+  const { cart } = useCart(); // Access cart state from the context
+
+  // Get the total item count from the cart
+  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <header className="h-28 bg-[#183457] text-amber-50">
+    <header className="h-28 bg-[#183457] text-amber-50  px-4 fixed top-0 right-0 left-0">
       <AnnounceMentBar />
 
       <div className="container mx-auto flex items-center justify-between h-full px-4">
-        {/* Left: Logo */}
         <div className="flex items-center">
-          <img src="/logo.png" alt="Logo" className="h-12" />
+          <div className="text-3xl font-semibold text-white">Uniqaya</div>
         </div>
 
-        {/* Center: Navigation Menu */}
-        <nav className="flex-grow flex justify-center">
-          {/* <NavigationMenu /> */}
-        </nav>
+        <div className="flex items-center">
+          {/* Menu (You can add this as you prefer) */}
+          <div className="mx-4">
+            <span className="text-white">Menu</span>
+          </div>
 
-        {/* Right: Account & Cart Icons */}
-        <div className="flex items-center space-x-6">
-          <User className="w-6 h-6 cursor-pointer" />
-
-          {/* Cart Icon with Badge */}
-          <div className="relative cursor-pointer">
-            <ShoppingCart className="w-6 h-6" />
-            {cartCount > -1 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-                {cartCount}
+          {/* Cart Icon */}
+          <div className="relative mx-4">
+            <ShoppingCart className="text-white text-2xl" />
+            {/* Display item count */}
+            {totalItems > 0 && (
+              <span className="absolute top-0 right-0 bg-red-600 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
+                {totalItems}
               </span>
             )}
+          </div>
+
+          {/* Account Icon */}
+          <div className="mx-4">
+            <User className="text-white text-2xl" />
           </div>
         </div>
       </div>
@@ -41,4 +46,3 @@ const Header = () => {
 };
 
 export default Header;
-
