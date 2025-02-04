@@ -12,7 +12,7 @@ const Header = () => {
 
       <div>
         <div>IMG</div>
-        <div><NavigationMenu/></div>
+        {/* <div><NavigationMenu/></div> */}
         <div>Accounts</div>
       </div>
     </header>
