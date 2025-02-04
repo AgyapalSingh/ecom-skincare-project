@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { GET_COLLECTION_BY_ID } from "../../lib/shopify/queries";
-import Layout from "../Layout/Layout";
-import UniqayaLoader from "../snippets/UniqayaLoader";
 import shopifyApi from "../../lib/shopify/shopifyApi";
 import { useCart } from "../../context/CartContext";
+import UniqayaLoader from "../snippets/UniqayaLoader";
 
 const BestSeller = () => {
   const [loading, setLoading] = useState(true);
@@ -29,17 +28,9 @@ const BestSeller = () => {
   }, []);
 
   if (loading) {
-    return (
-      <Layout title="Uniqaya Lifestyle | Shop Now">
-        <UniqayaLoader />
-      </Layout>
-    );
+    return <UniqayaLoader />;
   }
 
-  // Render error state
-  if (error) {
-    return <Layout title="Uniqaya Lifestyle | Shop Now">{error}</Layout>;
-  }
 
   return (
     <div>
