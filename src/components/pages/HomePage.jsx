@@ -49,7 +49,6 @@ const HomePage = () => {
     try {
       const response = await shopifyApi.post("", query);
       const fetchedCollection = response.data.data.collection;
-      console.log(fetchedCollection);
       // Ensure we extract the products array correctly
       setSelectCollection(fetchedCollection?.products?.edges || []);
     } catch (error) {

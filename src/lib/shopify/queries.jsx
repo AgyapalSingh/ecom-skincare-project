@@ -28,17 +28,13 @@ export const GET_PRODUCTS = `
 
 export const GET_NAVIGATION = `
 {
-  menus {
-    edges {
-      node {
-        id
-        title
-        items {
-          id
-          title
-          url
-        }
-      }
+  menu(handle: "main-menu") {
+    id
+    title
+    items {
+      title
+      url
+      type
     }
   }
 }`;

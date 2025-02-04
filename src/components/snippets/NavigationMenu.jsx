@@ -11,7 +11,9 @@ const NavigationMenu = () => {
     const query = { query: GET_NAVIGATION };
     try {
       const response = await shopifyApi.get("", query);
-      setMenus(response.data.menus); // Assuming the menus data is in 'menus'
+      const menuData = response.data.data.menu.items;
+      console.log(menuData);
+      // setMenus(response.data.menus); // Assuming the menus data is in 'menus'
     } catch (error) {
       setError("Failed to fetch navigation");
     } finally {
