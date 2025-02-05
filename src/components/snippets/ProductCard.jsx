@@ -37,7 +37,7 @@ const ProductCard = ({ product }) => {
         Rs. {selectedVariant ? selectedVariant.price.amount : "N/A"}
       </p>
 
-      {variants.length > 1 && ( // Show dropdown only if there are multiple variants
+      {/* {variants.length > 1 && ( // Show dropdown only if there are multiple variants
         <select
           className="border p-2 mt-2 rounded w-full"
           onChange={handleVariantChange}
@@ -49,6 +49,25 @@ const ProductCard = ({ product }) => {
             </option>
           ))}
         </select>
+      )} */}
+
+      {variants.length > 1 && ( // Show buttons only if there are multiple variants
+        <div className="flex flex-wrap gap-2 mt-2">
+          {variants.map((variant) => (
+            <button
+              key={variant.id}
+              onClick={() => setSelectedVariant(variant)}
+              className={`px-4 py-2 rounded border ${
+                selectedVariant?.id === variant.id
+                  ? "bg-blue-600 text-white" // Selected variant styling
+                  : "bg-gray-200 hover:bg-gray-300"
+              }`}
+            >
+              {/* {variant.title} - Rs. {variant.price.amount} */}
+              {variant.title} 
+            </button>
+          ))}
+        </div>
       )}
 
       <button
