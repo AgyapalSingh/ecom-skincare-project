@@ -1,11 +1,11 @@
 import React from "react";
 import Layout from "../Layout/Layout";
-import AllProducts from "../collections/AllProducts";
+import BestSeller from "../collections/BestSeller";
 
 const HomePage = () => {
   return (
-    <Layout title="Home | Uniqaya Lifestyle">
-      <AllProducts />
+    <Layout title="Best Sellers | Uniqaya Lifestyle">
+      <BestSeller />
     </Layout>
   );
 };

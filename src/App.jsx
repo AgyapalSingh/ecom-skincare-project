@@ -5,6 +5,7 @@ import CollectionPage from "./components/pages/CollectionPage";
 import PageNotFound from "./components/pages/PageNotFound";
 import ProductPage from "./products/ProductPage";
 import ProductPageFromCollection from "./products/ProductPageFromCollection";
+import BestSellerPage from "./components/pages/BestSellerPage";
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/All-Collections" element={<CollectionPage />} />
+        <Route path="/collections/bestsellers" element={<BestSellerPage />} />
         <Route path="/products/:handle" element={<ProductPage />} />
         <Route path="/collections/products/:handle" element={<ProductPageFromCollection />} />
         <Route path="*" element={<PageNotFound />} />

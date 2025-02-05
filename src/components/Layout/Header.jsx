@@ -39,13 +39,23 @@ const Header = () => {
           <div className="mx-4">
             <ul>
               <li>
-                <Link
+                <NavLink
                   className="nav-link dropdown-toggle"
                   to={"/All-Collections"}
                   data-bs-toggle="dropdown"
                 >
                   All Collections
-                </Link>
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  className="nav-link dropdown-toggle"
+                  to={"/collections/bestsellers"}
+                  data-bs-toggle="dropdown"
+                >
+                  Best Sellers
+                </NavLink>
               </li>
             </ul>
           </div>
