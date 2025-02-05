@@ -7,7 +7,7 @@ import ProductCardForCollection from "../snippets/ProductCardForCollection";
 
 const NewlyLaunchedCollection = () => {
   const [loading, setLoading] = useState(true);
-  const bestsellers = "bestsellers";
+  const newlylaunched = "newly-launched";
   const { cart, addToCart } = useCart();
   const [selectCollection, setSelectCollection] = useState([]);
 
@@ -46,7 +46,7 @@ const NewlyLaunchedCollection = () => {
                   key={node.id}
                   product={node}
                   addToCart={addToCart}
-                  collectionHandle={bestsellers}
+                  collectionHandle={newlylaunched}
                 />
               ))}
             </div>
