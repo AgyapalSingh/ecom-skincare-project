@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import UniqayaLoader from "../snippets/UniqayaLoader";
 import { GET_COLLECTIONS } from "../../lib/shopify/queries";
 import shopifyApi from "../../lib/shopify/shopifyApi";
+import UniqayaLoader from "../snippets/UniqayaLoader";
+
 
 const AllCollections = () => {
   const [loading, setLoading] = useState(true);
@@ -16,22 +17,20 @@ const AllCollections = () => {
       setCollections(fetchedCollections);
     } catch (error) {
       setError("Failed to fetch collections");
-      console.error("Failed to fetch collections", error);
     } finally {
-      setLoading(false); // Set loading to false after the API call finishes
+      setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchCollections();
   }, []);
 
-  if (loading) {
-    return <UniqayaLoader />;
-  }
-
   return (
-    <div>
-      {/* Collections Section */}
+    <>
+      {loading ? (
+        <UniqayaLoader />
+      ) : (
       <section className="max-w-[1130px] mx-auto px-4 sm:px-6 lg:px-0 justify-self-center">
         <h2 className="text-2xl font-bold text-center my-8">All Collections</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
@@ -47,7 +46,8 @@ const AllCollections = () => {
           ))}
         </div>
       </section>
-    </div>
+      )}
+    </>
   );
 };
 
