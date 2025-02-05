@@ -42,7 +42,7 @@ const AllCollections = () => {
               <div
                 key={node.id}
                 className="text-center border p-4 rounded-md cursor-pointer"
-                onClick={() => navigate(`/All-Collections/${node.handle}`)}
+                onClick={() => navigate(`/allcollections/${node.handle}`)}
               >
                 <img
                   src={node.image?.url || "default-image.jpg"}

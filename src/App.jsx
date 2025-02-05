@@ -14,8 +14,8 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/All-Collections" element={<CollectionPage />} />
-        <Route path="/All-Collections/:handle" element={<CollectionPageFromAllCollections />} />
+        <Route path="/allcollections" element={<CollectionPage />} />
+        <Route path="/allcollections/:handle" element={<CollectionPageFromAllCollections />} />
         <Route path="/collections/bestsellers" element={<BestSellerPage />} />
         <Route path="/products/:handle" element={<ProductPage />} />
         <Route path="/collections/products/:handle" element={<ProductPageFromCollection />} />

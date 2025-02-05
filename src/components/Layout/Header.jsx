@@ -41,7 +41,7 @@ const Header = () => {
               <li>
                 <NavLink
                   className="nav-link dropdown-toggle"
-                  to={"/All-Collections"}
+                  to={"/allcollections"}
                   data-bs-toggle="dropdown"
                 >
                   All Collections
