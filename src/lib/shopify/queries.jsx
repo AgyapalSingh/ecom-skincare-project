@@ -1,7 +1,7 @@
 // 1. QUERY TO FETCH ALL PRODUCTS
 export const GET_PRODUCTS = `
   {
-    products(first:70) {
+    products(first: 70) {
       edges {
         node {
           id
@@ -21,11 +21,24 @@ export const GET_PRODUCTS = `
               }
             }
           }
+          variants(first: 10) {
+            edges {
+              node {
+                id
+                title
+                availableForSale
+                price {
+                  amount
+                }
+              }
+            }
+          }
         }
       }
     }
   }
 `;
+
 
 // 2. QUERY TO FETCH ALL COLLECTIONS
 export const GET_COLLECTIONS = `{
