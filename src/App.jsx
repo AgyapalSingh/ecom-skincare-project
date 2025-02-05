@@ -17,8 +17,10 @@ function App() {
 
         <Route path="/products/:handle" element={<ProductPage />} />
 
+
         <Route path="/allcollections" element={<CollectionPage />} />
         <Route path="/allcollections/:handle" element={<CollectionPageFromAllCollections />} />
+        <Route path="/allcollections/:handle/:handle" element={<ProductPage />} />
 
         
 

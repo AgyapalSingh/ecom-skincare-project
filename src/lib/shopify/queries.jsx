@@ -140,6 +140,7 @@ export const GET_COLLECTION_BY_HANDLE = `
     collectionByHandle(handle: $handle) {
       id
       title
+      handle
       description
       products(first: 20) {
         edges {
