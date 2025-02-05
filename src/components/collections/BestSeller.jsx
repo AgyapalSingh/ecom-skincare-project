@@ -51,13 +51,13 @@ const BestSeller = () => {
                     alt={node.images?.edges[0]?.node?.altText || node.title}
                     className="w-[200px] aspect-square mx-auto cursor-pointer"
                     onClick={() =>
-                      navigate(`/collections/products/${node.handle}`)
+                      navigate(`/allcollections/bestsellers/products/${node.handle}`)
                     }
                   />
                   <h3
                     className="text-lg font-semibold cursor-pointer"
                     onClick={() =>
-                      navigate(`/collections/products/${node.handle}`)
+                      navigate(`/allcollections/bestsellers/products/${node.handle}`)
                     }
                   >
                     {node.title}

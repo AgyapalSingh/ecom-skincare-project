@@ -14,11 +14,16 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<HomePage />} />
+
+        <Route path="/products/:handle" element={<ProductPage />} />
+
         <Route path="/allcollections" element={<CollectionPage />} />
         <Route path="/allcollections/:handle" element={<CollectionPageFromAllCollections />} />
-        <Route path="/collections/bestsellers" element={<BestSellerPage />} />
-        <Route path="/products/:handle" element={<ProductPage />} />
-        <Route path="/collections/products/:handle" element={<ProductPageFromCollection />} />
+
+        
+
+        <Route path="/allcollections/bestsellers" element={<BestSellerPage />} />
+        <Route path="/allcollections/bestsellers/products/:handle" element={<ProductPageFromCollection />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
