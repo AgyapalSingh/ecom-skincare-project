@@ -19,7 +19,7 @@ const Header = () => {
   };
 
   return (
-    <header className="h-28 bg-[#183457] text-amber-50  px-4 fixed top-0 right-0 left-0">
+    <header className="h-28 bg-[#183457] text-amber-50 z-10 px-4 fixed top-0 right-0 left-0">
       <AnnounceMentBar />
 
       <nav className="container mx-auto flex items-center justify-between h-full px-4">
