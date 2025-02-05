@@ -44,13 +44,13 @@ const BestSeller = () => {
                 <img
                   src={node.featuredImage.url || "default-image.jpg"}
                   alt={node.images?.edges[0]?.node?.altText || node.title}
-                  className="w-[200px] aspect-square mx-auto"
+                  className="w-[200px] aspect-square mx-auto cursor-pointer"
                   onClick={() =>
                     navigate(`/collections/products/${node.handle}`)
                   }
                 />
                 <h3
-                  className="text-lg font-semibold"
+                  className="text-lg font-semibold cursor-pointer"
                   onClick={() =>
                     navigate(`/collections/products/${node.handle}`)
                   }
