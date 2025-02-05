@@ -4,6 +4,7 @@ import HomePage from "./components/pages/HomePage";
 import CollectionPage from "./components/pages/CollectionPage";
 import PageNotFound from "./components/pages/PageNotFound";
 import ProductPage from "./products/ProductPage";
+import ProductPageFromCollection from "./products/ProductPageFromCollection";
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/All-Collections" element={<CollectionPage />} />
         <Route path="/products/:handle" element={<ProductPage />} />
+        <Route path="/collections/products/:handle" element={<ProductPageFromCollection />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>

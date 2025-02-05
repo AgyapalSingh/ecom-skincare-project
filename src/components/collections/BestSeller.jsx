@@ -3,8 +3,10 @@ import { GET_COLLECTION_BY_ID } from "../../lib/shopify/queries";
 import shopifyApi from "../../lib/shopify/shopifyApi";
 import { useCart } from "../../context/CartContext";
 import UniqayaLoader from "../snippets/UniqayaLoader";
+import { useNavigate } from "react-router-dom";
 
 const BestSeller = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { cart, addToCart } = useCart();
@@ -31,7 +33,6 @@ const BestSeller = () => {
     return <UniqayaLoader />;
   }
 
-
   return (
     <div>
       <section className="max-w-[1130px] mx-auto px-4 sm:px-6 lg:px-0 justify-self-center">
@@ -44,8 +45,14 @@ const BestSeller = () => {
                   src={node.featuredImage.url || "default-image.jpg"}
                   alt={node.images?.edges[0]?.node?.altText || node.title}
                   className="w-[200px] aspect-square mx-auto"
+                  onClick={() => navigate(`/collections/products/${node.handle}`)}
                 />
-                <h3 className="text-lg font-semibold">{node.title}</h3>
+                <h3
+                  className="text-lg font-semibold"
+                  onClick={() => navigate(`/collections/products/${node.handle}`)}
+                >
+                  {node.title}
+                </h3>
                 <p className="text-gray-600">
                   Rs. {node.priceRange.minVariantPrice.amount}
                 </p>
