@@ -3,11 +3,9 @@ import { GET_PRODUCTS } from "../../lib/shopify/queries";
 import shopifyApi from "../../lib/shopify/shopifyApi";
 import { useCart } from "../../context/CartContext";
 import UniqayaLoader from "../snippets/UniqayaLoader";
-import { useNavigate } from "react-router-dom";
 import ProductCard from "../snippets/ProductCard";
 
 const AllProducts = () => {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const { cart, addToCart } = useCart();
   const [products, setProducts] = useState([]);

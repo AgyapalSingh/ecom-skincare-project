@@ -5,12 +5,10 @@ import shopifyApi from "../../lib/shopify/shopifyApi";
 import { useCart } from "../../context/CartContext";
 import { useParams } from "react-router-dom";
 import UniqayaLoader from "../snippets/UniqayaLoader";
-import { useNavigate } from "react-router-dom";
 import ProductCardForCollection from "../snippets/ProductCardForCollection"
 
 
 const CollectionPageFromAllCollections = () => {
-  const navigate = useNavigate();
   const { handle } = useParams();
   const [loading, setLoading] = useState(true);
   const { cart, addToCart } = useCart();

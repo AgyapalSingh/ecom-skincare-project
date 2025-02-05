@@ -3,11 +3,9 @@ import { GET_COLLECTION_BY_ID } from "../../lib/shopify/queries";
 import shopifyApi from "../../lib/shopify/shopifyApi";
 import { useCart } from "../../context/CartContext";
 import UniqayaLoader from "../snippets/UniqayaLoader";
-import { useNavigate } from "react-router-dom";
 import ProductCardForCollection from "../snippets/ProductCardForCollection"
 
 const BestSeller = () => {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const { cart, addToCart } = useCart();
   const [selectCollection, setSelectCollection] = useState([]);
