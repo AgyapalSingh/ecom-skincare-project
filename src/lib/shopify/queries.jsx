@@ -29,7 +29,7 @@ export const GET_PRODUCTS = `
 
 // 2. QUERY TO FETCH ALL COLLECTIONS
 export const GET_COLLECTIONS = `{
-  collections(first: 20) {
+  collections(first: 100) {
     edges {
       cursor
       node {
@@ -49,6 +49,38 @@ export const GET_COLLECTIONS = `{
 // 3. QUERY TO FETCH A SPECIFIC COLLECTION BY COLLECTION ID
 export const GET_COLLECTION_BY_ID = `{
   collection(id: "gid://shopify/Collection/277059010724") {
+    id
+    handle
+    title
+    description
+    image {
+      id
+      url
+    }
+    products(first: 20) {
+      edges {
+        node {
+          id
+          title
+          handle
+          featuredImage {
+            id
+            url
+          }
+            priceRange {
+            minVariantPrice {
+              amount
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`;
+
+export const GET_COLLECTION_NEWLY_LAUNCHED_BY_ID = `{
+  collection(id: "gid://shopify/Collection/584186953892") {
     id
     handle
     title
