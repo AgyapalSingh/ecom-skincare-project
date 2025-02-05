@@ -72,6 +72,7 @@ export const GET_COLLECTION_BY_ID = `{
         node {
           id
           title
+          handle
           featuredImage {
             id
             url
@@ -106,6 +107,26 @@ export const GET_PRODUCT_BY_HANDLE = `
             src
             altText
           }
+        }
+      }
+    }
+  }
+`;
+
+
+export const GET_PRODUCT_BY_HANDLE_FROM_COLLECTION = `
+  query getProductByHandle($handle: String!) {
+    productByHandle(handle: $handle) {
+      id
+      title
+      description
+      featuredImage {
+        url
+        altText
+      }
+      priceRange {
+        minVariantPrice {
+          amount
         }
       }
     }

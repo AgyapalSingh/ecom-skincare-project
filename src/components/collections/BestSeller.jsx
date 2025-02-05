@@ -18,6 +18,7 @@ const BestSeller = () => {
     try {
       const response = await shopifyApi.post("", query);
       setSelectCollection(response.data.data.collection?.products?.edges || []);
+      console.log(response.data.data.collection?.products?.edges );
     } catch (error) {
       console.error("Failed to fetch collection by ID", error);
     } finally {
