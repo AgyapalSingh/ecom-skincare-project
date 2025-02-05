@@ -10,6 +10,7 @@ import ProductCardForCollection from "../snippets/ProductCardForCollection"
 
 const CollectionPageFromAllCollections = () => {
   const { handle } = useParams();
+
   const [loading, setLoading] = useState(true);
   const { cart, addToCart } = useCart();
   const [selectCurrentCollection, setSelectCurrentCollection] = useState([]);
@@ -45,7 +46,7 @@ const CollectionPageFromAllCollections = () => {
           {selectCurrentCollection.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
               {selectCurrentCollection.map(({ node }) => (
-                <ProductCardForCollection key={node.id} product={node} addToCart={addToCart} />
+                <ProductCardForCollection key={node.id} product={node} addToCart={addToCart} collectionHandle={handle}/>
               ))}
             </div>
           ) : (

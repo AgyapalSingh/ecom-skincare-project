@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 
-const ProductCard = ({ product }) => {
+const ProductCardForCollection = ({ product, collectionHandle}) => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
@@ -15,11 +15,11 @@ const ProductCard = ({ product }) => {
         src={product.featuredImage.url}
         alt={product.featuredImage.altText || product.title}
         className="w-[200px] aspect-square mx-auto cursor-pointer"
-        onClick={() => navigate(`/products/${product.handle}`)}
+        onClick={() => navigate(`/allcollections/${collectionHandle}/${product.handle}`)}
       />
       <h3
         className="mt-2 font-semibold cursor-pointer"
-        onClick={() => navigate(`/products/${product.handle}`)}
+        onClick={() => navigate(`/allcollections/${collectionHandle}/${product.handle}`)}
       >
         {product.title}
       </h3>
@@ -32,7 +32,7 @@ const ProductCard = ({ product }) => {
             id: product.id,
             title: product.title,
             price: product.priceRange.minVariantPrice.amount,
-            image: product.images.edges[0]?.node.src,
+            image: product.featuredImage.url,
           })
         }
         className="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
@@ -43,4 +43,4 @@ const ProductCard = ({ product }) => {
   );
 };
 
-export default ProductCard;
+export default ProductCardForCollection;
