@@ -4,6 +4,7 @@ import shopifyApi from "../../lib/shopify/shopifyApi";
 import { useCart } from "../../context/CartContext";
 import UniqayaLoader from "../snippets/UniqayaLoader";
 import { useNavigate } from "react-router-dom";
+import ProductCardForCollection from "../snippets/ProductCardForCollection"
 
 const BestSeller = () => {
   const navigate = useNavigate();
@@ -42,43 +43,7 @@ const BestSeller = () => {
           {selectCollection.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
               {selectCollection.map(({ node }) => (
-                <div
-                  key={node.id}
-                  className="text-center border p-4 rounded-md"
-                >
-                  <img
-                    src={node.featuredImage.url || "default-image.jpg"}
-                    alt={node.images?.edges[0]?.node?.altText || node.title}
-                    className="w-[200px] aspect-square mx-auto cursor-pointer"
-                    onClick={() =>
-                      navigate(`/allcollections/bestsellers/products/${node.handle}`)
-                    }
-                  />
-                  <h3
-                    className="text-lg font-semibold cursor-pointer"
-                    onClick={() =>
-                      navigate(`/allcollections/bestsellers/products/${node.handle}`)
-                    }
-                  >
-                    {node.title}
-                  </h3>
-                  <p className="text-gray-600">
-                    Rs. {node.priceRange.minVariantPrice.amount}
-                  </p>
-                  <button
-                    onClick={() =>
-                      addToCart({
-                        id: node.id,
-                        title: node.title,
-                        price: node.priceRange?.minVariantPrice?.amount,
-                        image: node.featuredImage.url,
-                      })
-                    }
-                    className="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-                  >
-                    Add to Cart
-                  </button>
-                </div>
+                <ProductCardForCollection key={node.id} product={node} addToCart={addToCart} />
               ))}
             </div>
           ) : (
