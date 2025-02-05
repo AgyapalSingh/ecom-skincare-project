@@ -40,7 +40,9 @@ const CollectionPageFromAllCollections = () => {
       {loading ? (
         <UniqayaLoader />
       ) : (
+       
         <section className="max-w-[1130px] mx-auto px-4 sm:px-6 lg:px-0 justify-self-center">
+           <h2 className="text-2xl font-bold text-center my-8 uppercase">{handle}</h2>
           {selectCurrentCollection.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
               {selectCurrentCollection.map(({ node }) => (
