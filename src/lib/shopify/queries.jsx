@@ -59,6 +59,7 @@ export const GET_COLLECTIONS = `{
 }`;
 
 // 3. QUERY TO FETCH A SPECIFIC COLLECTION BY COLLECTION ID
+// BestSellers Collection
 export const GET_COLLECTION_BY_ID = `{
   collection(id: "gid://shopify/Collection/277059010724") {
     id
@@ -84,6 +85,20 @@ export const GET_COLLECTION_BY_ID = `{
               amount
             }
           }
+
+          variants(first: 10) {  
+              edges {
+                node {
+                  id
+                  title
+                  availableForSale  
+                  price {
+                    amount
+                    currencyCode
+                  }
+                }
+              }
+            }
         }
       }
     }
@@ -116,6 +131,19 @@ export const GET_COLLECTION_NEWLY_LAUNCHED_BY_ID = `{
               amount
             }
           }
+            variants(first: 10) {  
+              edges {
+                node {
+                  id
+                  title
+                  availableForSale  
+                  price {
+                    amount
+                    currencyCode
+                  }
+                }
+              }
+            }
         }
       }
     }

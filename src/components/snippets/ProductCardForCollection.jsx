@@ -8,7 +8,6 @@ const ProductCardForCollection = ({ product, collectionHandle}) => {
 
 
   const variants = product.variants.edges.map((edge) => edge.node);
-  console.log(variants)
 
   const [selectedVariant, setSelectedVariant] = useState(
       variants.length > 0 ? variants[0] : null

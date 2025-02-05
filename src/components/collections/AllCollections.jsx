@@ -16,7 +16,6 @@ const AllCollections = () => {
       const response = await shopifyApi.post("", query);
       const fetchedCollections = response.data.data.collections.edges;
       setCollections(fetchedCollections);
-      console.log(fetchedCollections);
     } catch (error) {
       setError("Failed to fetch collections");
     } finally {
