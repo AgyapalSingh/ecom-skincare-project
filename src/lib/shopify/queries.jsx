@@ -132,3 +132,33 @@ export const GET_PRODUCT_BY_HANDLE_FROM_COLLECTION = `
     }
   }
 `;
+
+
+
+export const GET_COLLECTION_BY_HANDLE = `
+  query GetCollectionByHandle($handle: String!) {
+    collectionByHandle(handle: $handle) {
+      id
+      title
+      description
+      products(first: 20) {
+        edges {
+          node {
+            id
+            title
+            handle
+            featuredImage {
+              url
+              altText
+            }
+            priceRange {
+              minVariantPrice {
+                amount
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
