@@ -7,6 +7,7 @@ import ProductCardForCollection from "../snippets/ProductCardForCollection"
 
 const BestSeller = () => {
   const [loading, setLoading] = useState(true);
+  const bestsellers = "bestsellers"
   const { cart, addToCart } = useCart();
   const [selectCollection, setSelectCollection] = useState([]);
 
@@ -41,7 +42,7 @@ const BestSeller = () => {
           {selectCollection.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
               {selectCollection.map(({ node }) => (
-                <ProductCardForCollection key={node.id} product={node} addToCart={addToCart} />
+                <ProductCardForCollection key={node.id} product={node} addToCart={addToCart} collectionHandle={bestsellers}/>
               ))}
             </div>
           ) : (
