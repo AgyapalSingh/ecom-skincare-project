@@ -1,7 +1,7 @@
 // 1. QUERY TO FETCH ALL PRODUCTS
 export const GET_PRODUCTS = `
   {
-    products(first:6) {
+    products(first:70) {
       edges {
         node {
           id
