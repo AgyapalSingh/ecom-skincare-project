@@ -87,3 +87,27 @@ export const GET_COLLECTION_BY_ID = `{
   }
 }
 `;
+
+
+export const GET_PRODUCT_BY_HANDLE = `
+  query getProductByHandle($handle: String!) {
+    productByHandle(handle: $handle) {
+      id
+      title
+      description
+      priceRange {
+        minVariantPrice {
+          amount
+        }
+      }
+      images(first: 1) {
+        edges {
+          node {
+            src
+            altText
+          }
+        }
+      }
+    }
+  }
+`;
