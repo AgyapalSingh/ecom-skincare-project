@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout/Layout";
-import ProductPageLoader from "../components/snippets/ProductPageLoader"
+import ProductPageLoader from "../components/snippets/ProductPageLoader";
 import { useParams } from "react-router-dom";
 import shopifyApi from "../lib/shopify/shopifyApi";
 import { useCart } from "../context/CartContext";
@@ -12,30 +12,28 @@ const ProductPage = () => {
   const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
+  const fetchProduct = async () => {
+    try {
+      const response = await shopifyApi.post("", {
+        query: GET_PRODUCT_BY_HANDLE,
+        variables: { handle },
+      });
+      setProduct(response.data.data.productByHandle);
+    } catch (error) {
+      setError("Failed to fetch product");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await shopifyApi.post("", {
-          query: GET_PRODUCT_BY_HANDLE,
-          variables: { handle },
-        });
-        setProduct(response.data.data.productByHandle);
-      } catch (error) {
-        setError("Failed to fetch product");
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchProduct();
   }, [handle]);
 
   if (error) return <p className="text-center text-red-500">{error}</p>;
   return (
-<Layout title={product ? product.title : "Uniqaya Lifestyles | Product"}>
-
+    <Layout title={product ? product.title : "Uniqaya Lifestyles | Product"}>
       {loading ? (
         <ProductPageLoader />
       ) : (

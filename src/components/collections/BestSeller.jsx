@@ -18,7 +18,6 @@ const BestSeller = () => {
     try {
       const response = await shopifyApi.post("", query);
       setSelectCollection(response.data.data.collection?.products?.edges || []);
-      console.log(response.data.data.collection?.products?.edges );
     } catch (error) {
       console.error("Failed to fetch collection by ID", error);
     } finally {
@@ -46,11 +45,15 @@ const BestSeller = () => {
                   src={node.featuredImage.url || "default-image.jpg"}
                   alt={node.images?.edges[0]?.node?.altText || node.title}
                   className="w-[200px] aspect-square mx-auto"
-                  onClick={() => navigate(`/collections/products/${node.handle}`)}
+                  onClick={() =>
+                    navigate(`/collections/products/${node.handle}`)
+                  }
                 />
                 <h3
                   className="text-lg font-semibold"
-                  onClick={() => navigate(`/collections/products/${node.handle}`)}
+                  onClick={() =>
+                    navigate(`/collections/products/${node.handle}`)
+                  }
                 >
                   {node.title}
                 </h3>
