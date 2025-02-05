@@ -39,7 +39,6 @@ export const GET_PRODUCTS = `
   }
 `;
 
-
 // 2. QUERY TO FETCH ALL COLLECTIONS
 export const GET_COLLECTIONS = `{
   collections(first: 100) {
@@ -124,7 +123,7 @@ export const GET_COLLECTION_NEWLY_LAUNCHED_BY_ID = `{
 }
 `;
 
-// 4. QUERY TO FETCH PRODUCT FROM HANDLE 
+// 4. QUERY TO FETCH PRODUCT FROM HANDLE
 // [USED TO CREATE DYNAMIC PRODUCT PAGE FOR ALL PRODUCTS WHEN PRODUCT IS CLICKED FROM ALL PRODUCTS]
 export const GET_PRODUCT_BY_HANDLE = `
   query getProductByHandle($handle: String!) {
@@ -149,8 +148,27 @@ export const GET_PRODUCT_BY_HANDLE = `
   }
 `;
 
-// 5. QUERY TO FETCH PRODUCT FROM HANDLE 
+// 5. QUERY TO FETCH PRODUCT FROM HANDLE
 // [ALSO USED TO CREATE DYNAMIC PRODUCT PAGE - BUT DIFFERENCE IS WHEN PRODUCT IS CLICKED FROM COLLECTION]
+// export const GET_PRODUCT_BY_HANDLE_FROM_COLLECTION = `
+//   query getProductByHandle($handle: String!) {
+//     productByHandle(handle: $handle) {
+//       id
+//       title
+//       description
+//       featuredImage {
+//         url
+//         altText
+//       }
+//       priceRange {
+//         minVariantPrice {
+//           amount
+//         }
+//       }
+//     }
+//   }
+// `;
+
 export const GET_PRODUCT_BY_HANDLE_FROM_COLLECTION = `
   query getProductByHandle($handle: String!) {
     productByHandle(handle: $handle) {
@@ -166,12 +184,54 @@ export const GET_PRODUCT_BY_HANDLE_FROM_COLLECTION = `
           amount
         }
       }
+      variants(first: 10) {
+        edges {
+          node {
+            id
+            title
+            availableForSale 
+            price {
+              amount
+            }
+          }
+        }
+      }
     }
   }
 `;
 
 // 6. QUERY TO FETCH A SPECIFIC COLLECTION BY COLLECTION HANDLE
 // [USED TO CREATE DYNAMIC COLLECTION PAGE FOR ALL COLLECTIONS WHEN THEY ARE CLICKED FROM ALL COLLECTION PAGE]
+// export const GET_COLLECTION_BY_HANDLE = `
+//   query GetCollectionByHandle($handle: String!) {
+//     collectionByHandle(handle: $handle) {
+//       id
+//       title
+//       handle
+//       description
+//       products(first: 20) {
+//         edges {
+//           node {
+//             id
+//             title
+//             handle
+//             featuredImage {
+//               url
+//               altText
+//             }
+//             priceRange {
+//               minVariantPrice {
+//                 amount
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
+
+
 export const GET_COLLECTION_BY_HANDLE = `
   query GetCollectionByHandle($handle: String!) {
     collectionByHandle(handle: $handle) {
@@ -192,6 +252,19 @@ export const GET_COLLECTION_BY_HANDLE = `
             priceRange {
               minVariantPrice {
                 amount
+              }
+            }
+            variants(first: 10) {  
+              edges {
+                node {
+                  id
+                  title
+                  availableForSale  
+                  price {
+                    amount
+                    currencyCode
+                  }
+                }
               }
             }
           }

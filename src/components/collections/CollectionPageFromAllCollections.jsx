@@ -21,6 +21,7 @@ const CollectionPageFromAllCollections = () => {
       const response = await shopifyApi.post("", query);
       const currentCollectionProducts =
         response.data.data.collectionByHandle.products?.edges;
+        console.log(currentCollectionProducts);
       setSelectCurrentCollection(currentCollectionProducts || []);
     } catch (error) {
       console.error("Failed to fetch collection by ID", error);
