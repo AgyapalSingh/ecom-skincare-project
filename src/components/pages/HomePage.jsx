@@ -6,7 +6,7 @@ import NewlyLaunchedCollection from "../collections/NewlyLaunchedCollection";
 const HomePage = () => {
   return (
     <Layout title="Home | Uniqaya Lifestyle">
-      {/* <NewlyLaunchedCollection/> */}
+      <NewlyLaunchedCollection/>
       <AllProducts />
     </Layout>
   );
