@@ -7,10 +7,10 @@ import { useCart } from "../context/CartContext";
 import { GET_PRODUCT_BY_HANDLE_FROM_COLLECTION } from "../lib/shopify/queries";
 
 const ProductPageFromCollection = () => {
-  const { handle } = useParams(); // Get the handle from URL params
+  const { handle } = useParams();
+  const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { addToCart } = useCart();
   const [error, setError] = useState(null);
 
   const fetchProductByHandle = async () => {

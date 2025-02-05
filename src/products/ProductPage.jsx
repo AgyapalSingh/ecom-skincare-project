@@ -7,11 +7,12 @@ import { useCart } from "../context/CartContext";
 import { GET_PRODUCT_BY_HANDLE } from "../lib/shopify/queries";
 
 const ProductPage = () => {
-  const [loading, setLoading] = useState(true);
   const { handle } = useParams();
   const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   const fetchProduct = async () => {
     try {
       const response = await shopifyApi.post("", {
