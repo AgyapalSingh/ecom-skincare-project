@@ -25,7 +25,7 @@ function App() {
         
 
         <Route path="/allcollections/bestsellers" element={<BestSellerPage />} />
-        <Route path="/allcollections/bestsellers/products/:handle" element={<ProductPageFromCollection />} />
+        {/* <Route path="/allcollections/bestsellers/products/:handle" element={<ProductPageFromCollection />} /> */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>

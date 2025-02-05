@@ -172,6 +172,18 @@ export const GET_PRODUCT_BY_HANDLE = `
           }
         }
       }
+        variants(first: 10) {
+            edges {
+              node {
+                id
+                title
+                availableForSale
+                price {
+                  amount
+                }
+              }
+            }
+          }
     }
   }
 `;

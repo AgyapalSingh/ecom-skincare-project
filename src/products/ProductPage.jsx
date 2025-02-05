@@ -10,6 +10,7 @@ const ProductPage = () => {
   const { handle } = useParams();
   const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
+  const [selectedVariant, setSelectedVariant] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -19,7 +20,13 @@ const ProductPage = () => {
         query: GET_PRODUCT_BY_HANDLE,
         variables: { handle },
       });
-      setProduct(response.data.data.productByHandle);
+      const fetchedProduct = response.data.data.productByHandle;
+      setProduct(fetchedProduct);
+
+      // ✅ Set the first available variant as the default
+      if (fetchedProduct.variants.edges.length > 0) {
+        setSelectedVariant(fetchedProduct.variants.edges[0].node);
+      }
     } catch (error) {
       setError("Failed to fetch product");
       console.error(error);
@@ -33,6 +40,7 @@ const ProductPage = () => {
   }, [handle]);
 
   if (error) return <p className="text-center text-red-500">{error}</p>;
+
   return (
     <Layout title={product ? product.title : "Uniqaya Lifestyles | Product"}>
       {loading ? (
@@ -48,21 +56,48 @@ const ProductPage = () => {
             <div>
               <h1 className="text-3xl font-bold">{product.title}</h1>
               <p className="text-gray-600 my-4">
-                Rs. {product.priceRange.minVariantPrice.amount}
+                Rs. {selectedVariant ? selectedVariant.price.amount : product.priceRange.minVariantPrice.amount}
               </p>
               <p className="text-gray-700">{product.description}</p>
+
+              {/* ✅ Variant Selection as Buttons */}
+              {product.variants.edges.length > 1 && (
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {product.variants.edges.map(({ node: variant }) => (
+                    <button
+                      key={variant.id}
+                      onClick={() => setSelectedVariant(variant)}
+                      className={`px-4 py-2 rounded border ${
+                        selectedVariant?.id === variant.id
+                          ? "bg-blue-600 text-white" // Selected variant styling
+                          : "bg-gray-200 hover:bg-gray-300"
+                      }`}
+                    >
+                      {variant.title} - Rs. {variant.price.amount}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {/* ✅ Add to Cart / Restocking Button */}
               <button
                 onClick={() =>
+                  selectedVariant &&
                   addToCart({
-                    id: product.id,
-                    title: product.title,
-                    price: product.priceRange.minVariantPrice.amount,
+                    id: selectedVariant.id,
+                    title: `${product.title} - ${selectedVariant.title}`,
+                    price: selectedVariant.price.amount,
                     image: product.images.edges[0]?.node.src,
                   })
                 }
-                className="mt-4 bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700"
+                className={`mt-4 px-6 py-3 rounded text-white w-full ${
+                  selectedVariant?.availableForSale
+                    ? "bg-blue-600 hover:bg-blue-700"
+                    : "bg-gray-500 cursor-not-allowed"
+                }`}
+                disabled={!selectedVariant?.availableForSale}
               >
-                Add to Cart
+                {selectedVariant?.availableForSale ? "Add to Cart" : "Restocking"}
               </button>
             </div>
           </div>
