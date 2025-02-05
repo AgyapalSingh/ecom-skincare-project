@@ -1,3 +1,4 @@
+// 1. QUERY TO FETCH ALL PRODUCTS
 export const GET_PRODUCTS = `
   {
     products(first:6) {
@@ -26,19 +27,7 @@ export const GET_PRODUCTS = `
   }
 `;
 
-export const GET_NAVIGATION = `
-{
-  menu(handle: "main-menu") {
-    id
-    title
-    items {
-      title
-      url
-      type
-    }
-  }
-}`;
-
+// 2. QUERY TO FETCH ALL COLLECTIONS
 export const GET_COLLECTIONS = `{
   collections(first: 20) {
     edges {
@@ -57,6 +46,7 @@ export const GET_COLLECTIONS = `{
   }
 }`;
 
+// 3. QUERY TO FETCH A SPECIFIC COLLECTION BY COLLECTION ID
 export const GET_COLLECTION_BY_ID = `{
   collection(id: "gid://shopify/Collection/277059010724") {
     id
@@ -89,7 +79,8 @@ export const GET_COLLECTION_BY_ID = `{
 }
 `;
 
-
+// 4. QUERY TO FETCH PRODUCT FROM HANDLE 
+// [USED TO CREATE DYNAMIC PRODUCT PAGE FOR ALL PRODUCTS WHEN PRODUCT IS CLICKED FROM ALL PRODUCTS]
 export const GET_PRODUCT_BY_HANDLE = `
   query getProductByHandle($handle: String!) {
     productByHandle(handle: $handle) {
@@ -113,7 +104,8 @@ export const GET_PRODUCT_BY_HANDLE = `
   }
 `;
 
-
+// 5. QUERY TO FETCH PRODUCT FROM HANDLE 
+// [ALSO USED TO CREATE DYNAMIC PRODUCT PAGE - BUT DIFFERENCE IS WHEN PRODUCT IS CLICKED FROM COLLECTION]
 export const GET_PRODUCT_BY_HANDLE_FROM_COLLECTION = `
   query getProductByHandle($handle: String!) {
     productByHandle(handle: $handle) {
@@ -133,8 +125,8 @@ export const GET_PRODUCT_BY_HANDLE_FROM_COLLECTION = `
   }
 `;
 
-
-
+// 6. QUERY TO FETCH A SPECIFIC COLLECTION BY COLLECTION HANDLE
+// [USED TO CREATE DYNAMIC COLLECTION PAGE FOR ALL COLLECTIONS WHEN THEY ARE CLICKED FROM ALL COLLECTION PAGE]
 export const GET_COLLECTION_BY_HANDLE = `
   query GetCollectionByHandle($handle: String!) {
     collectionByHandle(handle: $handle) {
