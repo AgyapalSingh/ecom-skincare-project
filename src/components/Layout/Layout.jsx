@@ -21,7 +21,7 @@ const Layout = ({
       </Helmet>
 
       <Header />
-      <main style={{ minHeight: "70vh", marginTop: "120px" }}>{children}</main>
+      <main style={{ minHeight: "70vh", marginTop: "110px" }}>{children}</main>
       <Footer />
     </>
   );
