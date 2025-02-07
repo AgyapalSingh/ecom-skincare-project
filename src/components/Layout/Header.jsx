@@ -19,10 +19,10 @@ const Header = () => {
   };
 
   return (
-    <header className="h-28 bg-[#183457] text-amber-50 z-10 px-4 fixed top-0 right-0 left-0">
+    <header className="h-28 bg-[#183457] text-amber-50 justify-center z-10 px-4 fixed top-0 right-0 left-0">
       <AnnounceMentBar />
 
-      <nav className="container mx-auto flex items-center justify-between h-full px-4">
+      <nav className="container mx-auto flex items-center justify-between  justify-self-center px-4">
         <div className="flex items-center">
           <div className="text-3xl font-semibold text-white">
             <Link to="/" className="navbar-brand">
@@ -37,7 +37,7 @@ const Header = () => {
         <div>
           {/* Menu (You can add this as you prefer) */}
           <div className="mx-4">
-            <ul>
+            <ul className="flex flex-row">
               <li>
                 <NavLink
                   className="nav-link dropdown-toggle"

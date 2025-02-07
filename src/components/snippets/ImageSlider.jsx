@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import './snippetsCss/ImageSlider.css'
 
 const desktopImages = [
   "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/UNI-CLUB.jpg?v=1738669086",
