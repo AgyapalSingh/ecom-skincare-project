@@ -1,7 +1,5 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Header from "./Header";
-import Footer from "./Footer";
 
 const Layout = ({
   children,
@@ -19,10 +17,7 @@ const Layout = ({
         <meta name="author" content={author} />
         <title>{title}</title>
       </Helmet>
-
-      <Header />
       <main style={{ minHeight: "70vh", marginTop: "110px" }}>{children}</main>
-      <Footer />
     </>
   );
 };

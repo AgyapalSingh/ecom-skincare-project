@@ -27,7 +27,7 @@ const Header = () => {
           <div className="text-3xl font-semibold text-white">
             <Link to="/" className="navbar-brand">
               <img
-                className=" h-8"
+                className=" h-8 w-[28]"
                 src="https://cdn.shopify.com/s/files/1/0589/0192/1956/files/Uniqaya_Logo_Wide_Clean_Functional.png?v=1724408288"
               />
             </Link>

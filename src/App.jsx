@@ -7,27 +7,36 @@ import ProductPage from "./products/ProductPage";
 import ProductPageFromCollection from "./products/ProductPageFromCollection";
 import BestSellerPage from "./components/pages/BestSellerPage";
 import CollectionPageFromAllCollections from "./components/collections/CollectionPageFromAllCollections";
-
+import Header from "./components/Layout/Header";
+import Footer from "./components/Layout/Footer";
 
 function App() {
   return (
     <>
+      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
 
         <Route path="/products/:handle" element={<ProductPage />} />
 
-
         <Route path="/allcollections" element={<CollectionPage />} />
-        <Route path="/allcollections/:handle" element={<CollectionPageFromAllCollections />} />
-        <Route path="/allcollections/:handle/:handle" element={<ProductPage />} />
+        <Route
+          path="/allcollections/:handle"
+          element={<CollectionPageFromAllCollections />}
+        />
+        <Route
+          path="/allcollections/:handle/:handle"
+          element={<ProductPage />}
+        />
 
-        
-
-        <Route path="/allcollections/bestsellers" element={<BestSellerPage />} />
+        <Route
+          path="/allcollections/bestsellers"
+          element={<BestSellerPage />}
+        />
         {/* <Route path="/allcollections/bestsellers/products/:handle" element={<ProductPageFromCollection />} /> */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
+      <Footer />
     </>
   );
 }
