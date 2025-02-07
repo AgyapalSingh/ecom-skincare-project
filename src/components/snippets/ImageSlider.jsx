@@ -39,7 +39,7 @@ const ImageSlider = () => {
       centeredSlides={true}
       loop={true}
       autoplay={{
-        delay: 2500,
+        delay: 5000,
         disableOnInteraction: false,
       }}
       pagination={{
@@ -51,7 +51,7 @@ const ImageSlider = () => {
     >
       {images.map((image, index) => (
         <SwiperSlide className="uniq-swiper-slide" key={index}>
-          <img src={image} alt={`Slide ${index + 1}`}  loading={index === 0 ? "eager" : "lazy"} />
+          <img src={image} alt={`Slide ${index + 1}`}   loading={index === 0 ? "eager" : "lazy"} />
         </SwiperSlide>
       ))}
     </Swiper>
