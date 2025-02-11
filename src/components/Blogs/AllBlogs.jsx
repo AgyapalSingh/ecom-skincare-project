@@ -1,54 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { GET_ALL_BLOGS } from "../../lib/shopify/queries";
-
+import { GET_ALL_ARTICLES } from "../../lib/shopify/queries";
+import shopifyApi from "../../lib/shopify/shopifyApi"; // Ensure this is correctly configured
 
 const AllBlogs = () => {
   const [loading, setLoading] = useState(true);
-  const [blogs, setBlogs] = useState([]);
+  const [articles, setArticles] = useState([]);
   const [error, setError] = useState("");
 
-  console.log(blogs)
-  const fetchAllBlogs = async () => {
-    const query = { query: GET_ALL_BLOGS };
-    console.log(query)
+  const fetchArticles = async () => {
     try {
-      const response = await shopifyApi.post("", query);
-      console.log(response);
-      const All_Blogs = response.data.blogs.edges.map((edge) => edge.node);
-      console.log(All_Blogs)
-      setBlogs(All_Blogs)
+      const response = await shopifyApi.post("", { query: GET_ALL_ARTICLES });
+
+      console.log("API Response:", response.data); // Debugging log
+
+      const fetchedArticles = response.data.data.articles.edges.map(edge => edge.node);
+      setArticles(fetchedArticles);
     } catch (error) {
-      setError("Failed to fetch products");
+      console.error("Error fetching articles:", error);
+      setError("Failed to fetch articles");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchAllBlogs();
+    fetchArticles();
   }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <>
       <h1>Shopify Blogs</h1>
-      {blogs.map((blog) => (
-        <div key={blog.id}>
-          <h2>{blog.title}</h2>
-          {blog.articles.edges.map(({ node: article }) => (
-            <div key={article.id}>
-              <h3>{article.title}</h3>
-              {article.image && (
-                <img
-                  src={article.image.url}
-                  alt={article.image.altText}
-                  width="200"
-                />
-              )}
-              <p>{article.excerpt}</p>
-              <div dangerouslySetInnerHTML={{ __html: article.contentHtml }} />
-              <hr />
-            </div>
-          ))}
+      {articles.map((article) => (
+        <div key={article.id}>
+          <h2>{article.title}</h2>
+          <h4>Blog: {article.blog?.title}</h4>
+          {article.image && (
+            <img src={article.image.url} alt={article.image.altText} width="200" />
+          )}
+          
+          <hr />
         </div>
       ))}
     </>

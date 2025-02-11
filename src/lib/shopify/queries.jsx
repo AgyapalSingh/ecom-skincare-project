@@ -282,17 +282,29 @@ export const SEARCH_QUERY = `
 `;
 
 //  QUERY TO FETCH ALL BLOGS
-export const GET_ALL_BLOGS = `
-    {
-  blogs(first: 10) {
-    edges {
-      node {
-        id
-        title
-        handle
+
+export const GET_ALL_ARTICLES = `
+  {
+    articles(first: 10, sortKey: PUBLISHED_AT, reverse: true) {
+      edges {
+        node {
+          id
+          title
+          handle
+          blog {
+            title
+            handle
+          }
+          excerpt
+          contentHtml
+          publishedAt
+          image {
+            url
+            altText
+          }
+        }
       }
     }
   }
-}
+`;
 
-  `;
