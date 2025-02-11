@@ -4,11 +4,18 @@ import { LuSearch, LuX } from "react-icons/lu";
 import { Link } from "react-router-dom";
 
 const SearchDrawer = ({ isOpen, closeDrawer }) => {
-  const { query, setQuery, results, loading, error, search } = useSearch();
+  const searchContext = useSearch();
+
+  if (!searchContext) {
+    console.error("Search context is not available! Make sure <SearchProvider> is wrapping the app.");
+    return null;
+  }
+
+  const { query, setQuery, results, loading, error, search } = searchContext;
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-screen bg-white shadow-lg z-50 p-6 transition-transform duration-300 ${
+      className={`fixed top-0 left-0 w-full h-auto bg-black shadow-lg z-50 p-6 transition-transform duration-300 ${
         isOpen ? "translate-y-0" : "-translate-y-full"
       }`}
     >
@@ -46,7 +53,7 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
           <>
             {/* Products */}
             <h3 className="text-lg font-semibold mt-4">Products</h3>
-            {results.products.edges.length > 0 ? (
+            {results?.products?.edges?.length > 0 ? (
               results.products.edges.map(({ node }) => (
                 <Link
                   key={node.id}
@@ -55,7 +62,7 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
                   onClick={closeDrawer}
                 >
                   <div className="flex items-center gap-3">
-                    {node.images.edges.length > 0 && (
+                    {node?.images?.edges?.length > 0 && (
                       <img
                         src={node.images.edges[0].node.url}
                         alt={node.title}
@@ -72,7 +79,7 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
 
             {/* Blogs */}
             <h3 className="text-lg font-semibold mt-4">Articles</h3>
-            {results.articles.edges.length > 0 ? (
+            {results?.articles?.edges?.length > 0 ? (
               results.articles.edges.map(({ node }) => (
                 <Link
                   key={node.id}
@@ -89,7 +96,7 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
 
             {/* Pages */}
             <h3 className="text-lg font-semibold mt-4">Pages</h3>
-            {results.pages.edges.length > 0 ? (
+            {results?.pages?.edges?.length > 0 ? (
               results.pages.edges.map(({ node }) => (
                 <Link
                   key={node.id}
