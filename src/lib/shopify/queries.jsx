@@ -272,7 +272,7 @@ export const SEARCH_QUERY = `
     products(first: 5, query: $query) {
       edges { node { id title handle images(first: 1) { edges { node { url } } } } }
     }
-    articles(first: 5, query: $query) {
+    articles(first: 5, query: $query, sortKey: PUBLISHED_AT, reverse: true) {
       edges { node { id title handle blog { title } } }
     }
     pages(first: 5, query: $query) {
@@ -285,26 +285,31 @@ export const SEARCH_QUERY = `
 
 export const GET_ALL_ARTICLES = `
   {
-    articles(first: 10, sortKey: PUBLISHED_AT, reverse: true) {
-      edges {
-        node {
-          id
+  articles(first: 220, sortKey: PUBLISHED_AT, reverse: true) {
+    edges {
+      node {
+        id
+        title
+        handle
+        blog {
           title
           handle
-          blog {
-            title
-            handle
-          }
-          excerpt
-          contentHtml
-          publishedAt
-          image {
-            url
-            altText
-          }
         }
+        excerpt
+        contentHtml
+        publishedAt
+        image {
+          url
+          altText
+        }
+        author {
+          name
+        }
+          tags
       }
     }
   }
+}
+
 `;
 
