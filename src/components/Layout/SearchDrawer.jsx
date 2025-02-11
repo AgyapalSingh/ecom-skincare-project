@@ -1,5 +1,5 @@
 import React from "react";
-import { useSearch } from "../../context/CartContext";
+import { useSearch } from "../../context/SearchContext";
 import { LuSearch, LuX } from "react-icons/lu";
 import { Link } from "react-router-dom";
 

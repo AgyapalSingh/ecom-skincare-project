@@ -3,6 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import AnnounceMentBar from "../snippets/AnnounceMentBar";
 import CartDrawer from "./CartDrawer";
+import SearchDrawer from "./SearchDrawer";
 import { PiShoppingCartLight } from "react-icons/pi";
 import { LuSearch } from "react-icons/lu";
 import { LuUserRound } from "react-icons/lu";
@@ -10,6 +11,7 @@ import { LuUserRound } from "react-icons/lu";
 const Header = () => {
   const { cart } = useCart(); // Access cart state from the context
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   // Get the total item count from the cart
   const totalItems =
@@ -62,7 +64,7 @@ const Header = () => {
         </div>
 
         <div className="flex items-center">
-          <div className="relative mx-4 cursor-pointer">
+          <div className="relative mx-4 cursor-pointer" onClick={() => setIsSearchOpen(true)}>
             <LuSearch className="text-white text-5xl" />
           </div>
 
@@ -84,6 +86,7 @@ const Header = () => {
             <User className="text-white text-2xl" />
           </div> */}
         </div>
+        <SearchDrawer isOpen={isSearchOpen} closeDrawer={() => setIsSearchOpen(false)} />
 
         <CartDrawer isOpen={isDrawerOpen} closeDrawer={toggleDrawer} />
       </nav>

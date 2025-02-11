@@ -51,4 +51,6 @@ export const SearchProvider = ({ children }) => {
 };
 
 // Custom Hook
-export const useSearch = () => useContext(SearchContext);
+export const useSearch = () => {
+  return useContext(SearchContext);
+};
