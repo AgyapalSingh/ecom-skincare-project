@@ -9,7 +9,8 @@ import BestSellerPage from "./components/pages/BestSellerPage";
 import CollectionPageFromAllCollections from "./components/collections/CollectionPageFromAllCollections";
 import Header from "./components/Layout/Header";
 import Footer from "./components/Layout/Footer";
-import AllBlogs from "./components/Blogs/AllBlogs";
+import AllBlogsPage from "./components/pages/AllBlogsPage";
+
 
 function App() {
   return (
@@ -38,7 +39,7 @@ function App() {
         
         <Route
           path="/blogs"
-          element={<AllBlogs />}
+          element={<AllBlogsPage />}
         />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
