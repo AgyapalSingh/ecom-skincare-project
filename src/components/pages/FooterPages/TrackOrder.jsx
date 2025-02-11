@@ -1,8 +1,9 @@
 import React from 'react'
+import Layout from '../../Layout/Layout'
 
 const TrackOrder = () => {
   return (
-    <div>TrackOrder</div>
+    <Layout title="Track Order | Uniqaya Lifestyle">TrackOrder</Layout>
   )
 }
 
