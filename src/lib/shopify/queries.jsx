@@ -313,3 +313,32 @@ export const GET_ALL_ARTICLES = `
 
 `;
 
+export const GET_PAGINATED_ARTICLES = `
+  query GetPaginatedArticles($first: Int!, $after: String) {
+    articles(first: $first, after: $after, sortKey: PUBLISHED_AT, reverse: true) {
+      edges {
+        node {
+          id
+          title
+          handle
+          excerpt
+          contentHtml
+          publishedAt
+          image {
+            url
+            altText
+          }
+          author {
+            name
+          }
+            tags
+        }
+        cursor
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
+  }
+`;
