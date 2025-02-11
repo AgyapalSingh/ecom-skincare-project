@@ -29,19 +29,25 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
       }`}
       onClick={handleClose}
     >
-      <div className={`fixed top-0 left-0 w-full min-h-80 h-auto bg-[#183457] shadow-lg z-50 p-6 transition-transform duration-300 ${
-        isOpen ? "translate-y-0" : "-translate-y-full"
-      }`}  onClick={(e) => e.stopPropagation()}>
+      <div
+        className={`fixed top-0 left-0 w-full min-h-80 h-auto bg-[#183457] shadow-lg z-50 p-6 transition-transform duration-300 ${
+          isOpen ? "translate-y-0" : "-translate-y-full"
+        }`}
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Close Button */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-6 text-3xl"
+          className="absolute top-2 cursor-pointer right-6 text-3xl "
         >
           <LuX size={28} />
         </button>
 
+        <div className="h-16 flex justify-center align-middle  border-amber-700">
+          <h1 className="self-center">UNIQAYA LIFESTYLES</h1>
+        </div>
         {/* Search Input */}
-        <div className="flex items-center gap-2 border-b pb-2 mt-12">
+        <div className="flex items-center gap-2 border-b pb-2 mt-120 ">
           <LuSearch size={24} />
           <input
             type="text"
