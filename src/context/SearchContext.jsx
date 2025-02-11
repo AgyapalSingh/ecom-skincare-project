@@ -26,24 +26,23 @@ export const SearchProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const search = async (searchQuery) => {
+  const search = async (query) => {
     setLoading(true);
     setError(null);
-    setQuery(searchQuery);
-
-    const data = await fetchSearchResults(searchQuery);
-    if (data.error) {
-      setError(data.error);
-    } else {
-      setResults(data);
+    try {
+      // Perform your Shopify Storefront API search here
+      const response = await fetchSearchResults(query);
+      setResults(response);
+    } catch (err) {
+      setError("Something went wrong");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
     <SearchContext.Provider
-      value={{ query, setQuery, results, loading, error, search }}
+      value={{ query, setQuery, results, setResults, loading, error, search }}
     >
       {children}
     </SearchContext.Provider>

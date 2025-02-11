@@ -11,7 +11,13 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
     return null;
   }
 
-  const { query, setQuery, results, loading, error, search } = searchContext;
+  const { query, setQuery, results, setResults, loading, error, search } = searchContext;
+
+  const handleClose = () => {
+    setQuery(""); // Reset search query
+    setResults(null); // Clear search results
+    closeDrawer(); // Close the drawer
+  };
 
   return (
     <div
@@ -20,7 +26,7 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
       }`}
     >
       {/* Close Button */}
-      <button onClick={closeDrawer} className="absolute top-4 right-6 text-3xl">
+      <button onClick={handleClose} className="absolute top-4 right-6 text-3xl">
         <LuX size={28} />
       </button>
 
@@ -59,7 +65,7 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
                   key={node.id}
                   to={`/products/${node.handle}`}
                   className="p-2 border-b block hover:bg-gray-100"
-                  onClick={closeDrawer}
+                  onClick={handleClose}
                 >
                   <div className="flex items-center gap-3">
                     {node?.images?.edges?.length > 0 && (
@@ -85,7 +91,7 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
                   key={node.id}
                   to={`/blogs/${node.blog.title}/${node.handle}`}
                   className="p-2 border-b block hover:bg-gray-100"
-                  onClick={closeDrawer}
+                  onClick={handleClose}
                 >
                   {node.title} <span className="text-gray-500">({node.blog.title})</span>
                 </Link>
@@ -102,7 +108,7 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
                   key={node.id}
                   to={`/${node.handle}`}
                   className="p-2 border-b block hover:bg-gray-100"
-                  onClick={closeDrawer}
+                  onClick={handleClose}
                 >
                   {node.title}
                 </Link>
@@ -118,5 +124,6 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
     </div>
   );
 };
+
 
 export default SearchDrawer;
