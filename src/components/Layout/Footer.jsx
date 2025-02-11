@@ -1,8 +1,26 @@
-import React from 'react'
+import React from 'react';
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <>
+      <footer>
+        <div>
+          <div>
+            <h1>Support</h1>
+            <li>
+                <NavLink
+                  className="nav-link dropdown-toggle"
+                  to={"/about-us"}
+                  data-bs-toggle="dropdown"
+                >
+                  About Us
+                </NavLink>
+              </li>
+          </div>
+        </div>
+      </footer>
+    </>
   )
 }
 

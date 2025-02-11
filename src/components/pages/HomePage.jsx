@@ -7,9 +7,9 @@ import ImageSlider from "../snippets/ImageSlider";
 const HomePage = () => {
   return (
     <Layout title="Home | Uniqaya Lifestyle">
-      <ImageSlider/>
+      {/* <ImageSlider/>
       <NewlyLaunchedCollection/>
-      <AllProducts />
+      <AllProducts /> */}
     </Layout>
   );
 };

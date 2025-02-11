@@ -10,6 +10,7 @@ import CollectionPageFromAllCollections from "./components/collections/Collectio
 import Header from "./components/Layout/Header";
 import Footer from "./components/Layout/Footer";
 import AllBlogsPage from "./components/pages/AllBlogsPage";
+import AboutUs from "./components/pages/FooterPages/AboutUs";
 
 
 function App() {
@@ -41,6 +42,8 @@ function App() {
           path="/blogs"
           element={<AllBlogsPage />}
         />
+
+        <Route path="/about-us" element={<AboutUs/>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
