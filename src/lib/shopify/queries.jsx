@@ -280,3 +280,19 @@ export const SEARCH_QUERY = `
     }
   }
 `;
+
+//  QUERY TO FETCH ALL BLOGS
+export const GET_ALL_BLOGS = `
+    {
+  blogs(first: 10) {
+    edges {
+      node {
+        id
+        title
+        handle
+      }
+    }
+  }
+}
+
+  `;
