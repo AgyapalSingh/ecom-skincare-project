@@ -9,6 +9,7 @@ import BestSellerPage from "./components/pages/BestSellerPage";
 import CollectionPageFromAllCollections from "./components/collections/CollectionPageFromAllCollections";
 import Header from "./components/Layout/Header";
 import Footer from "./components/Layout/Footer";
+import AllBlogs from "./components/Blogs/AllBlogs";
 
 function App() {
   return (
@@ -34,6 +35,11 @@ function App() {
           element={<BestSellerPage />}
         />
         {/* <Route path="/allcollections/bestsellers/products/:handle" element={<ProductPageFromCollection />} /> */}
+        
+        <Route
+          path="/blogs"
+          element={<AllBlogs />}
+        />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />

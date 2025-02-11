@@ -59,6 +59,16 @@ const Header = () => {
                   Best Sellers
                 </NavLink>
               </li>
+
+              <li>
+                <NavLink
+                  className="nav-link dropdown-toggle"
+                  to={"/blogs"}
+                  data-bs-toggle="dropdown"
+                >
+                  Blogs
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>
