@@ -11,6 +11,7 @@ const HomePage = () => {
       <NewlyLaunchedCollection/>
       <AllProducts />
     </Layout>
+    
   );
 };
 
