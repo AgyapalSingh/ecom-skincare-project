@@ -1,8 +1,9 @@
 import React from 'react'
+import Layout from '../../Layout/Layout'
 
 const FAQs = () => {
   return (
-    <div>FAQs</div>
+    <Layout title="FAQs | Uniqaya Lifestyle">FAQs</Layout>
   )
 }
 

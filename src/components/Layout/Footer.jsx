@@ -26,6 +26,15 @@ const Footer = () => {
                 Contact Us
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                className="nav-link dropdown-toggle"
+                to={"/faqs"}
+                data-bs-toggle="dropdown"
+              >
+                FAQs
+              </NavLink>
+            </li>
           </div>
         </div>
       </footer>

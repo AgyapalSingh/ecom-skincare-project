@@ -12,6 +12,7 @@ import Footer from "./components/Layout/Footer";
 import AllBlogsPage from "./components/pages/AllBlogsPage";
 import AboutUs from "./components/pages/FooterPages/AboutUs";
 import ContactUs from "./components/pages/FooterPages/ContactUs";
+import FAQs from "./components/pages/FooterPages/FAQs"
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
 
         <Route path="/about-us" element={<AboutUs/>} />
         <Route path="/contact-us" element={<ContactUs/>} />
+        <Route path="/faqs" element={<FAQs/>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
