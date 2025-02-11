@@ -3,6 +3,8 @@ import { useSearch } from "../../context/SearchContext";
 import { LuSearch, LuX } from "react-icons/lu";
 import { Link } from "react-router-dom";
 
+const popularKeywords = ["Tinted", "Sunscreen", "Body Butter"];
+
 const SearchDrawer = ({ isOpen, closeDrawer }) => {
   const searchContext = useSearch();
 
@@ -20,6 +22,11 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
     setQuery(""); // Reset search query
     setResults(null); // Clear search results
     closeDrawer(); // Close the drawer
+  };
+
+  const handleKeywordClick = (keyword) => {
+    setQuery(keyword);
+    search(keyword); // Trigger search when clicking a keyword
   };
 
   return (
@@ -63,6 +70,20 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
           >
             Search
           </button>
+        </div>
+
+        {/* Predefined Keywords */}
+        <div className="pt-[300px] flex flex-wrap gap-2">
+          <span className="text-white">Popular Searches: </span>
+          {popularKeywords.map((keyword) => (
+            <button
+              key={keyword}
+              onClick={() => handleKeywordClick(keyword)}
+              className="px-10 py-1 text-sm rounded-full border border-white-600 w-24 "
+            >
+              {keyword}
+            </button>
+          ))}
         </div>
 
         {/* Search Results */}
