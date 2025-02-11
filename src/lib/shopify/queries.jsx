@@ -264,3 +264,19 @@ export const GET_COLLECTION_BY_HANDLE = `
     }
   }
 `;
+
+// QUERY FOR SEARCHING PRODUCTS, PAGES, AND BLOGS
+
+const SEARCH_QUERY = `
+  query Search($query: String!) {
+    products(first: 5, query: $query) {
+      edges { node { id title handle images(first: 1) { edges { node { url } } } } }
+    }
+    articles(first: 5, query: $query) {
+      edges { node { id title handle blog { title } } }
+    }
+    pages(first: 5, query: $query) {
+      edges { node { id title handle } }
+    }
+  }
+`;
