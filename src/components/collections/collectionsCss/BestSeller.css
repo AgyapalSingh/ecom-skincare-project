@@ -26,17 +26,17 @@
 
 
 
-::-webkit-scrollbar {
+.uniq-coll-div::-webkit-scrollbar {
   height: 5px;
   width: 5px;
 }
 
-::-webkit-scrollbar-track {
+.uniq-coll-div::-webkit-scrollbar-track {
   border: none !important;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #18345759;
+.uniq-coll-div::-webkit-scrollbar-thumb {
+  background: #18345777;
   border-radius: 5px;
   cursor: pointer;
 }
