@@ -3,11 +3,12 @@ import { GET_COLLECTION_BY_ID } from "../../lib/shopify/queries";
 import shopifyApi from "../../lib/shopify/shopifyApi";
 import { useCart } from "../../context/CartContext";
 import UniqayaLoader from "../snippets/UniqayaLoader";
-import ProductCardForCollection from "../snippets/ProductCardForCollection"
+import ProductCardForCollection from "../snippets/ProductCardForCollection";
+import "./collectionsCss/BestSeller.css";
 
 const BestSeller = () => {
   const [loading, setLoading] = useState(true);
-  const bestsellers = "bestsellers"
+  const bestsellers = "bestsellers";
   const { cart, addToCart } = useCart();
   const [selectCollection, setSelectCollection] = useState([]);
 
@@ -37,19 +38,26 @@ const BestSeller = () => {
       {loading ? (
         <UniqayaLoader />
       ) : (
-        <section className="max-w-[1130px] mx-auto px-4 sm:px-6 lg:px-0 justify-self-center">
-          <h2 className="text-2xl font-bold text-center my-8">Best Seller</h2>
-          {selectCollection.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-              {selectCollection.map(({ node }) => (
-                <ProductCardForCollection key={node.id} product={node} addToCart={addToCart} collectionHandle={bestsellers}/>
-              ))}
-            </div>
-          ) : (
-            <p className="text-center text-gray-500">
-              No best sellers available
-            </p>
-          )}
+        <section className="uniq-bestSeller-sec">
+          <div className="uniq-bs-div">
+            <h2 className="uniq-bs-title">Best Seller</h2>
+            {selectCollection.length > 0 ? (
+              <div className="uniq-bs-prods">
+                {selectCollection.map(({ node }) => (
+                  <ProductCardForCollection
+                    key={node.id}
+                    product={node}
+                    addToCart={addToCart}
+                    collectionHandle={bestsellers}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-gray-500">
+                No best sellers available
+              </p>
+            )}
+          </div>
         </section>
       )}
     </>
