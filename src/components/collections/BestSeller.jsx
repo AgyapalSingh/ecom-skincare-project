@@ -39,8 +39,8 @@ const BestSeller = () => {
         <UniqayaLoader />
       ) : (
         <section className="uniq-bestSeller-sec">
+          <h2 className="uniq-bs-title">Best Seller</h2>
           <div className="uniq-bs-div">
-            <h2 className="uniq-bs-title">Best Seller</h2>
             {selectCollection.length > 0 ? (
               <div className="uniq-bs-prods">
                 {selectCollection.map(({ node }) => (
