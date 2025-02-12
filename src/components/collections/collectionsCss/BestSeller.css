@@ -1,11 +1,15 @@
-.uniq-bestSeller-sec {
+.uniq-collection-sec {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
+.uniq-coll-title {
+  display: flex;
+  align-self: center;
+}
 
-.uniq-bs-div {
+.uniq-coll-div {
   display: flex;
   flex-direction: column;
   overflow-x: auto;
@@ -13,30 +17,24 @@
   padding-bottom: 20px;
 }
 
-.uniq-bs-title {
-  display: flex;
-  align-self: center;
-}
-
-.uniq-bs-prods {
+.uniq-coll-prods {
   display: flex;
   flex-direction: row;
 }
+
+
+
 
 ::-webkit-scrollbar {
   height: 5px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-  /* box-shadow: inset 0 0 2px grey; */
-  /* border-radius: 10px; */
-  border: none  !important;
+  border: none !important;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: #18345759;
   border-radius: 5px;
-  cursor:pointer;
+  cursor: pointer;
 }

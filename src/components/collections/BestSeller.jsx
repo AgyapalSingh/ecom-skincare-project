@@ -38,11 +38,11 @@ const BestSeller = () => {
       {loading ? (
         <UniqayaLoader />
       ) : (
-        <section className="uniq-bestSeller-sec">
-          <h2 className="uniq-bs-title">Best Seller</h2>
-          <div className="uniq-bs-div">
+        <section className="uniq-collection-sec">
+          <h2 className="uniq-coll-title">Best Seller</h2>
+          <div className="uniq-coll-div">
             {selectCollection.length > 0 ? (
-              <div className="uniq-bs-prods">
+              <div className="uniq-coll-prods">
                 {selectCollection.map(({ node }) => (
                   <ProductCardForCollection
                     key={node.id}
