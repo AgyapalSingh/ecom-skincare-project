@@ -37,24 +37,26 @@ const NewlyLaunchedCollection = () => {
       {loading ? (
         <UniqayaLoader />
       ) : (
-        <section className="max-w-[1130px] mx-auto px-4 sm:px-6 lg:px-0 justify-self-center">
-          <h2 className="text-2xl font-bold text-center my-8">Newly Launched</h2>
-          {selectCollection.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-              {selectCollection.map(({ node }) => (
-                <ProductCardForCollection
-                  key={node.id}
-                  product={node}
-                  addToCart={addToCart}
-                  collectionHandle={newlylaunched}
-                />
-              ))}
-            </div>
-          ) : (
-            <p className="text-center text-gray-500">
-              No Newly Launched available
-            </p>
-          )}
+        <section className="uniq-collection-sec">
+          <h2 className="uniq-coll-title">Newly Launched</h2>
+          <div className="uniq-coll-div">
+            {selectCollection.length > 0 ? (
+              <div className="uniq-coll-prods">
+                {selectCollection.map(({ node }) => (
+                  <ProductCardForCollection
+                    key={node.id}
+                    product={node}
+                    addToCart={addToCart}
+                    collectionHandle={newlylaunched}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-gray-500">
+                No Newly Launched available
+              </p>
+            )}
+          </div>
         </section>
       )}
     </>
