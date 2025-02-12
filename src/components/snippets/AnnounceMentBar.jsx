@@ -12,7 +12,7 @@ const AnnounceMentBar = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % messages.length);
-    }, 3000); // Change message every 3 seconds
+    }, 3000); 
 
     return () => clearInterval(interval);
   }, []);

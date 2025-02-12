@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { useNavigate } from "react-router-dom"; 
 import './snippetsCss/ImageSlider.css';
 
 const desktopSlides = [
@@ -31,7 +31,7 @@ const mobileSlides = [
 
 const ImageSlider = () => {
   const [slides, setSlides] = useState(desktopSlides);
-  const navigate = useNavigate(); // React Router's navigate function
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const handleResize = () => {
@@ -48,7 +48,7 @@ const ImageSlider = () => {
   }, []);
 
   const handleSlideClick = (link) => {
-    navigate(link); // Navigate to the specified route
+    navigate(link); 
   };
 
   return (
@@ -71,8 +71,8 @@ const ImageSlider = () => {
         <SwiperSlide
           className="uniq-swiper-slide"
           key={index}
-          onClick={() => handleSlideClick(slide.link)} // Handle click event
-          style={{ cursor: "pointer" }} // Indicate it's clickable
+          onClick={() => handleSlideClick(slide.link)} 
+          style={{ cursor: "pointer" }} 
         >
           <img src={slide.image} alt={`Slide ${index + 1}`} loading={index === 0 ? "eager" : "lazy"} />
         </SwiperSlide>

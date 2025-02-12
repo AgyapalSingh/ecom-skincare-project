@@ -19,14 +19,14 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
     searchContext;
 
   const handleClose = () => {
-    setQuery(""); // Reset search query
-    setResults(null); // Clear search results
-    closeDrawer(); // Close the drawer
+    setQuery(""); 
+    setResults(null); 
+    closeDrawer(); 
   };
 
   const handleKeywordClick = (keyword) => {
     setQuery(keyword);
-    search(keyword); // Trigger search when clicking a keyword
+    search(keyword); 
   };
 
   return (
@@ -42,7 +42,6 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button */}
         <button
           onClick={handleClose}
           className="absolute top-2 cursor-pointer right-6 text-3xl "
@@ -53,7 +52,6 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
         <div className="h-16 flex justify-center align-middle  border-amber-700">
           <h1 className="self-center">UNIQAYA LIFESTYLES</h1>
         </div>
-        {/* Search Input */}
         <div className="flex items-center gap-2 border-b pb-2 mt-120 ">
           <LuSearch size={24} />
           <input
@@ -72,7 +70,6 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
           </button>
         </div>
 
-        {/* Predefined Keywords */}
         <div className="pt-[300px] flex flex-wrap gap-2">
           <span className="text-white">Popular Searches: </span>
           {popularKeywords.map((keyword) => (
@@ -86,7 +83,6 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
           ))}
         </div>
 
-        {/* Search Results */}
         <div className="mt-4 overflow-y-auto max-h-[70vh]">
           {loading ? (
             <p>Loading...</p>
@@ -94,7 +90,6 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
             <p className="text-red-500">{error}</p>
           ) : results ? (
             <>
-              {/* Products */}
               <h3 className="text-lg font-semibold mt-4">Products</h3>
               {results?.products?.edges?.length > 0 ? (
                 results.products.edges.map(({ node }) => (
@@ -120,7 +115,6 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
                 <p className="text-gray-500">No products found.</p>
               )}
 
-              {/* Blogs */}
               <h3 className="text-lg font-semibold mt-4">Articles</h3>
               {results?.articles?.edges?.length > 0 ? (
                 results.articles.edges.map(({ node }) => (
@@ -138,7 +132,6 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
                 <p className="text-gray-500">No articles found.</p>
               )}
 
-              {/* Pages */}
               <h3 className="text-lg font-semibold mt-4">Pages</h3>
               {results?.pages?.edges?.length > 0 ? (
                 results.pages.edges.map(({ node }) => (

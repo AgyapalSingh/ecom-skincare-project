@@ -30,7 +30,6 @@ export const SearchProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      // Perform your Shopify Storefront API search here
       const response = await fetchSearchResults(query);
       setResults(response);
     } catch (err) {
@@ -49,7 +48,6 @@ export const SearchProvider = ({ children }) => {
   );
 };
 
-// Custom Hook
 export const useSearch = () => {
   return useContext(SearchContext);
 };

@@ -23,7 +23,6 @@ const ProductPage = () => {
       const fetchedProduct = response.data.data.productByHandle;
       setProduct(fetchedProduct);
 
-      // ✅ Set the first available variant as the default
       if (fetchedProduct.variants.edges.length > 0) {
         setSelectedVariant(fetchedProduct.variants.edges[0].node);
       }
@@ -56,11 +55,13 @@ const ProductPage = () => {
             <div>
               <h1 className="text-3xl font-bold">{product.title}</h1>
               <p className="text-gray-600 my-4">
-                Rs. {selectedVariant ? selectedVariant.price.amount : product.priceRange.minVariantPrice.amount}
+                Rs.{" "}
+                {selectedVariant
+                  ? selectedVariant.price.amount
+                  : product.priceRange.minVariantPrice.amount}
               </p>
               <p className="text-gray-700">{product.description}</p>
 
-              {/* ✅ Variant Selection as Buttons */}
               {product.variants.edges.length > 1 && (
                 <div className="flex flex-wrap gap-2 mt-4">
                   {product.variants.edges.map(({ node: variant }) => (
@@ -69,7 +70,7 @@ const ProductPage = () => {
                       onClick={() => setSelectedVariant(variant)}
                       className={`px-4 py-2 rounded border ${
                         selectedVariant?.id === variant.id
-                          ? "bg-blue-600 text-white" // Selected variant styling
+                          ? "bg-blue-600 text-white"
                           : "bg-gray-200 hover:bg-gray-300"
                       }`}
                     >
@@ -79,7 +80,6 @@ const ProductPage = () => {
                 </div>
               )}
 
-              {/* ✅ Add to Cart / Restocking Button */}
               <button
                 onClick={() =>
                   selectedVariant &&
@@ -97,7 +97,9 @@ const ProductPage = () => {
                 }`}
                 disabled={!selectedVariant?.availableForSale}
               >
-                {selectedVariant?.availableForSale ? "Add to Cart" : "Restocking"}
+                {selectedVariant?.availableForSale
+                  ? "Add to Cart"
+                  : "Restocking"}
               </button>
             </div>
           </div>

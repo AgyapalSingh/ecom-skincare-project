@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from "react";
+import React, { useEffect, useState } from "react";
 import { GET_NAVIGATION } from "../../lib/shopify/queries";
 import shopifyApi from "../../lib/shopify/shopifyApi";
 
@@ -13,7 +13,6 @@ const NavigationMenu = () => {
       const response = await shopifyApi.get("", query);
       const menuData = response.data.data.menu.items;
       console.log(menuData);
-      // setMenus(response.data.menus); // Assuming the menus data is in 'menus'
     } catch (error) {
       setError("Failed to fetch navigation");
     } finally {
@@ -21,12 +20,10 @@ const NavigationMenu = () => {
     }
   };
 
-  // Fetch products on component mount
   useEffect(() => {
     fetchNavigation();
   }, []);
 
-  // Render loading, error, or product list
   if (loading) {
     return <div>Loading menus...</div>;
   }
@@ -39,7 +36,7 @@ const NavigationMenu = () => {
     <nav>
       <ul>
         {menus.map((menu) => (
-          <li key={menu.id}>{menu.name}</li> // Assuming menu has 'id' and 'name'
+          <li key={menu.id}>{menu.name}</li>
         ))}
       </ul>
     </nav>

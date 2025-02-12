@@ -15,15 +15,15 @@ const AllBlogs = () => {
     try {
       const response = await shopifyApi.post("", {
         query: GET_PAGINATED_ARTICLES,
-        variables: { first: 9, after: cursor }, // Fetch 9 articles per page
+        variables: { first: 9, after: cursor }, 
       });
 
       const data = response.data.data.articles;
       const newArticles = data.edges.map((edge) => edge.node);
 
       setArticles(newArticles);
-      setCursor(data.pageInfo.endCursor); // Store new cursor
-      setHasNextPage(data.pageInfo.hasNextPage); // Check if more pages exist
+      setCursor(data.pageInfo.endCursor); 
+      setHasNextPage(data.pageInfo.hasNextPage); 
     } catch (error) {
       console.error("Error fetching articles:", error);
       setError("Failed to fetch articles");
@@ -51,7 +51,6 @@ const AllBlogs = () => {
                 className="border rounded-xl p-4 shadow-lg bg-white text-center relative"
               >
                 <div className="relative">
-                  {/* Article Image */}
                   {article.image && (
                     <img
                       src={article.image.url}
@@ -59,8 +58,6 @@ const AllBlogs = () => {
                       className="w-full h-48 object-cover rounded-md my-3"
                     />
                   )}
-
-                  {/* Tags - Positioned at the top-left of the image */}
                   {article.tags?.length > 0 && (
                     <div className="absolute top-2 left-2 flex flex-wrap gap-1">
                       {article.tags.map((tag, index) => (
@@ -74,11 +71,7 @@ const AllBlogs = () => {
                     </div>
                   )}
                 </div>
-
-                {/* Article Title */}
                 <h2 className="text-xl font-semibold mt-2">{article.title}</h2>
-
-                {/* Published Date */}
                 <p className="text-sm text-gray-500">
                   {new Date(article.publishedAt).toLocaleDateString("en-US", {
                     month: "short",
@@ -86,8 +79,6 @@ const AllBlogs = () => {
                     year: "numeric",
                   })}
                 </p>
-
-                {/* Author Name */}
                 {article.author?.name && (
                   <h3 className="text-sm font-medium text-gray-700 mt-2">
                     By {article.author.name}
@@ -96,12 +87,10 @@ const AllBlogs = () => {
               </div>
             ))}
           </div>
-
-          {/* Pagination Buttons */}
           <div className="flex justify-center gap-4 mt-6">
             <button
               className="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
-              onClick={() => fetchArticles(null)} // Reset to first page
+              onClick={() => fetchArticles(null)} 
               disabled={!cursor}
             >
               First Page

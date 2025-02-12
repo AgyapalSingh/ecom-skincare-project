@@ -38,7 +38,7 @@ const ProductCardForCollection = ({ product, collectionHandle}) => {
       <p className="text-gray-600">
         Rs. {selectedVariant ? selectedVariant.price.amount : "N/A"}
       </p>
-      {variants.length > 1 && ( // Show dropdown only if there are multiple variants
+      {variants.length > 1 && ( 
         <select
           className="border p-2 mt-2 rounded w-full"
           onChange={handleVariantChange}

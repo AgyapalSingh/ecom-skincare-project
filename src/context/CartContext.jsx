@@ -3,7 +3,6 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  // Load cart from localStorage on mount
   const loadCartFromLocalStorage = () => {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
@@ -12,7 +11,6 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(loadCartFromLocalStorage);
   const [checkoutUrl, setCheckoutUrl] = useState(null);
 
-  // 🔹 Save cart to localStorage whenever cart updates
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);

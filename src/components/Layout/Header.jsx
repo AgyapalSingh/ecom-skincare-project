@@ -9,11 +9,11 @@ import { LuSearch } from "react-icons/lu";
 import { LuUserRound } from "react-icons/lu";
 
 const Header = () => {
-  const { cart } = useCart(); // Access cart state from the context
+  const { cart } = useCart(); 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  // Get the total item count from the cart
+
   const totalItems =
     cart.length > 0 ? cart.reduce((acc, item) => acc + item.quantity, 0) : 0;
   const toggleDrawer = () => {
@@ -37,7 +37,6 @@ const Header = () => {
         </div>
 
         <div>
-          {/* Menu (You can add this as you prefer) */}
           <div className="mx-4">
             <ul className="flex flex-row">
               <li>
@@ -82,19 +81,12 @@ const Header = () => {
             <LuUserRound className="text-white text-5xl" />
           </div>
 
-          {/* Cart Icon */}
           <div className="relative mx-4 cursor-pointer" onClick={toggleDrawer}>
             <PiShoppingCartLight className="text-white text-5xl" />
-            {/* Display item count (show 0 if the cart is empty) */}
             <span className="absolute top-0 right-0 bg-red-600 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
               {totalItems}
             </span>
           </div>
-
-          {/* Account Icon */}
-          {/* <div className="mx-4">
-            <User className="text-white text-2xl" />
-          </div> */}
         </div>
         <SearchDrawer isOpen={isSearchOpen} closeDrawer={() => setIsSearchOpen(false)} />
 

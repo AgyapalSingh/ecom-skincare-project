@@ -51,7 +51,7 @@ const ProductCard = ({ product }) => {
         </select>
       )} */}
 
-      {variants.length > 1 && ( // Show buttons only if there are multiple variants
+      {variants.length > 1 && ( 
         <div className="flex flex-wrap gap-2 mt-2">
           {variants.map((variant) => (
             <button
@@ -59,11 +59,10 @@ const ProductCard = ({ product }) => {
               onClick={() => setSelectedVariant(variant)}
               className={`px-4 py-2 rounded border ${
                 selectedVariant?.id === variant.id
-                  ? "bg-blue-600 text-white" // Selected variant styling
+                  ? "bg-blue-600 text-white" 
                   : "bg-gray-200 hover:bg-gray-300"
               }`}
             >
-              {/* {variant.title} - Rs. {variant.price.amount} */}
               {variant.title} 
             </button>
           ))}
