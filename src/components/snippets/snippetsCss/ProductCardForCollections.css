@@ -1,6 +1,6 @@
 .uniq-prod-for-col{
     border: 1px solid rgb(204, 203, 203);
-    min-width: 400px;
+    min-width: 350px;
     display: flex;
     flex-direction: column;
     justify-content: center;
