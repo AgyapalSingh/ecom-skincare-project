@@ -1,27 +1,25 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from "react";
 
-// Create a Context for the Cart
 const CartContext = createContext();
 
-// Create a Provider component
 export const CartProvider = ({ children }) => {
-  // Try to load the cart from localStorage if it exists
   const loadCartFromLocalStorage = () => {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   };
 
-  // Initialize cart state from localStorage
   const [cart, setCart] = useState(loadCartFromLocalStorage);
+  const [checkoutUrl, setCheckoutUrl] = useState(null);
 
-  // Add item to the cart
   const addToCart = (product) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
 
       if (existingItem) {
         return prevCart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
         );
       } else {
         return [...prevCart, { ...product, quantity: 1 }];
@@ -29,39 +27,72 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // Remove item from cart
   const removeFromCart = (id) => {
-    setCart((prevCart) => {
-      const updatedCart = prevCart.filter((item) => item.id !== id);
-      // Persist the updated cart in localStorage
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-      return updatedCart;
-    });
+    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
-  // Clear the cart
   const clearCart = () => {
     setCart([]);
-    // Clear the cart in localStorage as well
     localStorage.setItem("cart", JSON.stringify([]));
   };
 
-  // Persist cart to localStorage whenever it changes
-  useEffect(() => {
-    // Only persist if there are items in the cart
-    if (cart.length > 0) {
-      localStorage.setItem("cart", JSON.stringify(cart));
+  const createCheckout = async () => {
+    try {
+      const lineItems = cart.map((item) => ({
+        variantId: item.id,
+        quantity: item.quantity,
+      }));
+
+      const response = await fetch(
+        `https://${
+          import.meta.env.VITE_SHOPIFY_APP_URL
+        }/api/2023-01/graphql.json`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Shopify-Storefront-Access-Token": import.meta.env
+              .VITE_APP_SHOPIFY_PUBLIC_ACCESS_TOKEN,
+          },
+          body: JSON.stringify({
+            query: `
+            mutation CheckoutCreate($lineItems: [CheckoutLineItemInput!]!) {
+              checkoutCreate(input: { lineItems: $lineItems }) {
+                checkout {
+                  webUrl
+                }
+                checkoutUserErrors {
+                  message
+                }
+              }
+            }
+          `,
+            variables: { lineItems },
+          }),
+        }
+      );
+
+      const data = await response.json();
+      const url = data.data?.checkoutCreate?.checkout?.webUrl;
+
+      if (url) {
+        setCheckoutUrl(url);
+        window.location.href = url;
+      }
+    } catch (error) {
+      console.error("Error creating checkout:", error);
     }
-  }, [cart]);
+  };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, clearCart, createCheckout }}
+    >
       {children}
     </CartContext.Provider>
   );
 };
 
-// Custom hook to access the cart state
 export const useCart = () => {
   return useContext(CartContext);
 };

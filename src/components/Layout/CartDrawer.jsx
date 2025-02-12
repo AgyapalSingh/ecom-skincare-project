@@ -1,10 +1,9 @@
 import React from "react";
-import { useCart } from "../../context/CartContext"; // Import cart context
+import { useCart } from "../../context/CartContext";
 
 const CartDrawer = ({ isOpen, closeDrawer }) => {
-  const { cart, removeFromCart, clearCart } = useCart();
+  const { cart, removeFromCart, clearCart, createCheckout } = useCart();
 
-  // Calculate total price of items in the cart
   const totalPrice = cart
     .reduce((total, item) => total + item.quantity * parseFloat(item.price), 0)
     .toFixed(2);
@@ -23,13 +22,13 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between bg-amber-400 items-center">
-          <h2 className="text-xl font-bold ">Your Cart</h2>
-          <button className="cursor-pointer" onClick={closeDrawer}>Close</button>
+          <h2 className="text-xl font-bold">Your Cart</h2>
+          <button className="cursor-pointer" onClick={closeDrawer}>
+            Close
+          </button>
         </div>
 
-        {/* Cart items list */}
         <div className="mt-4 text-black">
-          
           {cart.length > 0 ? (
             cart.map((item) => (
               <div
@@ -63,7 +62,6 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
           )}
         </div>
 
-        {/* Cart summary */}
         {cart.length > 0 && (
           <div className="mt-4 text-black">
             <div className="flex justify-between items-center">
@@ -78,7 +76,10 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
               >
                 Clear Cart
               </button>
-              <button className="w-full bg-green-500 text-white py-2 rounded">
+              <button
+                onClick={createCheckout}
+                className="w-full bg-green-500 text-white py-2 rounded"
+              >
                 Checkout
               </button>
             </div>
