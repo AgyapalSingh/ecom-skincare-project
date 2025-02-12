@@ -1,6 +1,7 @@
 import React,  { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
+import "./snippetsCss/ProductCardForCollections.css"
 
 const ProductCardForCollection = ({ product, collectionHandle}) => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const ProductCardForCollection = ({ product, collectionHandle}) => {
   return (
     <div
       key={product.id}
-      className="text-center border cursor-pointer p-4 rounded-md"
+      className="uniq-prod-for-col"
     >
       <img
         src={product.featuredImage.url}

@@ -1,0 +1,10 @@
+.uniq-prod-for-col{
+    border: 1px solid rgb(204, 203, 203);
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 20px;
+    border-radius: 15px;
+}
