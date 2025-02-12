@@ -45,6 +45,7 @@ const CollectionPageFromAllCollections = () => {
       ) : (
         <section className="uniq-collection-sec">
           <h2 className="uniq-coll-title">{handle}</h2>
+          <span>Total No. : {selectCurrentCollection.length}</span>
           <div className="uniq-coll-div">
             {selectCurrentCollection.length > 0 ? (
               <div className="uniq-coll-prods">
