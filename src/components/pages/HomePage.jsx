@@ -7,11 +7,13 @@ import ImageSlider from "../snippets/ImageSlider";
 const HomePage = () => {
   return (
     <Layout title="Home | Uniqaya Lifestyle">
-      <ImageSlider/>
-      <NewlyLaunchedCollection/>
+      <ImageSlider />
+
+      <div className="uniq-home-container">
+        <NewlyLaunchedCollection />
+      </div>
       <AllProducts />
     </Layout>
-    
   );
 };
 
