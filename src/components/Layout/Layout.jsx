@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { motion, useScroll } from 'framer-motion';
 
 const Layout = ({
   children,
@@ -8,6 +9,7 @@ const Layout = ({
   keywords = "uniqaya, lifestyle, skincare, beauty, cosmetics, natural, organic",
   author = "Agyapal Singh",
 }) => {
+  const {scrollYProgress} = useScroll();
   return (
     <>
       <Helmet>
@@ -17,6 +19,12 @@ const Layout = ({
         <meta name="author" content={author} />
         <title>{title}</title>
       </Helmet>
+      <motion.div
+        style={{
+          scaleX: scrollYProgress,
+        }}
+        className="scroll-bar-progress"
+      ></motion.div>
       <main style={{ minHeight: "70vh", marginTop: "110px" }}>{children}</main>
     </>
   );
