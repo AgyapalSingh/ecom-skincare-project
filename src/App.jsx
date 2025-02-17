@@ -4,7 +4,7 @@ import HomePage from "./components/pages/HomePage";
 import CollectionPage from "./components/pages/CollectionPage";
 import PageNotFound from "./components/pages/PageNotFound";
 import ProductPage from "./products/ProductPage";
-import ProductPageFromCollection from "./products/ProductPageFromCollection";
+// import ProductPageFromCollection from "./products/ProductPageFromCollection";
 import BestSellerPage from "./components/pages/BestSellerPage";
 import CollectionPageFromAllCollections from "./components/collections/CollectionPageFromAllCollections";
 import Header from "./components/Layout/Header";
