@@ -1,4 +1,6 @@
 import { Route, Routes } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { IoIosArrowUp } from "react-icons/io";
 import "./App.css";
 import HomePage from "./components/pages/HomePage";
 import CollectionPage from "./components/pages/CollectionPage";
@@ -16,9 +18,27 @@ import FAQs from "./components/pages/FooterPages/FAQs";
 import TrackOrder from "./components/pages/FooterPages/TrackOrder";
 
 function App() {
+  const [showTopButton, setShowTopButton] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowTopButton(window.scrollY > 300);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
     <>
       <Header />
+      {showTopButton && (
+        <button
+          className="go-to-top"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          <IoIosArrowUp />
+        </button>
+      )}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/products/:handle" element={<ProductPage />} />
@@ -37,10 +57,8 @@ function App() {
         />
         {/* <Route path="/allcollections/bestsellers/products/:handle" element={<ProductPageFromCollection />} /> */}
 
-
         {/* BLogs */}
         <Route path="/blogs" element={<AllBlogsPage />} />
-
 
         {/* Footer Routes */}
         <Route path="/about-us" element={<AboutUs />} />
