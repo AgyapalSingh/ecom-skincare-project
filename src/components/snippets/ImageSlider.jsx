@@ -74,7 +74,7 @@ const ImageSlider = () => {
           onClick={() => handleSlideClick(slide.link)} 
           style={{ cursor: "pointer" }} 
         >
-          <img src={slide.image} alt={`Slide ${index + 1}`} loading={index === 0 ? "eager" : "lazy"} />
+          <img src={slide.image} alt={`Slide ${index + 1}`} fetchpriority="high" loading={index === 0 ? "eager" : "lazy"} />
         </SwiperSlide>
       ))}
     </Swiper>
