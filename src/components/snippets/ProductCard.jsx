@@ -5,9 +5,6 @@ import { useCart } from "../../context/CartContext";
 const ProductCard = ({ product }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleMouseEnter = () => setIsHovered(true);
-  const handleMouseLeave = () => setIsHovered(false);
-
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const variants = product.variants.edges.map((edge) => edge.node);
@@ -21,13 +18,10 @@ const ProductCard = ({ product }) => {
     setSelectedVariant(variant);
   };
 
-  const imageSrc = isHovered
-    ? product.images.edges[1]?.node.src || "default-image.jpg"
-    : product.images.edges[0]?.node.src || "default-image.jpg";
+  const firstImage = product.images.edges[0]?.node.src || "default-image.jpg";
+  const secondImage = product.images.edges[1]?.node.src || null; // Check if second image exists
 
-  const imageAlt = isHovered
-    ? product.images.edges[1]?.node.altText || product.title
-    : product.images.edges[0]?.node.altText || product.title;
+  const imageSrc = isHovered && secondImage ? secondImage : firstImage;
 
   return (
     <div
@@ -35,16 +29,15 @@ const ProductCard = ({ product }) => {
       className="text-center border cursor-pointer p-4 rounded-md"
     >
       <div
-        className="aspect-square mx-auto cursor-pointer"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        className="aspect-square mx-auto cursor-pointer relative overflow-hidden"
+        onMouseEnter={() => secondImage && setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={() => navigate(`/products/${product.handle}`)}
       >
         <img
           src={imageSrc}
-          alt={imageAlt}
-          width={"100%"}
-          height={"100%"}
-          onClick={() => navigate(`/products/${product.handle}`)}
+          alt={product.title}
+          className="w-full h-full object-cover transition-opacity duration-500"
         />
       </div>
       <h3
@@ -56,20 +49,6 @@ const ProductCard = ({ product }) => {
       <p className="text-gray-600">
         Rs. {selectedVariant ? selectedVariant.price.amount : "N/A"}
       </p>
-
-      {/* {variants.length > 1 && ( // Show dropdown only if there are multiple variants
-        <select
-          className="border p-2 mt-2 rounded w-full"
-          onChange={handleVariantChange}
-          value={selectedVariant?.id}
-        >
-          {variants.map((variant) => (
-            <option key={variant.id} value={variant.id}>
-              {variant.title} - Rs. {variant.price.amount}
-            </option>
-          ))}
-        </select>
-      )} */}
 
       {variants.length > 1 && (
         <div className="flex flex-wrap gap-2 mt-2">
@@ -96,7 +75,7 @@ const ProductCard = ({ product }) => {
             id: selectedVariant.id,
             title: `${product.title} - ${selectedVariant.title}`,
             price: selectedVariant.price.amount,
-            image: product.images.edges[0]?.node.src,
+            image: firstImage,
           })
         }
         className={`mt-2 px-4 py-2 rounded text-white w-full ${
