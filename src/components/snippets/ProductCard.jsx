@@ -21,12 +21,15 @@ const ProductCard = ({ product }) => {
       key={product.id}
       className="text-center border cursor-pointer p-4 rounded-md"
     >
-      <img
-        src={product.images.edges[0]?.node.src || "default-image.jpg"}
-        alt={product.images.edges[0]?.node.altText || product.title}
-        className="w-[200px] aspect-square mx-auto cursor-pointer"
-        onClick={() => navigate(`/products/${product.handle}`)}
-      />
+      <div className="aspect-square mx-auto cursor-pointer">
+        <img
+          src={product.images.edges[0]?.node.src || "default-image.jpg"}
+          alt={product.images.edges[0]?.node.altText || product.title}
+          width={"100%"}
+          height={"100%"}
+          onClick={() => navigate(`/products/${product.handle}`)}
+        />
+      </div>
       <h3
         className="mt-2 font-semibold cursor-pointer"
         onClick={() => navigate(`/products/${product.handle}`)}
@@ -51,7 +54,7 @@ const ProductCard = ({ product }) => {
         </select>
       )} */}
 
-      {variants.length > 1 && ( 
+      {variants.length > 1 && (
         <div className="flex flex-wrap gap-2 mt-2">
           {variants.map((variant) => (
             <button
@@ -59,11 +62,11 @@ const ProductCard = ({ product }) => {
               onClick={() => setSelectedVariant(variant)}
               className={`px-4 py-2 rounded border ${
                 selectedVariant?.id === variant.id
-                  ? "bg-blue-600 text-white" 
+                  ? "bg-blue-600 text-white"
                   : "bg-gray-200 hover:bg-gray-300"
               }`}
             >
-              {variant.title} 
+              {variant.title}
             </button>
           ))}
         </div>
