@@ -42,12 +42,12 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <button
+        <span
           onClick={handleClose}
           className="absolute top-2 cursor-pointer right-6 text-3xl "
         >
           <LuX size={28} />
-        </button>
+        </span>
 
         <div className="h-16 flex justify-center align-middle  border-amber-700">
           <h1 className="self-center">UNIQAYA LIFESTYLES</h1>
