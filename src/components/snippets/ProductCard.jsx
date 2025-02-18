@@ -26,7 +26,7 @@ const ProductCard = ({ product }) => {
   return (
     <div
       key={product.id}
-      className="text-center border cursor-pointer p-4 rounded-md"
+      className="text-center h-120 border cursor-pointer p-4 rounded-md relative"
     >
       <div
         className="aspect-square mx-auto cursor-pointer relative overflow-hidden"
@@ -78,7 +78,7 @@ const ProductCard = ({ product }) => {
             image: firstImage,
           })
         }
-        className={`mt-2 px-4 py-2 rounded text-white w-full ${
+        className={`mt-2 px-4 py-2 rounded absolute bottom-0 left-0 text-white w-full ${
           selectedVariant?.availableForSale
             ? "bg-blue-600 hover:bg-blue-700"
             : "bg-gray-500 cursor-not-allowed"
