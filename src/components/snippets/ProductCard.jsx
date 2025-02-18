@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 
 const ProductCard = ({ product }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const variants = product.variants.edges.map((edge) => edge.node);
@@ -16,15 +21,27 @@ const ProductCard = ({ product }) => {
     setSelectedVariant(variant);
   };
 
+  const imageSrc = isHovered
+    ? product.images.edges[1]?.node.src || "default-image.jpg"
+    : product.images.edges[0]?.node.src || "default-image.jpg";
+
+  const imageAlt = isHovered
+    ? product.images.edges[1]?.node.altText || product.title
+    : product.images.edges[0]?.node.altText || product.title;
+
   return (
     <div
       key={product.id}
       className="text-center border cursor-pointer p-4 rounded-md"
     >
-      <div className="aspect-square mx-auto cursor-pointer">
+      <div
+        className="aspect-square mx-auto cursor-pointer"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <img
-          src={product.images.edges[0]?.node.src || "default-image.jpg"}
-          alt={product.images.edges[0]?.node.altText || product.title}
+          src={imageSrc}
+          alt={imageAlt}
           width={"100%"}
           height={"100%"}
           onClick={() => navigate(`/products/${product.handle}`)}

@@ -12,7 +12,7 @@ const HomePage = () => {
       <div className="uniq-home-container">
         <NewlyLaunchedCollection />
       </div>
-      {/* <AllProducts /> */}
+      <AllProducts />
     </Layout>
   );
 };

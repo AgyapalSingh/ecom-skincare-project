@@ -13,7 +13,7 @@ export const GET_PRODUCTS = `
               amount
             }
           }
-          images(first: 1) {
+          images(first: 2) {
             edges {
               node {
                 src
