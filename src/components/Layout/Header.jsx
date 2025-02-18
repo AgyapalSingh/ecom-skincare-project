@@ -9,10 +9,9 @@ import { LuSearch } from "react-icons/lu";
 import { LuUserRound } from "react-icons/lu";
 
 const Header = () => {
-  const { cart } = useCart(); 
+  const { cart } = useCart();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-
 
   const totalItems =
     cart.length > 0 ? cart.reduce((acc, item) => acc + item.quantity, 0) : 0;
@@ -28,7 +27,10 @@ const Header = () => {
         <div className="flex items-center">
           <div className="text-3xl font-semibold text-white">
             <Link to="/" className="navbar-brand">
-              <img alt="Uniqaya-Logo"
+              <img
+                alt="Uniqaya-Logo"
+                width={"100%"}
+                height={"100%"}
                 className=" h-8"
                 src="https://cdn.shopify.com/s/files/1/0589/0192/1956/files/Uniqaya_Logo_Wide_Clean_Functional.png?v=1724408288"
               />
@@ -73,7 +75,10 @@ const Header = () => {
         </div>
 
         <div className="flex items-center">
-          <div className="relative mx-4 cursor-pointer" onClick={() => setIsSearchOpen(true)}>
+          <div
+            className="relative mx-4 cursor-pointer"
+            onClick={() => setIsSearchOpen(true)}
+          >
             <LuSearch className="text-white text-5xl" />
           </div>
 
@@ -88,7 +93,10 @@ const Header = () => {
             </span>
           </div>
         </div>
-        <SearchDrawer isOpen={isSearchOpen} closeDrawer={() => setIsSearchOpen(false)} />
+        <SearchDrawer
+          isOpen={isSearchOpen}
+          closeDrawer={() => setIsSearchOpen(false)}
+        />
 
         <CartDrawer isOpen={isDrawerOpen} closeDrawer={toggleDrawer} />
       </nav>
