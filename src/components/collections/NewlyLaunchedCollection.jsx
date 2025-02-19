@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GET_COLLECTION_NEWLY_LAUNCHED_BY_ID } from "../../lib/shopify/queries";
 import shopifyApi from "../../lib/shopify/shopifyApi";
 import UniqayaLoader from "../snippets/UniqayaLoader";
-import ProductCardForCollection from "../snippets/ProductCardForCollection";
+import ProductCardForCollection from "../snippets/Cards/ProductCardForCollection";
 
 const NewlyLaunchedCollection = () => {
   const [loading, setLoading] = useState(true);

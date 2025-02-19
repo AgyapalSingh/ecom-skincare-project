@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GET_PRODUCTS } from "../../lib/shopify/queries";
 import shopifyApi from "../../lib/shopify/shopifyApi";
 import UniqayaLoader from "../snippets/UniqayaLoader";
-import ProductCard from "../snippets/ProductCard";
+import ProductCard from "../snippets/Cards/ProductCard";
 
 const AllProducts = () => {
   const [loading, setLoading] = useState(true);

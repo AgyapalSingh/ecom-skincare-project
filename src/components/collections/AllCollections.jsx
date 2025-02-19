@@ -3,7 +3,7 @@ import { GET_COLLECTIONS } from "../../lib/shopify/queries";
 import shopifyApi from "../../lib/shopify/shopifyApi";
 import UniqayaLoader from "../snippets/UniqayaLoader";
 import { useNavigate } from "react-router-dom";
-import CollectionCard from "../snippets/CollectionCard";
+import CollectionCard from "../snippets/Cards/CollectionCard";
 
 const AllCollections = () => {
   const navigate = useNavigate();

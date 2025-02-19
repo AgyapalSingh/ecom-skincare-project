@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../../context/CartContext";
-import "./snippetsCss/ProductCardForCollections.css";
+import { useCart } from "../../../context/CartContext";
+import "../snippetsCss/ProductCardForCollections.css";
 
 const ProductCardForCollection = ({ product, collectionHandle }) => {
   const navigate = useNavigate();

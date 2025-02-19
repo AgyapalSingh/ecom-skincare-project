@@ -5,7 +5,7 @@ import shopifyApi from "../../lib/shopify/shopifyApi";
 import { useCart } from "../../context/CartContext";
 import { useParams } from "react-router-dom";
 import UniqayaLoader from "../snippets/UniqayaLoader";
-import ProductCardForCollection from "../snippets/ProductCardForCollection";
+import ProductCardForCollection from "../snippets/Cards/ProductCardForCollection";
 
 const CollectionPageFromAllCollections = () => {
   const { handle } = useParams();
