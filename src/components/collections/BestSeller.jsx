@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GET_COLLECTION_BY_ID } from "../../lib/shopify/queries";
 import shopifyApi from "../../lib/shopify/shopifyApi";
-import { useCart } from "../../context/CartContext";
 import UniqayaLoader from "../snippets/UniqayaLoader";
 import ProductCardForCollection from "../snippets/ProductCardForCollection";
 import "./collectionsCss/BestSeller.css";
@@ -9,9 +8,9 @@ import "./collectionsCss/BestSeller.css";
 const BestSeller = () => {
   const [loading, setLoading] = useState(true);
   const bestsellers = "bestsellers";
-  const { cart, addToCart } = useCart();
   const [selectCollection, setSelectCollection] = useState([]);
 
+  // UNIQ - Function to Fetch Specific Collection [BestSellers]
   const fetchCollectionByID = async () => {
     const query = { query: GET_COLLECTION_BY_ID };
     try {
@@ -29,9 +28,6 @@ const BestSeller = () => {
     fetchCollectionByID();
   }, []);
 
-  if (loading) {
-    return <UniqayaLoader />;
-  }
 
   return (
     <>
@@ -47,7 +43,6 @@ const BestSeller = () => {
                   <ProductCardForCollection
                     key={node.id}
                     product={node}
-                    addToCart={addToCart}
                     collectionHandle={bestsellers}
                   />
                 ))}
