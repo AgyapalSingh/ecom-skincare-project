@@ -54,6 +54,16 @@ const Header = () => {
               <li>
                 <NavLink
                   className="nav-link dropdown-toggle"
+                  to={"/products"}
+                  data-bs-toggle="dropdown"
+                >
+                  All Products
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  className="nav-link dropdown-toggle"
                   to={"/allcollections/bestsellers"}
                   data-bs-toggle="dropdown"
                 >

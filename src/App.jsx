@@ -15,6 +15,7 @@ import AboutUs from "./components/pages/FooterPages/AboutUs";
 import ContactUs from "./components/pages/FooterPages/ContactUs";
 import FAQs from "./components/pages/FooterPages/FAQs";
 import TrackOrder from "./components/pages/FooterPages/TrackOrder";
+import AllProductsPage from "./components/pages/AllProductsPage";
 
 function App() {
   const [showTopButton, setShowTopButton] = useState(false);
@@ -40,6 +41,7 @@ function App() {
       )}
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/products" element={<AllProductsPage />} />
         <Route path="/products/:handle" element={<ProductPage />} />
         <Route path="/allcollections" element={<CollectionPage />} />
         <Route
