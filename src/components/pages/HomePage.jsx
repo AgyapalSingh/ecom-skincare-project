@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "../Layout/Layout";
-import AllProducts from "../collections/AllProducts";
 import NewlyLaunchedCollection from "../collections/NewlyLaunchedCollection";
 import ImageSlider from "../snippets/ImageSlider";
 
@@ -12,7 +11,6 @@ const HomePage = () => {
       <div className="uniq-home-container">
         <NewlyLaunchedCollection />
       </div>
-      <AllProducts />
     </Layout>
   );
 };
