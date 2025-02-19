@@ -7,12 +7,17 @@ const ProductCardForCollection = ({ product, collectionHandle }) => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
-  const variants = product.variants.edges.map((edge) => edge.node);
+  // UNIQ - Change Image on Hover
+  const [isHovered, setIsHovered] = useState(false);
+  const firstImage = product.images.edges[0]?.node.src || "default-image.jpg";
+  const secondImage = product.images.edges[1]?.node.src || null;
+  const imageSrc = isHovered && secondImage ? secondImage : firstImage;
 
+  // UNIQ - Handle variant selection
+  const variants = product.variants.edges.map((edge) => edge.node);
   const [selectedVariant, setSelectedVariant] = useState(
     variants.length > 0 ? variants[0] : null
   );
-
   const handleVariantChange = (event) => {
     const variant = variants.find((v) => v.id === event.target.value);
     setSelectedVariant(variant);
@@ -20,10 +25,14 @@ const ProductCardForCollection = ({ product, collectionHandle }) => {
 
   return (
     <div key={product.id} className="uniq-prod-for-col">
-      <div className="aspect-square mx-auto cursor-pointer">
+      <div
+        onMouseEnter={() => secondImage && setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className="aspect-square mx-auto cursor-pointer"
+      >
         <img
-          src={product.featuredImage.url}
-          alt={product.featuredImage.altText || product.title}
+          src={imageSrc}
+          alt={product.title}
           width={"100%"}
           height={"100%"}
           onClick={() =>
@@ -62,7 +71,7 @@ const ProductCardForCollection = ({ product, collectionHandle }) => {
             id: selectedVariant.id,
             title: `${product.title} - ${selectedVariant.title}`,
             price: selectedVariant.price.amount,
-            image: product.featuredImage.url,
+            image: firstImage,
           })
         }
         className={`mt-2 px-4 py-2 rounded text-white w-full ${

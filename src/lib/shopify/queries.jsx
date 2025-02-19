@@ -60,7 +60,7 @@ export const GET_COLLECTIONS = `{
 
 // 3. QUERY TO FETCH A SPECIFIC COLLECTION BY COLLECTION ID
 // BestSellers Collection
-const BEST_SELLERS_GID = import.meta.env.VITE_BEST_SELLERS_GID
+const BEST_SELLERS_GID = import.meta.env.VITE_BEST_SELLERS_GID;
 export const GET_COLLECTION_BY_ID = `{
   collection(id: "${BEST_SELLERS_GID}") {
     id
@@ -107,10 +107,9 @@ export const GET_COLLECTION_BY_ID = `{
 }
 `;
 
-
 // 3. QUERY TO FETCH A SPECIFIC COLLECTION BY COLLECTION ID
 // BestSellers Collection
-const NEWLY_LAUNCHED_GID = import.meta.env.VITE_NEWLY_LAUNCHED_GID
+const NEWLY_LAUNCHED_GID = import.meta.env.VITE_NEWLY_LAUNCHED_GID;
 export const GET_COLLECTION_NEWLY_LAUNCHED_BY_ID = `{
   collection(id: "${NEWLY_LAUNCHED_GID}") {
     id
@@ -241,10 +240,15 @@ export const GET_COLLECTION_BY_HANDLE = `
             id
             title
             handle
-            featuredImage {
-              url
-              altText
+            images(first: 10) {
+              edges {
+                node {
+                  altText
+                  src
+                }
+              }
             }
+            
             priceRange {
               minVariantPrice {
                 amount

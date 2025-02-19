@@ -10,7 +10,7 @@ const HomePage = () => {
       <ImageSlider />
 
       <div className="uniq-home-container">
-        <NewlyLaunchedCollection />
+        {/* <NewlyLaunchedCollection /> */}
       </div>
       <AllProducts />
     </Layout>
