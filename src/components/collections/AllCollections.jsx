@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 const AllCollections = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [collections, setCollections] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(6);
 
+  // UNIQ - Function to Fetch All Collections
   const fetchCollections = async () => {
     const query = { query: GET_COLLECTIONS };
     try {
@@ -27,6 +28,10 @@ const AllCollections = () => {
     fetchCollections();
   }, []);
 
+  const loadMore = () =>{
+    setVisibleCount((prevCount) => prevCount + 6);
+  }
+
   return (
     <>
       {loading ? (
@@ -37,7 +42,7 @@ const AllCollections = () => {
             All Collections
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-            {collections.map(({ node }) => (
+            {collections.slice(0, visibleCount).map(({ node }) => (
               <div
                 key={node.id}
                 className="text-center border p-4 rounded-md cursor-pointer"
@@ -52,6 +57,17 @@ const AllCollections = () => {
               </div>
             ))}
           </div>
+
+          {visibleCount < collections.length && (
+            <div className="text-center mt-8">
+              <button
+                onClick={loadMore}
+                className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition duration-300"
+              >
+                More Collections
+              </button>
+            </div>
+          )}
         </section>
       )}
     </>
