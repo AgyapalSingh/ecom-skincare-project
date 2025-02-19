@@ -25,10 +25,9 @@ const ProductCardForCollection = ({ product, collectionHandle }) => {
 
   return (
     <div key={product.id} className="uniq-prod-for-col">
-      <div
+      <div className="uniq-col-prod-img-div"
         onMouseEnter={() => secondImage && setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="uniq-prod-img-div"
       >
         <img
           src={imageSrc}
@@ -40,9 +39,9 @@ const ProductCardForCollection = ({ product, collectionHandle }) => {
           }
         />
       </div>
-      <div className="uniq-prod-titl-pric">
+      <div className="uniq-col-prod-titl-pric">
         <h3
-          className="uniq-prod-title"
+          className="uniq-col-prod-title"
           onClick={() =>
             navigate(`/allcollections/${collectionHandle}/${product.handle}`)
           }
@@ -51,24 +50,32 @@ const ProductCardForCollection = ({ product, collectionHandle }) => {
           {product.title}
         </h3>
 
-        <p className="uniq-prod-price">
-        Rs. {selectedVariant ? selectedVariant.price.amount : "N/A"}
-      </p>
+        <p className="uniq-col-prod-price">
+          Rs. {selectedVariant ? selectedVariant.price.amount : "N/A"}
+        </p>
       </div>
-    
+
       {variants.length > 1 && (
-        <select
-          className="border p-2 mt-2 rounded w-full"
-          onChange={handleVariantChange}
-          value={selectedVariant?.id}
-        >
+        <div className="uniq-col-prod-varient">
           {variants.map((variant) => (
-            <option key={variant.id} value={variant.id}>
-              {variant.title} - Rs. {variant.price.amount}
-            </option>
+            <button
+              key={variant.id}
+              onClick={() =>
+                handleVariantChange({ target: { value: variant.id } })
+              }
+              className={` ${
+                selectedVariant?.id === variant.id
+                  ? "uniq-col-prod-varient-btn-select"
+                  : "uniq-col-prod-varient-btn"
+              }`}
+            >
+              {/* {variant.title} - Rs. {variant.price.amount} */}
+              {variant.title}
+            </button>
           ))}
-        </select>
+        </div>
       )}
+
       <button
         onClick={() =>
           selectedVariant &&
@@ -79,9 +86,9 @@ const ProductCardForCollection = ({ product, collectionHandle }) => {
             image: firstImage,
           })
         }
-        className={`mt-2 px-4 py-2 rounded text-white w-full ${
+        className={` ${
           selectedVariant?.availableForSale
-            ? "bg-blue-600 hover:bg-blue-700"
+            ? "uniq-col-prod-atc-btn"
             : "bg-gray-500 cursor-not-allowed"
         }`}
         disabled={!selectedVariant?.availableForSale}
