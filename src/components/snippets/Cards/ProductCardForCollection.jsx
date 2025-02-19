@@ -28,29 +28,34 @@ const ProductCardForCollection = ({ product, collectionHandle }) => {
       <div
         onMouseEnter={() => secondImage && setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="aspect-square mx-auto cursor-pointer"
+        className="uniq-prod-img-div"
       >
         <img
           src={imageSrc}
           alt={product.title}
-          width={"300px"}
-          height={"300px"}
+          width={"350px"}
+          height={"350px"}
           onClick={() =>
             navigate(`/allcollections/${collectionHandle}/${product.handle}`)
           }
         />
       </div>
-      <h3
-        className="mt-2 font-semibold cursor-pointer"
-        onClick={() =>
-          navigate(`/allcollections/${collectionHandle}/${product.handle}`)
-        }
-      >
-        {product.title}
-      </h3>
-      <p className="text-gray-600">
+      <div className="uniq-prod-titl-pric">
+        <h3
+          className="uniq-prod-title"
+          onClick={() =>
+            navigate(`/allcollections/${collectionHandle}/${product.handle}`)
+          }
+        >
+          {/* {product.title.substring(0, 30)}... */}
+          {product.title}
+        </h3>
+
+        <p className="uniq-prod-price">
         Rs. {selectedVariant ? selectedVariant.price.amount : "N/A"}
       </p>
+      </div>
+    
       {variants.length > 1 && (
         <select
           className="border p-2 mt-2 rounded w-full"
