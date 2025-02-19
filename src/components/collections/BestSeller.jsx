@@ -28,7 +28,6 @@ const BestSeller = () => {
     fetchCollectionByID();
   }, []);
 
-
   return (
     <>
       {loading ? (
@@ -49,7 +48,7 @@ const BestSeller = () => {
               </div>
             ) : (
               <p className="text-center text-gray-500">
-                No best sellers available
+                No Best Sellers available
               </p>
             )}
           </div>

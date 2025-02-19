@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { GET_COLLECTION_NEWLY_LAUNCHED_BY_ID } from "../../lib/shopify/queries";
 import shopifyApi from "../../lib/shopify/shopifyApi";
-import { useCart } from "../../context/CartContext";
 import UniqayaLoader from "../snippets/UniqayaLoader";
 import ProductCardForCollection from "../snippets/ProductCardForCollection";
 
 const NewlyLaunchedCollection = () => {
   const [loading, setLoading] = useState(true);
   const newlylaunched = "newly-launched";
-  const { cart, addToCart } = useCart();
   const [selectCollection, setSelectCollection] = useState([]);
 
+  // UNIQ - Function to Fetch Specific Collection [Newly Launched]
   const fetchCollectionByID = async () => {
     const query = { query: GET_COLLECTION_NEWLY_LAUNCHED_BY_ID };
     try {
       const response = await shopifyApi.post("", query);
-      const bestSellerProducts = response.data.data.collection?.products?.edges;
-      setSelectCollection(bestSellerProducts || []);
+      const newlyLaunchedProducts =
+        response.data.data.collection?.products?.edges;
+      setSelectCollection(newlyLaunchedProducts || []);
     } catch (error) {
       console.error("Failed to fetch collection by ID", error);
     } finally {
@@ -27,10 +27,6 @@ const NewlyLaunchedCollection = () => {
   useEffect(() => {
     fetchCollectionByID();
   }, []);
-
-  if (loading) {
-    return <UniqayaLoader />;
-  }
 
   return (
     <>
@@ -46,7 +42,6 @@ const NewlyLaunchedCollection = () => {
                   <ProductCardForCollection
                     key={node.id}
                     product={node}
-                    addToCart={addToCart}
                     collectionHandle={newlylaunched}
                   />
                 ))}
