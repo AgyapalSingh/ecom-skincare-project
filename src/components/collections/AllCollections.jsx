@@ -3,6 +3,7 @@ import { GET_COLLECTIONS } from "../../lib/shopify/queries";
 import shopifyApi from "../../lib/shopify/shopifyApi";
 import UniqayaLoader from "../snippets/UniqayaLoader";
 import { useNavigate } from "react-router-dom";
+import CollectionCard from "../snippets/CollectionCard";
 
 const AllCollections = () => {
   const navigate = useNavigate();
@@ -28,9 +29,9 @@ const AllCollections = () => {
     fetchCollections();
   }, []);
 
-  const loadMore = () =>{
+  const loadMore = () => {
     setVisibleCount((prevCount) => prevCount + 6);
-  }
+  };
 
   return (
     <>
@@ -43,18 +44,7 @@ const AllCollections = () => {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
             {collections.slice(0, visibleCount).map(({ node }) => (
-              <div
-                key={node.id}
-                className="text-center border p-4 rounded-md cursor-pointer"
-                onClick={() => navigate(`/allcollections/${node.handle}`)}
-              >
-                <img
-                  src={node.image?.url || "default-image.jpg"}
-                  alt={node.image?.altText || node.title}
-                  className="w-full h-40 object-cover mb-2"
-                />
-                <h3 className="text-lg font-semibold">{node.title}</h3>
-              </div>
+              <CollectionCard key={node.id} collection={node} />
             ))}
           </div>
 
