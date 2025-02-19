@@ -33,8 +33,8 @@ const ProductCardForCollection = ({ product, collectionHandle }) => {
         <img
           src={imageSrc}
           alt={product.title}
-          width={"100%"}
-          height={"100%"}
+          width={"300px"}
+          height={"300px"}
           onClick={() =>
             navigate(`/allcollections/${collectionHandle}/${product.handle}`)
           }
