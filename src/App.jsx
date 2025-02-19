@@ -1,12 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { IoIosArrowUp } from "react-icons/io";
 import "./App.css";
 import HomePage from "./components/pages/HomePage";
 import CollectionPage from "./components/pages/CollectionPage";
 import PageNotFound from "./components/pages/PageNotFound";
 import ProductPage from "./products/ProductPage";
-// import ProductPageFromCollection from "./products/ProductPageFromCollection";
 import BestSellerPage from "./components/pages/BestSellerPage";
 import CollectionPageFromAllCollections from "./components/collections/CollectionPageFromAllCollections";
 import Header from "./components/Layout/Header";
@@ -55,7 +54,6 @@ function App() {
           path="/allcollections/bestsellers"
           element={<BestSellerPage />}
         />
-        {/* <Route path="/allcollections/bestsellers/products/:handle" element={<ProductPageFromCollection />} /> */}
 
         {/* BLogs */}
         <Route path="/blogs" element={<AllBlogsPage />} />
