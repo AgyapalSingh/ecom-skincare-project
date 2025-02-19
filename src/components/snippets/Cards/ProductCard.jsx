@@ -3,25 +3,24 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../../../context/CartContext";
 
 const ProductCard = ({ product }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   const navigate = useNavigate();
   const { addToCart } = useCart();
-  const variants = product.variants.edges.map((edge) => edge.node);
 
+  // UNIQ - Change Image on Hover
+  const [isHovered, setIsHovered] = useState(false);
+  const firstImage = product.images.edges[0]?.node.src || "default-image.jpg";
+  const secondImage = product.images.edges[1]?.node.src || null;
+  const imageSrc = isHovered && secondImage ? secondImage : firstImage;
+
+  // UNIQ - Handle variant selection
+  const variants = product.variants.edges.map((edge) => edge.node);
   const [selectedVariant, setSelectedVariant] = useState(
     variants.length > 0 ? variants[0] : null
   );
-
   const handleVariantChange = (event) => {
     const variant = variants.find((v) => v.id === event.target.value);
     setSelectedVariant(variant);
   };
-
-  const firstImage = product.images.edges[0]?.node.src || "default-image.jpg";
-  const secondImage = product.images.edges[1]?.node.src || null; // Check if second image exists
-
-  const imageSrc = isHovered && secondImage ? secondImage : firstImage;
 
   return (
     <div
