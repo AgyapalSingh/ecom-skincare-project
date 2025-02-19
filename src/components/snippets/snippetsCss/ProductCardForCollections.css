@@ -95,4 +95,5 @@
     padding: 10px 0px;
     text-transform: uppercase;
     margin-top: 10px;
+    cursor: not-allowed;
 }

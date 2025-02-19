@@ -23,12 +23,9 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div
-      key={product.id}
-      className="text-center border cursor-pointer p-4 rounded-md"
-    >
+    <div key={product.id} className="uniq-prod-for-col">
       <div
-        className="aspect-square mx-auto cursor-pointer relative overflow-hidden"
+        className="uniq-col-prod-img-div"
         onMouseEnter={() => secondImage && setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => navigate(`/products/${product.handle}`)}
@@ -36,29 +33,32 @@ const ProductCard = ({ product }) => {
         <img
           src={imageSrc}
           alt={product.title}
-          className="w-full h-full object-cover transition-opacity duration-500"
+          width={"350px"}
+          height={"350px"}
         />
       </div>
-      <h3
-        className="mt-2 font-semibold cursor-pointer"
-        onClick={() => navigate(`/products/${product.handle}`)}
-      >
-        {product.title}
-      </h3>
-      <p className="text-gray-600">
-        Rs. {selectedVariant ? selectedVariant.price.amount : "N/A"}
-      </p>
+      <div className="uniq-col-prod-titl-pric">
+        <h3
+          className="uniq-col-prod-title"
+          onClick={() => navigate(`/products/${product.handle}`)}
+        >
+          {product.title}
+        </h3>
+        <p className="uniq-col-prod-price">
+          Rs. {selectedVariant ? selectedVariant.price.amount : "N/A"}
+        </p>
+      </div>
 
       {variants.length > 1 && (
-        <div className="flex flex-wrap gap-2 mt-2">
+        <div className="uniq-col-prod-varient">
           {variants.map((variant) => (
             <button
               key={variant.id}
               onClick={() => setSelectedVariant(variant)}
-              className={`px-4 py-2 rounded border ${
+              className={` ${
                 selectedVariant?.id === variant.id
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-200 hover:bg-gray-300"
+                  ? "uniq-col-prod-varient-btn-select"
+                  : "uniq-col-prod-varient-btn"
               }`}
             >
               {variant.title}
@@ -77,10 +77,10 @@ const ProductCard = ({ product }) => {
             image: firstImage,
           })
         }
-        className={`mt-2 px-4 py-2 rounded text-white w-full ${
+        className={` ${
           selectedVariant?.availableForSale
-            ? "bg-blue-600 hover:bg-blue-700"
-            : "bg-gray-500 cursor-not-allowed"
+            ? "uniq-col-prod-atc-btn"
+            : "uniq-col-prod-atc-btn-others"
         }`}
         disabled={!selectedVariant?.availableForSale}
       >

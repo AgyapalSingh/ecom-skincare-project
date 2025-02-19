@@ -25,18 +25,19 @@ const ProductCardForCollection = ({ product, collectionHandle }) => {
 
   return (
     <div key={product.id} className="uniq-prod-for-col">
-      <div className="uniq-col-prod-img-div"
+      <div
+        className="uniq-col-prod-img-div"
         onMouseEnter={() => secondImage && setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        onClick={() =>
+          navigate(`/allcollections/${collectionHandle}/${product.handle}`)
+        }
       >
         <img
           src={imageSrc}
           alt={product.title}
           width={"350px"}
           height={"350px"}
-          onClick={() =>
-            navigate(`/allcollections/${collectionHandle}/${product.handle}`)
-          }
         />
       </div>
       <div className="uniq-col-prod-titl-pric">
@@ -89,7 +90,7 @@ const ProductCardForCollection = ({ product, collectionHandle }) => {
         className={` ${
           selectedVariant?.availableForSale
             ? "uniq-col-prod-atc-btn"
-            : "bg-gray-500 cursor-not-allowed"
+            : "uniq-col-prod-atc-btn-others"
         }`}
         disabled={!selectedVariant?.availableForSale}
       >
