@@ -154,3 +154,63 @@ body {
   border: 2px solid #18345736;
   background-color: rgb(255, 255, 255);
 }
+
+
+
+
+
+/* UNIQ HEADER */
+
+.uniq-header {
+  height: 120px;
+  background-color: #183457;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.uniq-announementBar {
+  height: 30px;
+}
+
+.uniq-navbar {
+  height: 90px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.uniq-navbar-logo {
+  height: 100%;
+  width: 20%;
+  align-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.uniq-navbar-menus {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.uniq-navbar-menus-list {
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.uniq-navbar-btns {
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+}
