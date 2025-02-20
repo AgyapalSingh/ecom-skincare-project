@@ -216,7 +216,7 @@ body {
   top: 120;
   right: 0;
   height: 100vh;
-  width: 100%;
+  width: 80%;
   background-color: #183457;
   overflow: hidden;
   transition: transform 0.4s ease-in-out;
