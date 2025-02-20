@@ -155,7 +155,7 @@ body {
   background-color: rgb(255, 255, 255);
 }
 
-/* UNIQ HEADER */
+/* UNIQ HEADER **********************************************************************************************************************************************************/
 
 .uniq-header {
   height: 120px;
@@ -168,10 +168,12 @@ body {
   z-index: 10;
 }
 
+/* AnnounceMentBar */
 .uniq-announementBar {
   height: 30px;
 }
 
+/* Navbar */
 .uniq-navbar {
   height: 90px;
   width: 100%;
@@ -180,6 +182,7 @@ body {
   align-items: center;
 }
 
+/* Navbar Logo */
 .uniq-navbar-logo {
   height: 100%;
   width: 20%;
@@ -189,6 +192,7 @@ body {
   justify-content: center;
 }
 
+/* Navbar Menu Div */
 .uniq-navbar-menus {
   width: 60%;
   height: 100%;
@@ -197,12 +201,14 @@ body {
   align-items: center;
 }
 
+/* Navbar Menu List */
 .uniq-navbar-menus-list {
   width: 60%;
   display: flex;
   justify-content: space-around;
 }
 
+/* Navbar Mobile Drawer */
 .uniq-mobile-nav-drawer {
   position: fixed;
   top: 120;
@@ -215,11 +221,11 @@ body {
   z-index: 9;
   transform: translateX(+100%);
 }
-
 .uniq-mobile-nav-drawer.mobileDraweropen {
   transform: translateX(0%);
 }
 
+/* Navbar Mobile Drawer Menu List */
 .uniq-mobile-nav-drawer-menu-list {
   background-color: rgb(230, 230, 230);
   width: 90%;
@@ -227,6 +233,7 @@ body {
   border-radius: 0px 0px 5px 5px;
 }
 
+/* Navbar Mobile Drawer Menu List Items */
 .uniq-mobile-nav-drawer-menu-list li {
   font-size: 14px;
   color: #183457;
@@ -234,6 +241,7 @@ body {
   border-bottom: 1px solid #183457;
 }
 
+/* Navbar Buttons */
 .uniq-navbar-btns {
   width: 20%;
   display: flex;
@@ -242,26 +250,29 @@ body {
   align-items: center;
 }
 
+/* Navbar Search Button */
 .uniq-navbar-search {
   cursor: pointer;
 }
 
+/* Navbar User Button */
 .uniq-navbar-user {
   cursor: pointer;
 }
 
-
-
+/* Navbar Buttons Icons */
 .nav-icon {
   font-size: 32px;
   margin: 0px 3px;
 }
 
+/* Navbar Cart Button */
 .uniq-navbar-cart {
   cursor: pointer;
   position: relative;
 }
 
+/* Navbar Cart Badge */
 .uniq-cart-badge {
   position: absolute;
   top: -2px;
@@ -277,18 +288,25 @@ body {
   justify-content: center;
 }
 
+
+/* Navbar Hamburger Button for Mobile */
 .uniq-header-hamburger {
   margin-right: 5px;
 }
+
+/* Navbar Hamburger Button for Mobile Icon*/
 .uniq-header-hamburger .nav-icon {
   font-size: 34px;
 }
+
+
 @media screen and (min-width: 768px) {
   .uniq-header-hamburger {
     display: none;
   }
 }
 
+/* Mobile Drawer User Btn */
 .uniq-navbar-user-mobile {
   width: 90%;
   margin-left: 5%;
@@ -298,6 +316,8 @@ body {
 .uniq-navbar-user-mobile div {
   display: flex;
 }
+
+
 @media screen and (max-width: 768px) {
   .uniq-navbar-logo {
     width: 50%;
@@ -310,7 +330,6 @@ body {
     width: 50%;
     justify-content: end;
   }
-
   .uniq-navbar-user {
     display: none;
   }
