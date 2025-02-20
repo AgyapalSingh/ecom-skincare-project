@@ -77,7 +77,7 @@ const Header = () => {
       </nav>
 
       <div
-        className={`uniq-mobile-nav-drawer ${isMobileMenuOpen ? "open" : ""}`}
+        className={`uniq-mobile-nav-drawer ${isMobileMenuOpen ? "mobileDraweropen" : ""}`}
       >
         <ul className="uniq-mobile-nav-drawer-menu-list">
           <li onClick={toggleMobileMenu}>
