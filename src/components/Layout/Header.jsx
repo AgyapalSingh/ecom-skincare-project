@@ -64,11 +64,7 @@ const Header = () => {
           </div>
           <div className="relative cursor-pointer" onClick={toggleDrawer}>
             <PiShoppingCartLight className="text-3xl" />
-            {totalItems > 0 && (
-              <span className="absolute top-0 right-0 bg-red-600 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
-                {totalItems}
-              </span>
-            )}
+            <span className="uniq-cart-badge">{totalItems}</span>
           </div>
           <div className="uniq-header-hamburger " onClick={toggleMobileMenu}>
             {isMobileMenuOpen ? (
@@ -76,30 +72,28 @@ const Header = () => {
             ) : (
               <GiHamburgerMenu className="text-3xl" />
             )}
-            {/* <GiHamburgerMenu className="text-3xl" /> */}
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu Drawer */}
-      {isMobileMenuOpen && (
-        <div className="uniq-mobile-nav-drawer">
-          <ul className="uniq-mobile-nav-drawer-menu-list">
-            <li onClick={toggleMobileMenu}>
-              <NavLink to="/allcollections">All Collections</NavLink>
-            </li>
-            <li onClick={toggleMobileMenu}>
-              <NavLink to="/products">All Products</NavLink>
-            </li>
-            <li onClick={toggleMobileMenu}>
-              <NavLink to="/allcollections/bestsellers">Best Sellers</NavLink>
-            </li>
-            <li onClick={toggleMobileMenu}>
-              <NavLink to="/blogs">Blogs</NavLink>
-            </li>
-          </ul>
-        </div>
-      )}
+      <div
+        className={`uniq-mobile-nav-drawer ${isMobileMenuOpen ? "open" : ""}`}
+      >
+        <ul className="uniq-mobile-nav-drawer-menu-list">
+          <li onClick={toggleMobileMenu}>
+            <NavLink to="/allcollections">All Collections</NavLink>
+          </li>
+          <li onClick={toggleMobileMenu}>
+            <NavLink to="/products">All Products</NavLink>
+          </li>
+          <li onClick={toggleMobileMenu}>
+            <NavLink to="/allcollections/bestsellers">Best Sellers</NavLink>
+          </li>
+          <li onClick={toggleMobileMenu}>
+            <NavLink to="/blogs">Blogs</NavLink>
+          </li>
+        </ul>
+      </div>
 
       <SearchDrawer
         isOpen={isSearchOpen}
