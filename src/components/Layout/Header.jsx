@@ -4,9 +4,9 @@ import { useCart } from "../../context/CartContext";
 import AnnounceMentBar from "../snippets/AnnounceMentBar";
 import CartDrawer from "./CartDrawer";
 import SearchDrawer from "./SearchDrawer";
-import { PiShoppingCartLight } from "react-icons/pi";
+import { PiShoppingCartSimple } from "react-icons/pi";
 import { LuSearch, LuUserRound } from "react-icons/lu";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { HiOutlineBars3CenterLeft } from "react-icons/hi2";
 import { IoMdClose } from "react-icons/io";
 
 const Header = () => {
@@ -56,28 +56,37 @@ const Header = () => {
         </div>
 
         <div className="uniq-navbar-btns ">
-          <div onClick={() => setIsSearchOpen(true)}>
-            <LuSearch className="text-3xl" />
+          <div
+            className="uniq-navbar-search"
+            onClick={() => setIsSearchOpen(true)}
+          >
+            <LuSearch className="nav-icon" />
           </div>
-          <div>
-            <LuUserRound className="text-3xl" />
+
+          <div className="uniq-navbar-user">
+            <LuUserRound className="nav-icon" />
           </div>
-          <div className="relative cursor-pointer" onClick={toggleDrawer}>
-            <PiShoppingCartLight className="text-3xl" />
-            <span className="uniq-cart-badge">{totalItems}</span>
+
+          <div className="uniq-navbar-cart" onClick={toggleDrawer}>
+          <span className="uniq-cart-badge">{totalItems}</span>
+            <PiShoppingCartSimple className="nav-icon" />
+            
           </div>
-          <div className="uniq-header-hamburger " onClick={toggleMobileMenu}>
+
+          <div className="uniq-header-hamburger" onClick={toggleMobileMenu}>
             {isMobileMenuOpen ? (
-              <IoMdClose className="text-3xl" />
+              <IoMdClose className="nav-icon" />
             ) : (
-              <GiHamburgerMenu className="text-3xl" />
+              <HiOutlineBars3CenterLeft className="nav-icon" />
             )}
           </div>
         </div>
       </nav>
 
       <div
-        className={`uniq-mobile-nav-drawer ${isMobileMenuOpen ? "mobileDraweropen" : ""}`}
+        className={`uniq-mobile-nav-drawer ${
+          isMobileMenuOpen ? "mobileDraweropen" : ""
+        }`}
       >
         <ul className="uniq-mobile-nav-drawer-menu-list">
           <li onClick={toggleMobileMenu}>
@@ -93,6 +102,14 @@ const Header = () => {
             <NavLink to="/blogs">Blogs</NavLink>
           </li>
         </ul>
+        <div className="uniq-navbar-user-mobile">
+          <div>
+            <span>
+              <LuUserRound className="nav-icon" />
+            </span>
+            <span> Account</span>
+          </div>
+        </div>
       </div>
 
       <SearchDrawer

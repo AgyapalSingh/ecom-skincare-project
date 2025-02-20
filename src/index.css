@@ -203,14 +203,6 @@ body {
   justify-content: space-around;
 }
 
-.uniq-navbar-btns {
-  width: 20%;
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-  align-items: center;
-}
-
 .uniq-mobile-nav-drawer {
   position: fixed;
   top: 120;
@@ -219,7 +211,7 @@ body {
   width: 100%;
   background-color: #183457;
   overflow: hidden;
-  transition: transform 0.4s ease-in-out;
+  transition: transform 0.3s ease-in-out;
   z-index: 9;
   transform: translateX(+100%);
 }
@@ -242,13 +234,41 @@ body {
   border-bottom: 1px solid #183457;
 }
 
+.uniq-navbar-btns {
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+}
+
+.uniq-navbar-search {
+  cursor: pointer;
+}
+
+.uniq-navbar-user {
+  cursor: pointer;
+}
+
+
+
+.nav-icon {
+  font-size: 32px;
+  margin: 0px 3px;
+}
+
+.uniq-navbar-cart {
+  cursor: pointer;
+  position: relative;
+}
+
 .uniq-cart-badge {
   position: absolute;
-  top: 0;
-  right: 0;
-  background-color: red;
+  top: -2px;
+  right: -4px;
+  background-color: rgb(175, 7, 7);
   color: white;
-  font-size: 12px;
+  font-size: 10px;
   border-radius: 50%;
   width: 18px;
   height: 18px;
@@ -257,12 +277,27 @@ body {
   justify-content: center;
 }
 
+.uniq-header-hamburger {
+  margin-right: 5px;
+}
+.uniq-header-hamburger .nav-icon {
+  font-size: 34px;
+}
 @media screen and (min-width: 768px) {
   .uniq-header-hamburger {
     display: none;
   }
 }
 
+.uniq-navbar-user-mobile {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 20px;
+  border-radius: 0px 0px 5px 5px;
+}
+.uniq-navbar-user-mobile div {
+  display: flex;
+}
 @media screen and (max-width: 768px) {
   .uniq-navbar-logo {
     width: 50%;
@@ -274,5 +309,9 @@ body {
   .uniq-navbar-btns {
     width: 50%;
     justify-content: end;
+  }
+
+  .uniq-navbar-user {
+    display: none;
   }
 }
