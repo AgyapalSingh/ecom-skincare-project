@@ -155,10 +155,6 @@ body {
   background-color: rgb(255, 255, 255);
 }
 
-
-
-
-
 /* UNIQ HEADER */
 
 .uniq-header {
@@ -213,4 +209,41 @@ body {
   flex-direction: row;
   height: 100%;
   align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+  .uniq-header-hamburger {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .uniq-navbar-logo {
+    width: 50%;
+    justify-content: start;
+  }
+  .uniq-navbar-menus {
+    display: none;
+  }
+  .uniq-navbar-btns {
+    width: 50%;
+    justify-content: end;
+  }
+  .uniq-mobile-nav-drawer {
+    height: 100vh;
+    background-color: #183457;
+    opacity: 98%;
+  }
+  .uniq-mobile-nav-drawer-menu-list {
+    background-color: rgb(230, 230, 230);
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 0px 0px 5px 5px;
+  }
+  .uniq-mobile-nav-drawer-menu-list li {
+    font-size: 14px;
+    color: #183457;
+    padding: 20px;
+    border-bottom: 1px solid #183457;
+  }
 }
