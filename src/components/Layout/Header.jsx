@@ -70,11 +70,12 @@ const Header = () => {
               </span>
             )}
           </div>
-          <div
-            className="uniq-header-hamburger "
-            onClick={toggleMobileMenu}
-          >
-            {isMobileMenuOpen ? <IoMdClose className="text-3xl" /> : <GiHamburgerMenu className="text-3xl" />}
+          <div className="uniq-header-hamburger " onClick={toggleMobileMenu}>
+            {isMobileMenuOpen ? (
+              <IoMdClose className="text-3xl" />
+            ) : (
+              <GiHamburgerMenu className="text-3xl" />
+            )}
             {/* <GiHamburgerMenu className="text-3xl" /> */}
           </div>
         </div>
