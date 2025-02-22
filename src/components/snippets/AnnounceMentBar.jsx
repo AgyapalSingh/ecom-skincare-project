@@ -18,8 +18,8 @@ const AnnounceMentBar = () => {
   }, []);
 
   return (
-    <div className="announcement-bar announcement-bar w-full h-8  justify-center content-center bg-[#F5F2EE]  text-center py-8 my-8">
-      <p className="text-black"  >{messages[currentIndex]}</p>
+    <div className="announcement-bar">
+      <p>{messages[currentIndex]}</p>
     </div>
   );
 };
