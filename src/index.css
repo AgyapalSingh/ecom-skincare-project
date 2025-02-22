@@ -45,6 +45,7 @@ body {
 
   --theme-primary-color: #183457;
   --theme-secondary-color: #FFFEFA;
+  --theme-logo-color: #EDC0C6;
   --annoucement-bg: #F5F2EE;
 
   /* Fonts */
@@ -54,13 +55,14 @@ body {
   --font-color-primary: #183457;
   --font-color-secondary: #ffffff;
   --font-color-p-span: #111111;
-  --font-color-hover: rgb(151, 151, 151);
+  --font-color-hover: rgb(211, 211, 211);
+  
    
 
 
   --font-size-h1: 36px;
   --font-size-p: 24px;
-  --font-size-menus: 18px;
+  --font-size-menus: 14px;
   --font-size-span: 14px;
 
 }
@@ -277,10 +279,19 @@ body {
   justify-content: space-around;
 }
 
+@media (max-width: 1366px) {
+  .uniq-navbar-menus-list {
+    width: 80%;
+  }
+}
+
 .uniq-navbar-menus-list li{
   font-size: var(--font-size-menus);
   font-family: var(--font-fam-primary);
   transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 300;
 }
 
 .uniq-navbar-menus-list li:hover{
@@ -343,7 +354,13 @@ body {
 /* Navbar Buttons Icons */
 .nav-icon {
   font-size: 32px;
-  margin: 0px 3px;
+  margin: 0px 8px;
+  /* transition: all 0.3s ease-in-out; */
+  color: var(--theme-logo-color);
+}
+
+.nav-icon:hover{
+  color: var(--font-color-hover);
 }
 
 /* Navbar Cart Button */
@@ -355,11 +372,13 @@ body {
 /* Navbar Cart Badge */
 .uniq-cart-badge {
   position: absolute;
-  top: -2px;
-  right: -4px;
-  background-color: rgb(175, 7, 7);
-  color: white;
+  top: -3px;
+  right: 1px;
+  background-color: var(--theme-logo-color);
+  color: var(--theme-primary-color);
   font-size: 10px;
+  font-weight:600;
+  font-family: var(--font-fam-primary);
   border-radius: 50%;
   width: 18px;
   height: 18px;
@@ -368,6 +387,10 @@ body {
   justify-content: center;
 }
 
+
+.nav-icon:hover .uniq-cart-badge{
+  background-color: var(--font-color-secondary);
+}
 
 /* Navbar Hamburger Button for Mobile */
 .uniq-header-hamburger {
@@ -380,7 +403,7 @@ body {
 }
 
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 993px) {
   .uniq-header-hamburger {
     display: none;
   }
@@ -398,9 +421,10 @@ body {
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
   .uniq-navbar-logo {
-    width: 50%;
+    width: 49%;
+    margin-left: 1%;
     justify-content: start;
   }
   .uniq-navbar-menus {
