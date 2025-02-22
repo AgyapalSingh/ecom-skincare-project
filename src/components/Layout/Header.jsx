@@ -14,6 +14,7 @@ const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(null);
 
   const totalItems =
     cart.length > 0 ? cart.reduce((acc, item) => acc + item.quantity, 0) : 0;
@@ -40,9 +41,28 @@ const Header = () => {
 
         <div className="uniq-navbar-menus">
           <ul className="uniq-navbar-menus-list ">
-            <li>
+            <li
+              onMouseEnter={() => setIsDropdownOpen("Allcollections")}
+              onMouseLeave={() => setIsDropdownOpen(null)}
+              className={`nav-link ${
+                isDropdownOpen === "Allcollections" ? "active" : ""
+              }`}
+            >
               <NavLink to="/allcollections">All Collections</NavLink>
+              {isDropdownOpen === "Allcollections" && (
+                <div
+                  onMouseEnter={() => setIsDropdownOpen("Allcollections")}
+                  onMouseLeave={() => setIsDropdownOpen(null)}
+                  className={`uniq-navbar-dropdown-menu ${
+                    isDropdownOpen === "Allcollections" ? "dropDownOpen" : ""
+                  }`}
+                >
+                  <Link to="/allcollections/bestsellers">Best Sellers</Link>
+                  <Link to="/products">All Products</Link>
+                </div>
+              )}
             </li>
+
             <li>
               <NavLink to="/products">All Products</NavLink>
             </li>
@@ -68,9 +88,8 @@ const Header = () => {
           </div>
 
           <div className="uniq-navbar-cart" onClick={toggleDrawer}>
-          <span className="uniq-cart-badge">{totalItems}</span>
+            <span className="uniq-cart-badge">{totalItems}</span>
             <PiShoppingCartSimple className="nav-icon" />
-            
           </div>
 
           <div className="uniq-header-hamburger" onClick={toggleMobileMenu}>
