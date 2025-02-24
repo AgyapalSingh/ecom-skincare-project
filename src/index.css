@@ -745,6 +745,7 @@ body {
   font-size: var(--font-size-h1);
   font-family: var(--font-fam-secondary);
   padding: 20px 0px;
+  color: var( --theme-primary-color);
 }
 
 .uniq-allCollections-div {

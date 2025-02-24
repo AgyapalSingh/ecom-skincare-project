@@ -12,6 +12,7 @@
   font-family: var(--font-fam-secondary);
   padding: 20px 0px;
   text-transform: capitalize;
+  color: var( --theme-primary-color);
 }
 
 .uniq-coll-div {
