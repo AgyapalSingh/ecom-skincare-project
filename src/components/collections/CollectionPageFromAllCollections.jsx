@@ -40,26 +40,28 @@ const CollectionPageFromAllCollections = () => {
       {loading ? (
         <UniqayaLoader />
       ) : (
-        <section className="uniq-collection-sec">
-          <h2 className="uniq-coll-title">{handle}</h2>
-          <span>Total No. : {selectCurrentCollection.length}</span>
-          <div className="uniq-coll-div">
-            {selectCurrentCollection.length > 0 ? (
-              <div className="uniq-coll-prods">
-                {selectCurrentCollection.map(({ node }) => (
-                  <ProductCardForCollection
-                    key={node.id}
-                    product={node}
-                    collectionHandle={handle}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p className="text-center text-gray-500">
-                No best sellers available
-              </p>
-            )}
-          </div>
+        <section className=" uniq-Collection-container">
+          <section className="uniq-collection-sec">
+            <h2 className="uniq-coll-title">{handle}</h2>
+            <span className="uniq-coll-nof-items">Total No. : {selectCurrentCollection.length}</span>
+            <div className="uniq-coll-div">
+              {selectCurrentCollection.length > 0 ? (
+                <div className="uniq-coll-prods">
+                  {selectCurrentCollection.map(({ node }) => (
+                    <ProductCardForCollection
+                      key={node.id}
+                      product={node}
+                      collectionHandle={handle}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <p className="text-center text-gray-500">
+                  No best sellers available
+                </p>
+              )}
+            </div>
+          </section>
         </section>
       )}
     </Layout>

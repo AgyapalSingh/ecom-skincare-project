@@ -8,6 +8,10 @@
 .uniq-coll-title {
   display: flex;
   align-self: center;
+  font-size: var(--font-size-h1);
+  font-family: var(--font-fam-secondary);
+  padding: 20px 0px;
+  text-transform: capitalize;
 }
 
 .uniq-coll-div {

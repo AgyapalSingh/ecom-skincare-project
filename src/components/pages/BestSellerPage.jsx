@@ -5,7 +5,9 @@ import BestSeller from "../collections/BestSeller";
 const HomePage = () => {
   return (
     <Layout title="Best Sellers | Uniqaya Lifestyle">
-      <BestSeller />
+      <section className=" uniq-Collection-container">
+        <BestSeller />
+      </section>
     </Layout>
   );
 };
