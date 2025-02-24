@@ -36,22 +36,20 @@ const AllProducts = () => {
       {loading ? (
         <UniqayaLoader />
       ) : (
-        <section className="max-w-[1130px] mx-auto px-4 sm:px-6 lg:px-0 justify-self-center">
-          <h2 className="text-2xl font-bold text-center my-8">All Products</h2>
+        <section className="uniq-allCollections">
+          <h2 className="uniq-allCollections-header">All Products</h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+          <div className="uniq-allCollections-div">
             {products.slice(0, visibleCount).map(({ node }) => (
               <ProductCard key={node.id} product={node} />
             ))}
           </div>
 
           {visibleCount < products.length && (
-            <div className="text-center mt-8">
+            <div className="uniq-allCollections-loadmore">
               <button
-                onClick={loadMore}
-                className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition duration-300"
-              >
-                Load More
+                onClick={loadMore}>
+                Load More...
               </button>
             </div>
           )}
