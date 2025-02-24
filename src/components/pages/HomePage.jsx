@@ -14,10 +14,10 @@ const HomePage = () => {
       <section className="uniq-newlyLaunched-sec uniq-home-container">
         <NewlyLaunchedCollection />
       </section>
-      <section className="uniq-img-marquee-sec uniq-home-container">
+      <section className="uniq-marquee-container">
         <Marquee />
       </section>
-      <section className="uniq-text-marquee-sec uniq-home-container">
+      <section className="uniq-marquee-container">
         <ScrollingText />
       </section>
     </Layout>

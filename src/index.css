@@ -432,7 +432,7 @@ body {
   .uniq-header-hamburger {
     display: none;
   }
-  .uniq-mobile-nav-drawer{
+  .uniq-mobile-nav-drawer {
     display: none;
   }
 }
@@ -475,18 +475,12 @@ body {
   margin-right: 15px;
 }
 
-
-
-
-
-
-
-
-
-
-
 /* MARQUEE of Images **********************************************************************************************************************************************************/
-
+.uniq-marquee-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .uniq-img-marquee {
   overflow: hidden;
@@ -502,7 +496,7 @@ body {
   content: "";
   position: absolute;
   top: 0;
-  width: 50px; 
+  width: 50px;
   height: 100%;
   z-index: 2;
   pointer-events: none;
@@ -510,19 +504,27 @@ body {
 
 .uniq-img-marquee::before {
   left: 0;
-  background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
 }
 
 .uniq-img-marquee::after {
   right: 0;
-  background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
 }
 
 .uniq-img-marquee-content {
   display: flex;
   gap: 20px;
   animation: uniq-marquee 80s linear infinite;
-  width: max-content; 
+  width: max-content;
 }
 
 .uniq-img-marquee-content img {
@@ -540,8 +542,8 @@ body {
 }
 
 @media screen and (max-width: 992px) {
-  .uniq-img-marquee{
-    width: 100%;
+  .uniq-img-marquee {
+    width: 90%;
   }
   .uniq-img-marquee-content img {
     width: 200px;
@@ -549,12 +551,7 @@ body {
   }
 }
 
-
-
-
-
 /* Text Marqee or Scrolling Text **********************************************************************************************************************************************************/
-
 
 .uniq-text-marquee {
   overflow: hidden;
@@ -570,7 +567,7 @@ body {
   content: "";
   position: absolute;
   top: 0;
-  width: 50px; 
+  width: 50px;
   height: 100%;
   z-index: 2;
   pointer-events: none;
@@ -590,10 +587,8 @@ body {
   display: flex;
   gap: 20px;
   animation: uniq-text-marquee 25s linear infinite;
-  width: max-content; 
+  width: max-content;
 }
-
-
 
 @keyframes uniq-text-marquee {
   from {
@@ -605,15 +600,13 @@ body {
 }
 
 @media screen and (max-width: 992px) {
-  .uniq-text-marquee{
+  .uniq-text-marquee {
     width: 100%;
   }
-
 }
 
-
 .uniq-marquee-text {
-  font-size: 18px;
+  font-size: var(--font-size-span);
   font-weight: 400;
   font-family: var(--font-fam-primary);
   color: var(--font-color-secondary);
