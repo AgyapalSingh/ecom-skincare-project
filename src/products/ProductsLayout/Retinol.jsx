@@ -1,6 +1,6 @@
 import React from "react";
 
-const TintedSuncreen = ({
+const Retinol = ({
   product,
   selectedVariant,
   setSelectedVariant,
@@ -8,7 +8,7 @@ const TintedSuncreen = ({
 }) => {
   return (
     <div className="bg-orange-50 p-6 rounded-lg shadow-lg">
-      <h1>Tinted Component</h1>
+      <h1>Retinol Component</h1>
       <h1 className="text-4xl font-bold text-orange-700">{product.title}</h1>
       <p className="text-gray-600 mt-2">
         Rs.{" "}
@@ -66,4 +66,4 @@ const TintedSuncreen = ({
   );
 };
 
-export default TintedSuncreen;
+export default Retinol;

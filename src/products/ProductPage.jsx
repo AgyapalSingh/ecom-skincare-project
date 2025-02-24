@@ -7,6 +7,15 @@ import { useCart } from "../context/CartContext";
 import { GET_PRODUCT_BY_HANDLE } from "../lib/shopify/queries";
 import TintedSuncreen from "./ProductsLayout/TintedSuncreen";
 import DefaultLayout from "./ProductsLayout/DefaultLayout";
+import HydraSuncreen from "./ProductsLayout/HydraSunscreen";
+import FootCareCream from "./ProductsLayout/FootCareCream";
+import Retinol from "./ProductsLayout/Retinol";
+import Moisturizer from "./ProductsLayout/Moisturizer";
+import FaceWash from "./ProductsLayout/FaceWash";
+import NightCream from "./ProductsLayout/NightCream";
+import CalmingSunscreen from "./ProductsLayout/CalmingSunscreen";
+import BodyButter from "./ProductsLayout/BodyButter";
+import DeTan from "./ProductsLayout/DeTan";
 
 const ProductPage = () => {
   const { handle } = useParams();
@@ -44,9 +53,109 @@ const ProductPage = () => {
 
   const getProductLayout = () => {
     switch (handle) {
+      // 1. Tinted Sunscreen SPF 50 PA+++
       case "sun-screen-full-protection-broad-spectrum-tinted-sunscreen-with-spf-50":
         return (
           <TintedSuncreen
+            product={product}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
+            addToCart={addToCart}
+          />
+        );
+
+      // 2. Uniqaya Hydra Sunscreen SPF 60 PA++++
+      case "uniqaya-hydra-sunscreen-spf-60-pa-hyaluronic-acid-niacinamide-sunscreen":
+        return (
+          <HydraSuncreen
+            product={product}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
+            addToCart={addToCart}
+          />
+        );
+
+      // 3. Foot Care Cream For Dry & Rough Heels
+      case "moisturizing-repairing-foot-care-cream-with-coffee-extract-peppermint":
+        return (
+          <FootCareCream
+            product={product}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
+            addToCart={addToCart}
+          />
+        );
+
+      //4. 1% Encapsulated Retinol Face Serum
+      case "anti-aging-encapsulated-retinol-serum-with-vit-e-kakadu-plum-pearl-algae":
+        return (
+          <Retinol
+            product={product}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
+            addToCart={addToCart}
+          />
+        );
+
+      //5. Hyaluronic Acid Moisturizer with Peach Extract
+      case "hyaluronic-acid-moisturizer-for-all-skin-types":
+        return (
+          <Moisturizer
+            product={product}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
+            addToCart={addToCart}
+          />
+        );
+
+      //6. Salicylic Acid Face Wash
+      case "salicylic-acid-face-wash-vitamin-c-foaming-face-wash":
+        return (
+          <FaceWash
+            product={product}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
+            addToCart={addToCart}
+          />
+        );
+
+      //7. Niacinamide Night Cream For Glowing Skin
+      case "skin-restoring-night-repair-cream-with-mulberry-kiwi-extract":
+        return (
+          <NightCream
+            product={product}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
+            addToCart={addToCart}
+          />
+        );
+
+      //8. Calming Sunscreen For Sensitive Skin and Acne Prone Skin
+      case "calming-sunscreen-for-sensitive-acne-prone-skin":
+        return (
+          <CalmingSunscreen
+            product={product}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
+            addToCart={addToCart}
+          />
+        );
+
+      //9. Anti Stretch Mark Body Butter
+      case "anti-stretch-mark-cream":
+        return (
+          <BodyButter
+            product={product}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
+            addToCart={addToCart}
+          />
+        );
+
+      //10. De-Tan Mask With Niacinamide, Glycolic Acid
+      case "de-tan-mask-for-instant-tan-removal-with-niacinamide-glycolic-acid":
+        return (
+          <DeTan
             product={product}
             selectedVariant={selectedVariant}
             setSelectedVariant={setSelectedVariant}
