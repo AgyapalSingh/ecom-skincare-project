@@ -48,6 +48,10 @@ const Footer = () => {
             </menu>
           </div>
         </div>
+        <div className="Developers-Name">
+          <h1>Developed By Agyapal Singh</h1>
+          <span>With ❤</span>
+        </div>
       </footer>
     </>
   );
