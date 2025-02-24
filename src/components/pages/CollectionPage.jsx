@@ -5,7 +5,9 @@ import AllCollections from "../collections/AllCollections";
 const CollectionPage = () => {
   return (
     <Layout title="All Collections | Uniqaya Lifestyle">
-      <AllCollections/>
+      <section className=" uniq-Collection-container">
+        <AllCollections />
+      </section>
     </Layout>
   );
 };

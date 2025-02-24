@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
 /* DEVELOPERS SECTION */
-.Developers-Name{
+.Developers-Name {
   height: 120px;
   display: flex;
   flex-direction: column;
@@ -12,31 +12,31 @@
   background-color: var(--theme-primary-color);
 }
 
-.Developers-Name h1{
+.Developers-Name h1 {
   font-size: 18px;
-  font-family: var(--font-fam-primary) ;
+  font-family: var(--font-fam-primary);
   color: var(--font-color-secondary);
   font-weight: 300;
   margin-bottom: 10px;
   font-family: "Montserrat", serif;
 }
-.Developers-Name h1 a{
-  border-bottom: 1px solid var(--font-color-secondary)
+.Developers-Name h1 a {
+  border-bottom: 1px solid var(--font-color-secondary);
 }
 
-.Developers-Name span{
+.Developers-Name span {
   font-size: 14px;
-  font-family: var(--font-fam-secondary) ;
+  font-family: var(--font-fam-secondary);
   color: var(--font-color-hover);
   font-weight: 300;
 }
 
 @media screen and (max-width: 992px) {
-  .Developers-Name h1{
+  .Developers-Name h1 {
     font-size: 14px;
   }
 
-  .Developers-Name span{
+  .Developers-Name span {
     font-size: 12px;
   }
 }
@@ -196,7 +196,7 @@ body {
     justify-content: center;
     flex-direction: row;
   }
-  .uniqaya-loader_container{
+  .uniqaya-loader_container {
     margin-right: 20px;
   }
 }
@@ -655,10 +655,7 @@ body {
   white-space: nowrap;
 }
 
-
-/*  */
-
-
+/* EcoIcon Marqee **********************************************************************************************************************************************************/
 
 .uniq-econIcon-marquee {
   overflow: hidden;
@@ -726,4 +723,70 @@ body {
     width: 100px;
     height: auto;
   }
+}
+
+/* All Collections Page **********************************************************************************************************************************************************/
+.uniq-Collection-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uniq-allCollections {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  align-items: center;
+  justify-content: center;
+}
+
+.uniq-allCollections-header{
+  font-size: var(--font-size-h1);
+  font-family: var(--font-fam-secondary);
+  padding: 20px 0px;
+}
+
+.uniq-allCollections-div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.uniq-coll-card{
+  width: 320px;
+  box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+  margin: 10px 20px;
+}
+
+.uniq-coll-card-img{
+  border-bottom: 1px solid var(--theme-primary-color);
+  width: 320px;
+  height: 320px;
+  border-radius: 0px 20px 0px 0px;
+}
+
+.uniq-coll-card-title{
+  font-family: var(--font-fam-primary);
+  font-weight: 200px;
+  font-size: var(--font-size-p);
+  padding: 20px 0px;
+  text-align: center;
+  color : var(--font-color-secondary);
+  background-color: var(--font-color-primary);
+  text-transform: uppercase;
+  border-radius: 0px 0px 0px 20px;
+}
+
+.uniq-allCollections-loadmore button{
+  color: var(--font-color-secondary);
+  padding: 5px 10px;
+  background-color: var(--font-color-primary);
+  border-radius: 5px;
+  font-size: var(--font-size-menus);
+  font-family: var(--font-fam-primary);
+  font-weight: 300;
+  margin-top: 20px;
 }

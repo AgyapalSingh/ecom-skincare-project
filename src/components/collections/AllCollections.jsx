@@ -38,23 +38,22 @@ const AllCollections = () => {
       {loading ? (
         <UniqayaLoader />
       ) : (
-        <section className="max-w-[1130px] mx-auto px-4 sm:px-6 lg:px-0 justify-self-center">
-          <h2 className="text-2xl font-bold text-center my-8">
+        <section className="uniq-allCollections">
+          <h2 className="uniq-allCollections-header">
             All Collections
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+          <div className="uniq-allCollections-div">
             {collections.slice(0, visibleCount).map(({ node }) => (
               <CollectionCard key={node.id} collection={node} />
             ))}
           </div>
 
           {visibleCount < collections.length && (
-            <div className="text-center mt-8">
+            <div className="uniq-allCollections-loadmore">
               <button
                 onClick={loadMore}
-                className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition duration-300"
               >
-                More Collections
+                More Collections...
               </button>
             </div>
           )}
