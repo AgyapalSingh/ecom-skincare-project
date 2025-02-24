@@ -20,6 +20,9 @@
   margin-bottom: 10px;
   font-family: "Montserrat", serif;
 }
+.Developers-Name h1 a{
+  border-bottom: 1px solid var(--font-color-secondary)
+}
 
 .Developers-Name span{
   font-size: 14px;

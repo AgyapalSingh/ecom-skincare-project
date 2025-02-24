@@ -49,7 +49,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="Developers-Name">
-          <h1>Developed By Agyapal Singh</h1>
+          <h1>Developed By <a href="https://www.linkedin.com/in/agyapal-singh-020983241/" target="_blank"> Agyapal Singh </a></h1>
           <span>With ❤</span>
         </div>
       </footer>
