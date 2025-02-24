@@ -36,24 +36,19 @@ const AllProducts = () => {
       {loading ? (
         <UniqayaLoader />
       ) : (
-        <section className="uniq-allCollections">
+        <div className="uniq-allCollections">
           <h2 className="uniq-allCollections-header">All Products</h2>
-
           <div className="uniq-allCollections-div">
             {products.slice(0, visibleCount).map(({ node }) => (
               <ProductCard key={node.id} product={node} />
             ))}
           </div>
-
           {visibleCount < products.length && (
             <div className="uniq-allCollections-loadmore">
-              <button
-                onClick={loadMore}>
-                Load More...
-              </button>
+              <button onClick={loadMore}>Load More...</button>
             </div>
           )}
-        </section>
+        </div>
       )}
     </>
   );

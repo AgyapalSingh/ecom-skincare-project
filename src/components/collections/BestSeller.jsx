@@ -33,8 +33,9 @@ const BestSeller = () => {
       {loading ? (
         <UniqayaLoader />
       ) : (
-        <section className="uniq-collection-sec">
+        <div className="uniq-collection-sec">
           <h2 className="uniq-coll-title">Best Seller</h2>
+          <span className="uniq-coll-nof-items">Total No. : {selectCollection.length}</span>
           <div className="uniq-coll-div">
             {selectCollection.length > 0 ? (
               <div className="uniq-coll-prods">
@@ -52,7 +53,7 @@ const BestSeller = () => {
               </p>
             )}
           </div>
-        </section>
+        </div>
       )}
     </>
   );
