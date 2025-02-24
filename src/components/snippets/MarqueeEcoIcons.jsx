@@ -1,14 +1,14 @@
 import React from "react"; // Import the CSS file
 
 const ecoIcon = [
-  "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/Cruelty_Free.jpg?v=1725340405",
-  "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/Sulphate.jpg?v=1725338587",
-  "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/Paraben.jpg?v=1725338587",
-  "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/Plant_Based.jpg?v=1725340405",
-  "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/Non_Toxic.jpg?v=1725340404",
-  "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/Clinically_Proven.jpg?v=1725338587",
-  "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/CIR.jpg?v=1725340405",
-  "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/GMP.jpg?v=1725340683",
+  "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/1_Cruelty_Free_Final.jpg?v=1725447616",
+  "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/2_Sulfate_Free_Final.jpg?v=1725447616",
+  "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/3_Paraben_Free_Final.jpg?v=1725447616",
+  "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/4_Plant_Based_Ingredient_Final.jpg?v=1725447616",
+  "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/5_Non_Toxic_Final.jpg?v=1725447616",
+  "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/6_Clinically_Proven.jpg?v=1725447616",
+  "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/7_Cosmetic_Ingredient_Review.jpg?v=1725447616",
+  "https://cdn.shopify.com/s/files/1/0589/0192/1956/files/8_GMP_Certified.jpg?v=1725447616",
 ];
 
 const MarqueeEcoIcons = () => {
