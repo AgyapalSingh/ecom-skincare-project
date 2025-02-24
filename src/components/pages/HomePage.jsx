@@ -4,6 +4,7 @@ import NewlyLaunchedCollection from "../collections/NewlyLaunchedCollection";
 import ImageSlider from "../snippets/ImageSlider";
 import Marquee from "../snippets/Marquee";
 import ScrollingText from "../snippets/ScrollingText";
+import MarqueeEcoIcons from "../snippets/MarqueeEcoIcons";
 
 const HomePage = () => {
   return (
@@ -19,6 +20,9 @@ const HomePage = () => {
       </section>
       <section className="uniq-marquee-container">
         <ScrollingText />
+      </section>
+      <section className="uniq-marquee-container">
+        <MarqueeEcoIcons />
       </section>
     </Layout>
   );

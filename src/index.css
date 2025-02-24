@@ -654,3 +654,76 @@ body {
   text-transform: uppercase;
   white-space: nowrap;
 }
+
+
+/*  */
+
+
+
+.uniq-econIcon-marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  width: 60%;
+  padding: 10px 0;
+}
+
+.uniq-econIcon-marquee::before,
+.uniq-econIcon-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.uniq-econIcon-marquee::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.uniq-econIcon-marquee::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.uniq-econIcon-marquee-content {
+  display: flex;
+  gap: 20px;
+  animation: uniq-econIcon-marquee 30s linear infinite;
+  width: max-content;
+}
+
+.uniq-econIcon-marquee-content img {
+  width: 150px;
+  height: auto;
+}
+
+@keyframes uniq-econIcon-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .uniq-econIcon-marquee {
+    width: 90%;
+  }
+  .uniq-econIcon-marquee-content img {
+    width: 100px;
+    height: auto;
+  }
+}
