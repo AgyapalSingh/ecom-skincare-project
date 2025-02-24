@@ -485,9 +485,10 @@ body {
 
 
 
-/* MARQUEE of Images */
+/* MARQUEE of Images **********************************************************************************************************************************************************/
 
-.uniq-marquee {
+
+.uniq-img-marquee {
   overflow: hidden;
   white-space: nowrap;
   position: relative;
@@ -496,8 +497,8 @@ body {
   padding: 10px 0;
 }
 
-.uniq-marquee::before,
-.uniq-marquee::after {
+.uniq-img-marquee::before,
+.uniq-img-marquee::after {
   content: "";
   position: absolute;
   top: 0;
@@ -507,24 +508,24 @@ body {
   pointer-events: none;
 }
 
-.uniq-marquee::before {
+.uniq-img-marquee::before {
   left: 0;
   background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
 }
 
-.uniq-marquee::after {
+.uniq-img-marquee::after {
   right: 0;
   background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
 }
 
-.uniq-marquee-content {
+.uniq-img-marquee-content {
   display: flex;
   gap: 20px;
   animation: uniq-marquee 80s linear infinite;
   width: max-content; 
 }
 
-.uniq-marquee-content img {
+.uniq-img-marquee-content img {
   width: 250px;
   height: auto;
 }
@@ -539,11 +540,83 @@ body {
 }
 
 @media screen and (max-width: 992px) {
-  .uniq-marquee{
+  .uniq-img-marquee{
     width: 100%;
   }
-  .uniq-marquee-content img {
+  .uniq-img-marquee-content img {
     width: 200px;
     height: auto;
   }
+}
+
+
+
+
+
+/* Text Marqee or Scrolling Text **********************************************************************************************************************************************************/
+
+
+.uniq-text-marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  width: 80%;
+  background: var(--font-color-primary);
+  padding: 10px 0;
+}
+
+.uniq-text-marquee::before,
+.uniq-text-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50px; 
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* .uniq-text-marquee::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+
+.uniq-text-marquee::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+} */
+
+.uniq-text-marquee-content {
+  display: flex;
+  gap: 20px;
+  animation: uniq-text-marquee 25s linear infinite;
+  width: max-content; 
+}
+
+
+
+@keyframes uniq-text-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .uniq-text-marquee{
+    width: 100%;
+  }
+
+}
+
+
+.uniq-marquee-text {
+  font-size: 18px;
+  font-weight: 400;
+  font-family: var(--font-fam-primary);
+  color: var(--font-color-secondary);
+  text-transform: uppercase;
+  white-space: nowrap;
 }

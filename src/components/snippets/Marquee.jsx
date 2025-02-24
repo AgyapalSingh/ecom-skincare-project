@@ -25,10 +25,10 @@ const images = [
 
 const Marquee = () => {
   return (
-    <div className="uniq-marquee">
-      <div className="uniq-marquee-content">
+    <div className="uniq-img-marquee">
+      <div className="uniq-img-marquee-content">
         {images.concat(images).map((src, index) => ( 
-          <img key={index} src={src} alt={`uniq-marquee-${index}`} />
+          <img key={index} src={src} alt={`uniq-img-marquee-${index}`} />
         ))}
       </div>
     </div>

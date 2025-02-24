@@ -3,6 +3,7 @@ import Layout from "../Layout/Layout";
 import NewlyLaunchedCollection from "../collections/NewlyLaunchedCollection";
 import ImageSlider from "../snippets/ImageSlider";
 import Marquee from "../snippets/Marquee";
+import ScrollingText from "../snippets/ScrollingText";
 
 const HomePage = () => {
   return (
@@ -13,8 +14,11 @@ const HomePage = () => {
       <section className="uniq-newlyLaunched-sec uniq-home-container">
         <NewlyLaunchedCollection />
       </section>
-      <section className="uniq-marquee-sec uniq-home-container">
+      <section className="uniq-img-marquee-sec uniq-home-container">
         <Marquee />
+      </section>
+      <section className="uniq-text-marquee-sec uniq-home-container">
+        <ScrollingText />
       </section>
     </Layout>
   );
