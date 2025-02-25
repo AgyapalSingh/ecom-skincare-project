@@ -40,7 +40,7 @@ const CollectionPageFromAllCollections = () => {
       {loading ? (
         <UniqayaLoader />
       ) : (
-        <div className=" uniq-Collection-container">
+        <section className="uniq-ag-section-container">
           <div className="uniq-collection-sec">
             <h2 className="uniq-coll-title">{handle}</h2>
             <span className="uniq-coll-nof-items">Total No. : {selectCurrentCollection.length}</span>
@@ -62,7 +62,7 @@ const CollectionPageFromAllCollections = () => {
               )}
             </div>
           </div>
-        </div>
+        </section>
       )}
     </Layout>
   );

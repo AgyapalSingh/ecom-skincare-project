@@ -5,7 +5,7 @@ import AllProducts from "../collections/AllProducts";
 const AllProductsPage = () => {
   return (
     <Layout title="All Products | Uniqaya Lifestyle">
-      <section className=" uniq-Collection-container">
+      <section className="uniq-ag-section-container">
         <AllProducts />
       </section>
     </Layout>
