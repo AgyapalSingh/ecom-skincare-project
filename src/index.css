@@ -888,18 +888,23 @@ body {
 
 .uniq-ag-all-blogs-prev-btn{
   color: var(--font-color-primary);
-  padding: 5px 10px;
+  padding: 10px 10px;
   background-color: var(--font-color-hover);
   border-radius: 5px;
   font-size: var(--font-size-menus);
   font-family: var(--font-fam-primary);
   font-weight: 300;
   margin-top: 20px;
+  cursor: pointer;
+}
+.uniq-ag-all-blogs-prev-btn:disabled {
+  opacity: 70%;
+  cursor: not-allowed;
 }
 
 .uniq-ag-all-blogs-next-btn{
   color: var(--font-color-secondary);
-  padding: 5px 10px;
+  padding: 10px 10px;
   background-color: var(--font-color-primary);
   border-radius: 5px;
   font-size: var(--font-size-menus);

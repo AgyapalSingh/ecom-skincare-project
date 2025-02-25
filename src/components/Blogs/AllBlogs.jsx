@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import { GET_PAGINATED_ARTICLES } from "../../lib/shopify/queries";
 import shopifyApi from "../../lib/shopify/shopifyApi";
 import UniqayaLoader from "../snippets/UniqayaLoader";
+import { GrPrevious, GrNext } from "react-icons/gr";
 
 const AllBlogs = () => {
   const [loading, setLoading] = useState(true);
   const [articles, setArticles] = useState([]);
   const [error, setError] = useState("");
+  const [cursorStack, setCursorStack] = useState([]);
   const [cursor, setCursor] = useState(null);
   const [hasNextPage, setHasNextPage] = useState(false);
 
-  const fetchArticles = async (cursor = null) => {
+  const fetchArticles = async (cursor = null, isNext = true) => {
     setLoading(true);
     try {
       const response = await shopifyApi.post("", {
@@ -24,6 +26,12 @@ const AllBlogs = () => {
       setArticles(newArticles);
       setCursor(data.pageInfo.endCursor);
       setHasNextPage(data.pageInfo.hasNextPage);
+
+      if (isNext) {
+        setCursorStack((prev) => [...prev, cursor]);
+      } else {
+        setCursorStack((prev) => prev.slice(0, -1));
+      }
     } catch (error) {
       console.error("Error fetching articles:", error);
       setError("Failed to fetch articles");
@@ -44,15 +52,15 @@ const AllBlogs = () => {
         <div className="uniq-ag-all-blogs-container">
           <h1 className="uniq-ag-all-blogs-header">Blogs</h1>
 
-          <div className="uniq-ag-all-blogs ">
+          <div className="uniq-ag-all-blogs">
             {articles.map((article) => (
-              <div key={article.id} className="uniq-ag-all-blogs-card ">
+              <div key={article.id} className="uniq-ag-all-blogs-card">
                 <div className="relative">
                   {article.image && (
                     <img
                       src={article.image.url}
                       alt={article.image.altText}
-                      className="uniq-ag-all-blogs-card-img "
+                      className="uniq-ag-all-blogs-card-img"
                     />
                   )}
                   {article.tags?.length > 0 && (
@@ -63,9 +71,7 @@ const AllBlogs = () => {
                     </div>
                   )}
                 </div>
-                <h2 className="uniq-ag-all-blogs-card-title">
-                  {article.title}
-                </h2>
+                <h2 className="uniq-ag-all-blogs-card-title">{article.title}</h2>
                 <div className="uniq-ag-all-blogs-card-publisher-Date">
                   <p className="uniq-ag-all-blogs-card-published-Date">
                     {new Date(article.publishedAt).toLocaleDateString("en-US", {
@@ -75,9 +81,7 @@ const AllBlogs = () => {
                     })}
                   </p>
                   {article.author?.name && (
-                    <h3 className="uniq-ag-all-blogs-card-publisher ">
-                      By {article.author.name}
-                    </h3>
+                    <h3 className="uniq-ag-all-blogs-card-publisher">By {article.author.name}</h3>
                   )}
                 </div>
               </div>
@@ -86,17 +90,17 @@ const AllBlogs = () => {
           <div className="flex justify-center gap-4 mt-6">
             <button
               className="uniq-ag-all-blogs-prev-btn"
-              onClick={() => fetchArticles(null)}
-              disabled={!cursor}
+              onClick={() => fetchArticles(cursorStack[cursorStack.length - 2] || null, false)}
+              disabled={cursorStack.length <= 2}
             >
-              First Page
+              <GrPrevious />
             </button>
             <button
               className="uniq-ag-all-blogs-next-btn"
-              onClick={() => fetchArticles(cursor)}
+              onClick={() => fetchArticles(cursor, true)}
               disabled={!hasNextPage}
             >
-              Next Page
+              <GrNext />
             </button>
           </div>
         </div>
