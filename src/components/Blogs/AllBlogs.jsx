@@ -15,15 +15,15 @@ const AllBlogs = () => {
     try {
       const response = await shopifyApi.post("", {
         query: GET_PAGINATED_ARTICLES,
-        variables: { first: 9, after: cursor }, 
+        variables: { first: 9, after: cursor },
       });
 
       const data = response.data.data.articles;
       const newArticles = data.edges.map((edge) => edge.node);
 
       setArticles(newArticles);
-      setCursor(data.pageInfo.endCursor); 
-      setHasNextPage(data.pageInfo.hasNextPage); 
+      setCursor(data.pageInfo.endCursor);
+      setHasNextPage(data.pageInfo.hasNextPage);
     } catch (error) {
       console.error("Error fetching articles:", error);
       setError("Failed to fetch articles");
@@ -41,69 +41,65 @@ const AllBlogs = () => {
       {loading ? (
         <UniqayaLoader />
       ) : (
-        <section className="max-w-[1130px] mx-auto px-4 sm:px-6 lg:px-0 justify-self-center">
-          <h1 className="text-3xl font-bold text-center my-6">Shopify Blogs</h1>
+        <div className="uniq-ag-all-blogs-container">
+          <h1 className="uniq-ag-all-blogs-header">Blogs</h1>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6">
+          <div className="uniq-ag-all-blogs ">
             {articles.map((article) => (
-              <div
-                key={article.id}
-                className="border rounded-xl p-4 shadow-lg bg-white text-center relative"
-              >
+              <div key={article.id} className="uniq-ag-all-blogs-card ">
                 <div className="relative">
                   {article.image && (
                     <img
                       src={article.image.url}
                       alt={article.image.altText}
-                      className="w-full h-48 object-cover rounded-md my-3"
+                      className="uniq-ag-all-blogs-card-img "
                     />
                   )}
                   {article.tags?.length > 0 && (
-                    <div className="absolute top-2 left-2 flex flex-wrap gap-1">
+                    <div className="uniq-ag-all-blogs-card-tag">
                       {article.tags.map((tag, index) => (
-                        <span
-                          key={index}
-                          className="bg-red-500 text-white px-2 py-1 text-xs font-semibold rounded-md"
-                        >
-                          {tag}
-                        </span>
+                        <span key={index}>{tag}</span>
                       ))}
                     </div>
                   )}
                 </div>
-                <h2 className="text-xl font-semibold mt-2">{article.title}</h2>
-                <p className="text-sm text-gray-500">
-                  {new Date(article.publishedAt).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "2-digit",
-                    year: "numeric",
-                  })}
-                </p>
-                {article.author?.name && (
-                  <h3 className="text-sm font-medium text-gray-700 mt-2">
-                    By {article.author.name}
-                  </h3>
-                )}
+                <h2 className="uniq-ag-all-blogs-card-title">
+                  {article.title}
+                </h2>
+                <div className="uniq-ag-all-blogs-card-publisher-Date">
+                  <p className="uniq-ag-all-blogs-card-published-Date">
+                    {new Date(article.publishedAt).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "2-digit",
+                      year: "numeric",
+                    })}
+                  </p>
+                  {article.author?.name && (
+                    <h3 className="uniq-ag-all-blogs-card-publisher ">
+                      By {article.author.name}
+                    </h3>
+                  )}
+                </div>
               </div>
             ))}
           </div>
           <div className="flex justify-center gap-4 mt-6">
             <button
-              className="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
-              onClick={() => fetchArticles(null)} 
+              className="uniq-ag-all-blogs-prev-btn"
+              onClick={() => fetchArticles(null)}
               disabled={!cursor}
             >
               First Page
             </button>
             <button
-              className="px-4 py-2 bg-blue-500 text-white rounded-md disabled:opacity-50"
+              className="uniq-ag-all-blogs-next-btn"
               onClick={() => fetchArticles(cursor)}
               disabled={!hasNextPage}
             >
               Next Page
             </button>
           </div>
-        </section>
+        </div>
       )}
     </>
   );
