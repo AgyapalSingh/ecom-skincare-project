@@ -1,5 +1,8 @@
 import React from "react";
 import { useCart } from "../../context/CartContext";
+import { RxCross2 } from "react-icons/rx";
+import { TfiFaceSad } from "react-icons/tfi";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const CartDrawer = ({ isOpen, closeDrawer }) => {
   const { cart, removeFromCart, clearCart, createCheckout } = useCart();
@@ -9,56 +12,56 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
     .toFixed(2);
 
   return (
-    <div
-      className={`fixed inset-0 bg-black/50 z-50 transition-all duration-300 ${
-        isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-      }`}
+    <section
+      className={`uniq-ag-cart-drawer-container ${isOpen ? "isOpen" : ""}`}
       onClick={closeDrawer}
     >
       <div
-        className={`fixed right-0 top-0 w-80 h-full bg-white p-4 transform ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        } transition-transform duration-300`}
+        className={`uniq-ag-cart-drawer ${isOpen ? "isOpen" : ""} `}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex justify-between bg-amber-400 items-center">
-          <h2 className="text-xl font-bold">Your Cart</h2>
+        <div className="uniq-ag-cart-drawer-header">
+          <h2>Your Cart</h2>
           <button className="cursor-pointer" onClick={closeDrawer}>
-            Close
+            <RxCross2 />
           </button>
         </div>
 
-        <div className="mt-4 text-black">
+        <div className="uniq-ag-cart-drawer-products">
           {cart.length > 0 ? (
             cart.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-center justify-between my-2"
-              >
-                <div>
+              <div key={item.id} className="uniq-ag-cart-drawer-products-card">
+                <div className="uniq-ag-cart-drawer-products-card-left">
                   <img
                     src={item.image || "default-image.jpg"}
                     alt={item.title}
-                    className="w-16 h-16 object-cover"
+                    className="uniq-ag-cart-drawer-products-card-left-img"
                   />
-                  <p className="text-sm">{item.title}</p>
-                </div>
-                <div>
-                  <p className="text-sm">Qty: {item.quantity}</p>
-                  <p className="text-sm">
-                    Price: Rs. {item.quantity * item.price}
+                  <p className="uniq-ag-cart-drawer-products-card-left-p">
+                    Qty: {item.quantity}
+                  </p>
+                  <p className="uniq-ag-cart-drawer-products-card-left-p">
+                    <span>Rs. {item.quantity * item.price}</span>
                   </p>
                 </div>
-                <button
-                  className="text-red-500"
-                  onClick={() => removeFromCart(item.id)}
-                >
-                  Remove
-                </button>
+
+                <div className="uniq-ag-cart-drawer-products-card-right">
+                  <div className="uniq-ag-cart-drawer-products-card-title">
+                    <p className="text-sm">{item.title}</p>
+                  </div>
+                  <div className="uniq-ag-cart-drawer-products-card-btn">
+                    <button onClick={() => removeFromCart(item.id)}>
+                    <RiDeleteBin6Line />
+                    </button>
+                  </div>
+                </div>
               </div>
             ))
           ) : (
-            <p>Your cart is empty.</p>
+            <div className="uniq-ag-cart-empty-msg">
+              <p>Your cart is empty.</p>
+              <TfiFaceSad />
+            </div>
           )}
         </div>
 
@@ -86,7 +89,7 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 
