@@ -3,11 +3,15 @@ import { GET_COLLECTION_NEWLY_LAUNCHED_BY_ID } from "../../lib/shopify/queries";
 import shopifyApi from "../../lib/shopify/shopifyApi";
 import UniqayaLoader from "../snippets/UniqayaLoader";
 import ProductCardForCollection from "../snippets/Cards/ProductCardForCollection";
+import CartDrawer from "../Layout/CartDrawer";
 
 const NewlyLaunchedCollection = () => {
   const [loading, setLoading] = useState(true);
   const newlylaunched = "newly-launched";
   const [selectCollection, setSelectCollection] = useState([]);
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
 
   // UNIQ - Function to Fetch Specific Collection [Newly Launched]
   const fetchCollectionByID = async () => {
@@ -43,6 +47,7 @@ const NewlyLaunchedCollection = () => {
                     key={node.id}
                     product={node}
                     collectionHandle={newlylaunched}
+                    openCartDrawer={toggleDrawer}
                   />
                 ))}
               </div>
@@ -52,6 +57,8 @@ const NewlyLaunchedCollection = () => {
               </p>
             )}
           </div>
+
+          <CartDrawer isOpen={isDrawerOpen} closeDrawer={toggleDrawer} />
         </section>
       )}
     </>
