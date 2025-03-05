@@ -5,11 +5,15 @@ import shopifyApi from "../../lib/shopify/shopifyApi";
 import { useParams } from "react-router-dom";
 import UniqayaLoader from "../snippets/UniqayaLoader";
 import ProductCardForCollection from "../snippets/Cards/ProductCardForCollection";
+import CartDrawer from "../Layout/CartDrawer";
 
 const CollectionPageFromAllCollections = () => {
   const { handle } = useParams();
   const [loading, setLoading] = useState(true);
   const [selectCurrentCollection, setSelectCurrentCollection] = useState([]);
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
 
   const fetchCollectionByHandle = async () => {
     const query = { query: GET_COLLECTION_BY_HANDLE, variables: { handle } };
@@ -43,7 +47,9 @@ const CollectionPageFromAllCollections = () => {
         <section className="uniq-ag-section-container">
           <div className="uniq-collection-sec">
             <h2 className="uniq-coll-title">{handle}</h2>
-            <span className="uniq-coll-nof-items">Total No. : {selectCurrentCollection.length}</span>
+            <span className="uniq-coll-nof-items">
+              Total No. : {selectCurrentCollection.length}
+            </span>
             <div className="uniq-coll-div">
               {selectCurrentCollection.length > 0 ? (
                 <div className="uniq-coll-prods">
@@ -52,6 +58,7 @@ const CollectionPageFromAllCollections = () => {
                       key={node.id}
                       product={node}
                       collectionHandle={handle}
+                      openCartDrawer={toggleDrawer}
                     />
                   ))}
                 </div>
@@ -62,6 +69,7 @@ const CollectionPageFromAllCollections = () => {
               )}
             </div>
           </div>
+          <CartDrawer isOpen={isDrawerOpen} closeDrawer={toggleDrawer} />
         </section>
       )}
     </Layout>

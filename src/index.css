@@ -278,6 +278,7 @@ body {
   align-items: center;
   background-color: var(--theme-primary-color);
   height: 30px;
+  color: white;
 }
 
 .uniq-ag-cart-drawer-header h2 {
