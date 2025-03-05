@@ -4,11 +4,15 @@ import shopifyApi from "../../lib/shopify/shopifyApi";
 import UniqayaLoader from "../snippets/UniqayaLoader";
 import ProductCardForCollection from "../snippets/Cards/ProductCardForCollection";
 import "./collectionsCss/BestSeller.css";
+import CartDrawer from "../Layout/CartDrawer";
 
 const BestSeller = () => {
   const [loading, setLoading] = useState(true);
   const bestsellers = "bestsellers";
   const [selectCollection, setSelectCollection] = useState([]);
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
 
   // UNIQ - Function to Fetch Specific Collection [BestSellers]
   const fetchCollectionByID = async () => {
@@ -44,6 +48,7 @@ const BestSeller = () => {
                     key={node.id}
                     product={node}
                     collectionHandle={bestsellers}
+                    openCartDrawer={toggleDrawer}
                   />
                 ))}
               </div>
@@ -53,6 +58,7 @@ const BestSeller = () => {
               </p>
             )}
           </div>
+          <CartDrawer isOpen={isDrawerOpen} closeDrawer={toggleDrawer} />
         </div>
       )}
     </>
