@@ -2,6 +2,7 @@ import React from "react";
 import { useSearch } from "../../context/SearchContext";
 import { LuSearch, LuX } from "react-icons/lu";
 import { Link } from "react-router-dom";
+import { TfiFaceSad } from "react-icons/tfi";
 
 const popularKeywords = ["Tinted", "Sunscreen", "Body Butter", "De-Tan"];
 
@@ -113,7 +114,7 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
 
               <div className="uniq-ag-serach-drawer-output-articles-container">
                 <h3 className="uniq-ag-serach-drawer-output-articles-title">
-                  Articles
+                  Articles :
                 </h3>
                 {results?.articles?.edges?.length > 0 ? (
                   results.articles.edges.map(({ node }) => (
@@ -148,7 +149,10 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
               )} */}
             </>
           ) : (
-            <p className=" ">Empty! Kindly Search</p>
+            <div className="uniq-ag-defalut-output">
+              <p>Your search is empty ! </p>
+              <TfiFaceSad />
+            </div>
           )}
         </div>
       </div>

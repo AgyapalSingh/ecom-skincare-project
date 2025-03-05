@@ -382,7 +382,7 @@ body {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
   max-height: 90vh;
-  overflow-y:auto;
+  overflow-y: auto;
 }
 
 .uniq-ag-serach-drawer.isOpen {
@@ -443,19 +443,19 @@ body {
   color: var(--theme-logo-color);
 }
 
-.uniq-ag-serach-drawer-pre-defined-btn{
+.uniq-ag-serach-drawer-pre-defined-btn {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
   margin-bottom: 50px;
 }
 
-.uniq-ag-serach-drawer-pre-defined-btn-header{
+.uniq-ag-serach-drawer-pre-defined-btn-header {
   font-family: var(--font-fam-primary);
   font-size: 18px;
 }
 
-.uniq-ag-serach-drawer-pre-defined-btn button{
+.uniq-ag-serach-drawer-pre-defined-btn button {
   font-family: var(--font-fam-primary);
   font-weight: 300;
   background-color: var(--theme-logo-color);
@@ -467,36 +467,46 @@ body {
   font-size: 14px;
 }
 
-.uniq-ag-serach-drawer-output-container{
+.uniq-ag-serach-drawer-output-container {
   background-color: var(--theme-secondary-color);
+  background-color: rgb(243, 243, 243);
   color: var(--theme-primary-color);
   padding: 20px 5px;
   border-radius: 20px;
   margin-bottom: 100px;
+  min-height: 30vh;
 }
 
-.uniq-ag-serach-drawer-output-products-container{
+.uniq-ag-defalut-output {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  min-height: 20vh;
+  font-family: var(--font-fam-primary);
+}
+
+.uniq-ag-serach-drawer-output-products-container {
   display: flex;
   flex-direction: column;
   font-family: var(--font-fam-primary);
-  margin-bottom: 50px
+  margin-bottom: 50px;
 }
 
-.uniq-ag-serach-drawer-output-products-title{
+.uniq-ag-serach-drawer-output-products-title {
   padding-left: 20px;
   font-size: 18px;
   font-weight: 300;
   margin-bottom: 20px;
 }
 
-.uniq-ag-serach-drawer-output-products{
+.uniq-ag-serach-drawer-output-products {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
 }
 
-
-.uniq-ag-search-product-card{
+.uniq-ag-search-product-card {
   display: flex;
   flex-direction: column;
   width: 300px;
@@ -506,40 +516,18 @@ body {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
-.uniq-ag-search-product-card img{
-  width: 300px
+.uniq-ag-search-product-card img {
+  width: 300px;
 }
 
-.uniq-ag-search-product-card span{
+.uniq-ag-search-product-card span {
   font-size: 14px;
   padding: 10px 10px 0px 10px;
   background-color: rgb(241, 241, 241);
   height: 100%;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.uniq-ag-serach-drawer-output-articles-container{
+.uniq-ag-serach-drawer-output-articles-container {
   display: flex;
   flex-direction: column;
   font-family: var(--font-fam-primary);
@@ -547,25 +535,63 @@ body {
   gap: 8px;
 }
 
-.uniq-ag-serach-drawer-output-articles-title{
+.uniq-ag-serach-drawer-output-articles-title {
   padding-left: 20px;
   font-size: 18px;
   font-weight: 300;
   margin-bottom: 20px;
 }
 
-.uniq-ag-serach-drawer-output-articles-list{
+.uniq-ag-serach-drawer-output-articles-list {
   padding-bottom: 5px;
   border-bottom: 1px solid var(--theme-primary-color);
 }
 
-.uniq-ag-serach-drawer-output-articles-list span{
+.uniq-ag-serach-drawer-output-articles-list span {
   padding-bottom: 5px;
   color: var(--theme-logo-color);
 }
 
+@media screen and (max-width: 992px) {
+  .uniq-ag-serach-drawer {
+    padding: 50px 5px;
+  }
 
+  .uniq-ag-serach-drawer-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
 
+  .uniq-ag-serach-drawer-pre-defined-btn-header {
+    font-family: var(--font-fam-primary);
+    font-size: 14px;
+  }
+
+  .uniq-ag-serach-drawer-pre-defined-btn button {
+    border-radius: 50px;
+    width: 100px;
+    font-size: 12px;
+  }
+
+  .uniq-ag-serach-drawer-output-products {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    padding-bottom: 50px;
+  }
+
+  .uniq-ag-serach-drawer-output-products::-webkit-scrollbar-thumb {
+    background: #183457;
+    border-radius: 10px 10px 10px 10px;
+    cursor: pointer;
+  }
+
+  .uniq-ag-serach-drawer-output-articles-list {
+    font-size: 14px;
+  }
+}
 
 /* UNIQ HEADER **********************************************************************************************************************************************************/
 
