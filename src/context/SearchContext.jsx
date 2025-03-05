@@ -5,12 +5,13 @@ import { SEARCH_QUERY } from "../lib/shopify/queries";
 const SearchContext = createContext();
 
 const fetchSearchResults = async (searchQuery) => {
-  if (!searchQuery.trim()) return { products: [], articles: [], pages: [] };
+  const trimmedQuery = searchQuery.trim();
+  if (!trimmedQuery) return { products: [], articles: [], pages: [] };
 
   try {
     const response = await shopifyApi.post("", {
       query: SEARCH_QUERY,
-      variables: { query: searchQuery },
+      variables: { query: `title:${trimmedQuery}` }, // Ensure only title is searched
     });
 
     return response.data.data;
@@ -19,6 +20,7 @@ const fetchSearchResults = async (searchQuery) => {
     return { error: "Failed to fetch search results" };
   }
 };
+
 
 export const SearchProvider = ({ children }) => {
   const [query, setQuery] = useState("");
