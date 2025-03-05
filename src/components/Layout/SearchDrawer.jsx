@@ -3,7 +3,7 @@ import { useSearch } from "../../context/SearchContext";
 import { LuSearch, LuX } from "react-icons/lu";
 import { Link } from "react-router-dom";
 
-const popularKeywords = ["Tinted", "Sunscreen", "Body Butter"];
+const popularKeywords = ["Tinted", "Sunscreen", "Body Butter", "De-Tan"];
 
 const SearchDrawer = ({ isOpen, closeDrawer }) => {
   const searchContext = useSearch();

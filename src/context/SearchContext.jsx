@@ -11,7 +11,7 @@ const fetchSearchResults = async (searchQuery) => {
   try {
     const response = await shopifyApi.post("", {
       query: SEARCH_QUERY,
-      variables: { query: `title:${trimmedQuery}` }, // Ensure only title is searched
+      variables: { query: `title:${trimmedQuery}` }, 
     });
 
     return response.data.data;
