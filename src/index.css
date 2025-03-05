@@ -519,6 +519,54 @@ body {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.uniq-ag-serach-drawer-output-articles-container{
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-fam-primary);
+  margin-bottom: 50px;
+  gap: 8px;
+}
+
+.uniq-ag-serach-drawer-output-articles-title{
+  padding-left: 20px;
+  font-size: 18px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.uniq-ag-serach-drawer-output-articles-list{
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--theme-primary-color);
+}
+
+.uniq-ag-serach-drawer-output-articles-list span{
+  padding-bottom: 5px;
+  color: var(--theme-logo-color);
+}
+
+
+
+
 /* UNIQ HEADER **********************************************************************************************************************************************************/
 
 .uniq-header {

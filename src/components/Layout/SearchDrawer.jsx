@@ -83,7 +83,9 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
           ) : results ? (
             <>
               <div className="uniq-ag-serach-drawer-output-products-container">
-                <h3 className="uniq-ag-serach-drawer-output-products-title">Products :</h3>
+                <h3 className="uniq-ag-serach-drawer-output-products-title">
+                  Products :
+                </h3>
                 <div className="uniq-ag-serach-drawer-output-products">
                   {results?.products?.edges?.length > 0 ? (
                     results.products.edges.map(({ node }) => (
@@ -104,29 +106,32 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
                       </Link>
                     ))
                   ) : (
-                    <p >No products found.</p>
+                    <p>No products found.</p>
                   )}
                 </div>
               </div>
 
-              <h3 className="text-lg font-semibold mt-4">Articles</h3>
-              {results?.articles?.edges?.length > 0 ? (
-                results.articles.edges.map(({ node }) => (
-                  <Link
-                    key={node.id}
-                    to={`/blogs/${node.blog.title}/${node.handle}`}
-                    className="p-2 border-b block hover:bg-gray-100"
-                    onClick={handleClose}
-                  >
-                    {node.title}{" "}
-                    <span className="text-gray-500">({node.blog.title})</span>
-                  </Link>
-                ))
-              ) : (
-                <p className="text-gray-500">No articles found.</p>
-              )}
+              <div className="uniq-ag-serach-drawer-output-articles-container">
+                <h3 className="uniq-ag-serach-drawer-output-articles-title">
+                  Articles
+                </h3>
+                {results?.articles?.edges?.length > 0 ? (
+                  results.articles.edges.map(({ node }) => (
+                    <Link
+                      key={node.id}
+                      to={`/blogs/${node.blog.title}/${node.handle}`}
+                      onClick={handleClose}
+                      className="uniq-ag-serach-drawer-output-articles-list"
+                    >
+                      {node.title} <span>({node.blog.title})</span>
+                    </Link>
+                  ))
+                ) : (
+                  <p>No articles found.</p>
+                )}
+              </div>
 
-              <h3 className="text-lg font-semibold mt-4">Pages</h3>
+              {/* <h3 className="text-lg font-semibold mt-4">Pages</h3>
               {results?.pages?.edges?.length > 0 ? (
                 results.pages.edges.map(({ node }) => (
                   <Link
@@ -140,15 +145,11 @@ const SearchDrawer = ({ isOpen, closeDrawer }) => {
                 ))
               ) : (
                 <p className="text-gray-500">No pages found.</p>
-              )}
+              )} */}
             </>
           ) : (
             <p className=" ">Empty! Kindly Search</p>
           )}
-        </div>
-
-        <div>
-          footer
         </div>
       </div>
     </div>
