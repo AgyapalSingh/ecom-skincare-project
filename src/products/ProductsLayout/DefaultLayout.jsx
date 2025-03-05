@@ -1,22 +1,33 @@
 import React from "react";
 
-const DefaultLayout = ({ product, selectedVariant, setSelectedVariant, addToCart , openCartDrawer}) => {
+const DefaultLayout = ({
+  product,
+  selectedVariant,
+  setSelectedVariant,
+  addToCart,
+  openCartDrawer,
+}) => {
   const handleAddToCart = () => {
     if (selectedVariant) {
       addToCart({
         id: selectedVariant.id,
-            title: `${product.title} - ${selectedVariant.title}`,
-            price: selectedVariant.price.amount,
-            image: product.images.edges[0]?.node.src,
+        title: `${product.title} - ${selectedVariant.title}`,
+        price: selectedVariant.price.amount,
+        image: product.images.edges[0]?.node.src,
       });
       openCartDrawer();
     }
   };
-  
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       <h1 className="text-3xl font-bold text-gray-800">{product.title}</h1>
-      <p className="text-gray-600 mt-2">Rs. {selectedVariant ? selectedVariant.price.amount : product.priceRange.minVariantPrice.amount}</p>
+      <p className="text-gray-600 mt-2">
+        Rs.{" "}
+        {selectedVariant
+          ? selectedVariant.price.amount
+          : product.priceRange.minVariantPrice.amount}
+      </p>
 
       <img
         src={product.images.edges[0]?.node.src || "default-image.jpg"}

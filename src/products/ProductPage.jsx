@@ -153,6 +153,7 @@ const ProductPage = () => {
             selectedVariant={selectedVariant}
             setSelectedVariant={setSelectedVariant}
             addToCart={addToCart}
+            openCartDrawer={toggleDrawer}
           />
         );
 
