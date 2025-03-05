@@ -1,6 +1,18 @@
 import React from "react";
 
-const DefaultLayout = ({ product, selectedVariant, setSelectedVariant, addToCart }) => {
+const DefaultLayout = ({ product, selectedVariant, setSelectedVariant, addToCart , openCartDrawer}) => {
+  const handleAddToCart = () => {
+    if (selectedVariant) {
+      addToCart({
+        id: selectedVariant.id,
+            title: `${product.title} - ${selectedVariant.title}`,
+            price: selectedVariant.price.amount,
+            image: product.images.edges[0]?.node.src,
+      });
+      openCartDrawer();
+    }
+  };
+  
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       <h1 className="text-3xl font-bold text-gray-800">{product.title}</h1>
@@ -33,15 +45,7 @@ const DefaultLayout = ({ product, selectedVariant, setSelectedVariant, addToCart
       )}
 
       <button
-        onClick={() =>
-          selectedVariant &&
-          addToCart({
-            id: selectedVariant.id,
-            title: `${product.title} - ${selectedVariant.title}`,
-            price: selectedVariant.price.amount,
-            image: product.images.edges[0]?.node.src,
-          })
-        }
+        onClick={handleAddToCart}
         className={`mt-6 px-6 py-3 rounded text-white w-full ${
           selectedVariant?.availableForSale
             ? "bg-blue-600 hover:bg-blue-700"

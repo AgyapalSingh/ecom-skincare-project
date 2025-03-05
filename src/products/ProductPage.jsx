@@ -16,6 +16,7 @@ import NightCream from "./ProductsLayout/NightCream";
 import CalmingSunscreen from "./ProductsLayout/CalmingSunscreen";
 import BodyButter from "./ProductsLayout/BodyButter";
 import DeTan from "./ProductsLayout/DeTan";
+import CartDrawer from "../components/Layout/CartDrawer";
 
 const ProductPage = () => {
   const { handle } = useParams();
@@ -24,6 +25,9 @@ const ProductPage = () => {
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+      const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
 
   const fetchProduct = async () => {
     try {
@@ -169,6 +173,7 @@ const ProductPage = () => {
             selectedVariant={selectedVariant}
             setSelectedVariant={setSelectedVariant}
             addToCart={addToCart}
+            openCartDrawer={toggleDrawer}
           />
         );
     }
@@ -177,6 +182,8 @@ const ProductPage = () => {
   return (
     <Layout title={product ? product.title : "Uniqaya Lifestyles | Product"}>
       {loading ? <ProductPageLoader /> : getProductLayout()}
+
+      <CartDrawer isOpen={isDrawerOpen} closeDrawer={toggleDrawer} />
     </Layout>
   );
 };
