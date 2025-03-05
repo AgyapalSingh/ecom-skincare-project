@@ -5,7 +5,14 @@ import { TfiFaceSad } from "react-icons/tfi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 const CartDrawer = ({ isOpen, closeDrawer }) => {
-  const { cart, removeFromCart, clearCart, createCheckout } = useCart();
+  const {
+    cart,
+    removeFromCart,
+    clearCart,
+    increaseQuantity,
+    decreaseQuantity,
+    createCheckout,
+  } = useCart();
 
   const totalPrice = cart
     .reduce((total, item) => total + item.quantity * parseFloat(item.price), 0)
@@ -37,12 +44,21 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
                     alt={item.title}
                     className="uniq-ag-cart-drawer-products-card-left-img"
                   />
-                  <p className="uniq-ag-cart-drawer-products-card-left-p">
-                    Qty: {item.quantity}
-                  </p>
-                  <p className="uniq-ag-cart-drawer-products-card-left-p">
-                    <span>Rs. {item.quantity * item.price}</span>
-                  </p>
+                  <div className="uniq-ag-cart-drawer-products-quantity">
+                    <button
+                      onClick={() => decreaseQuantity(item.id)}
+                      className="uniq-ag-cart-quantity-dec-btn"
+                    >
+                      -
+                    </button>
+                    <span className="uniq-ag-cart-quantity">{item.quantity}</span>
+                    <button
+                      onClick={() => increaseQuantity(item.id)}
+                      className="uniq-ag-cart-quantity-inc-btn"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
 
                 <div className="uniq-ag-cart-drawer-products-card-right">
@@ -50,8 +66,11 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
                     <p className="text-sm">{item.title}</p>
                   </div>
                   <div className="uniq-ag-cart-drawer-products-card-btn">
+                    <p className="uniq-ag-cart-drawer-products-card-p">
+                      <span>Rs. {item.quantity * item.price}</span>
+                    </p>
                     <button onClick={() => removeFromCart(item.id)}>
-                    <RiDeleteBin6Line />
+                      <RiDeleteBin6Line />
                     </button>
                   </div>
                 </div>

@@ -39,6 +39,27 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify([]));
   };
 
+
+  const increaseQuantity = (id) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
+  
+  const decreaseQuantity = (id) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id && item.quantity > 1
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      )
+    );
+  };
+
+  
+
   const createCheckout = async () => {
     try {
       const lineItems = cart.map((item) => ({
@@ -89,7 +110,7 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, clearCart, createCheckout }}
+      value={{ cart, addToCart, removeFromCart, clearCart, increaseQuantity, decreaseQuantity, createCheckout }}
     >
       {children}
     </CartContext.Provider>

@@ -302,19 +302,42 @@ body {
 
 .uniq-ag-cart-drawer-products-card-left {
   width: 30%;
-  border: var(--font-color-hover) 1px solid;
+  padding: 2px 0px;
 }
 
 .uniq-ag-cart-drawer-products-card-left-img {
   width: 80px;
-  border-bottom: var(--font-color-hover) 1px solid;
 }
 
-.uniq-ag-cart-drawer-products-card-left-p {
+.uniq-ag-cart-drawer-products-quantity{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.uniq-ag-cart-quantity-dec-btn{
+  background-color:  rgb(245, 245, 245);
+  width: 20px;
+}
+
+.uniq-ag-cart-quantity{
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+.uniq-ag-cart-quantity-inc-btn{
+  background-color:  rgb(245, 245, 245);
+  width: 20px;
+}
+
+.uniq-ag-cart-drawer-products-card-p {
   font-size: 12px;
 }
 
-.uniq-ag-cart-drawer-products-card-left-p span {
+.uniq-ag-cart-drawer-products-card-p span {
   color: green;
 }
 
@@ -328,9 +351,8 @@ body {
 
 .uniq-ag-cart-drawer-products-card-btn {
   display: flex;
+  justify-content: space-between;
   align-items: end;
-  justify-content: end;
-  flex-direction: column;
   height: 30%;
   padding-left: 3px;
   padding-bottom: 3px;
