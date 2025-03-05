@@ -3,11 +3,14 @@ import { GET_PRODUCTS } from "../../lib/shopify/queries";
 import shopifyApi from "../../lib/shopify/shopifyApi";
 import UniqayaLoader from "../snippets/UniqayaLoader";
 import ProductCard from "../snippets/Cards/ProductCard";
+import CartDrawer from "../Layout/CartDrawer";
 
 const AllProducts = () => {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [visibleCount, setVisibleCount] = useState(6);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
 
   // UNIQ - Function to Fetch All Products
   const fetchProducts = async () => {
@@ -40,7 +43,11 @@ const AllProducts = () => {
           <h2 className="uniq-allCollections-header">All Products</h2>
           <div className="uniq-allCollections-div">
             {products.slice(0, visibleCount).map(({ node }) => (
-              <ProductCard key={node.id} product={node} />
+              <ProductCard
+                key={node.id}
+                product={node}
+                openCartDrawer={toggleDrawer}
+              />
             ))}
           </div>
           {visibleCount < products.length && (
@@ -48,6 +55,8 @@ const AllProducts = () => {
               <button onClick={loadMore}>Load More...</button>
             </div>
           )}
+
+          <CartDrawer isOpen={isDrawerOpen} closeDrawer={toggleDrawer} />
         </div>
       )}
     </>

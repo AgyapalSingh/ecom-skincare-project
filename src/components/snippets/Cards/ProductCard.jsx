@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../../context/CartContext";
-import "../snippetsCss/ProductCard.css"
+import "../snippetsCss/ProductCard.css";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, openCartDrawer }) => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
@@ -21,6 +21,18 @@ const ProductCard = ({ product }) => {
   const handleVariantChange = (event) => {
     const variant = variants.find((v) => v.id === event.target.value);
     setSelectedVariant(variant);
+  };
+
+  const handleAddToCart = () => {
+    if (selectedVariant) {
+      addToCart({
+        id: selectedVariant.id,
+        title: `${product.title} - ${selectedVariant.title}`,
+        price: selectedVariant.price.amount,
+        image: product.images.edges[0]?.node.src || "default-image.jpg",
+      });
+      openCartDrawer();
+    }
   };
 
   return (
@@ -69,15 +81,7 @@ const ProductCard = ({ product }) => {
       )}
 
       <button
-        onClick={() =>
-          selectedVariant &&
-          addToCart({
-            id: selectedVariant.id,
-            title: `${product.title} - ${selectedVariant.title}`,
-            price: selectedVariant.price.amount,
-            image: firstImage,
-          })
-        }
+        onClick={handleAddToCart}
         className={` ${
           selectedVariant?.availableForSale
             ? "uniq-col-prod-atc-btn"
