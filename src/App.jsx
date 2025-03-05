@@ -1,3 +1,4 @@
+import AutoScrollToTop from "./lib/Utils/AutoScrollToTop";
 import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { IoIosArrowUp } from "react-icons/io";
@@ -39,34 +40,36 @@ function App() {
           <IoIosArrowUp />
         </button>
       )}
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<AllProductsPage />} />
-        <Route path="/products/:handle" element={<ProductPage />} />
-        <Route path="/allcollections" element={<CollectionPage />} />
-        <Route
-          path="/allcollections/:handle"
-          element={<CollectionPageFromAllCollections />}
-        />
-        <Route
-          path="/allcollections/:handle/:handle"
-          element={<ProductPage />}
-        />
-        <Route
-          path="/allcollections/bestsellers"
-          element={<BestSellerPage />}
-        />
+      <AutoScrollToTop>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<AllProductsPage />} />
+          <Route path="/products/:handle" element={<ProductPage />} />
+          <Route path="/allcollections" element={<CollectionPage />} />
+          <Route
+            path="/allcollections/:handle"
+            element={<CollectionPageFromAllCollections />}
+          />
+          <Route
+            path="/allcollections/:handle/:handle"
+            element={<ProductPage />}
+          />
+          <Route
+            path="/allcollections/bestsellers"
+            element={<BestSellerPage />}
+          />
 
-        {/* BLogs */}
-        <Route path="/blogs" element={<AllBlogsPage />} />
+          {/* BLogs */}
+          <Route path="/blogs" element={<AllBlogsPage />} />
 
-        {/* Footer Routes */}
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/contact-us" element={<ContactUs />} />
-        <Route path="/faqs" element={<FAQs />} />
-        <Route path="/track-order" element={<TrackOrder />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+          {/* Footer Routes */}
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/faqs" element={<FAQs />} />
+          <Route path="/track-order" element={<TrackOrder />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </AutoScrollToTop>
       <Footer />
     </>
   );
