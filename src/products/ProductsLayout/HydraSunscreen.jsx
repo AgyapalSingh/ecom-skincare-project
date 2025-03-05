@@ -5,7 +5,19 @@ const HydraSuncreen = ({
   selectedVariant,
   setSelectedVariant,
   addToCart,
+  openCartDrawer,
 }) => {
+  const handleAddToCart = () => {
+    if (selectedVariant) {
+      addToCart({
+        id: selectedVariant.id,
+        title: `${product.title} - ${selectedVariant.title}`,
+        price: selectedVariant.price.amount,
+        image: product.images.edges[0]?.node.src,
+      });
+      openCartDrawer();
+    }
+  };
   return (
     <div className="bg-orange-50 p-6 rounded-lg shadow-lg">
       <h1>Hydra Component</h1>
@@ -44,15 +56,7 @@ const HydraSuncreen = ({
       )}
 
       <button
-        onClick={() =>
-          selectedVariant &&
-          addToCart({
-            id: selectedVariant.id,
-            title: `${product.title} - ${selectedVariant.title}`,
-            price: selectedVariant.price.amount,
-            image: product.images.edges[0]?.node.src,
-          })
-        }
+        onClick={handleAddToCart}
         className={`mt-6 px-6 py-3 rounded text-white w-full ${
           selectedVariant?.availableForSale
             ? "bg-orange-600 hover:bg-orange-700"
