@@ -709,11 +709,10 @@ body {
 
 .uniq-navbar-nav-link {
   transition: border-bottom 0.3s ease-in-out;
-  border-bottom: 2px solid var(--theme-primary-color);
 }
 
 .nav-active-link {
-  border-bottom: 10px solid var(--theme-logo-color); /* Change color as needed */
+  border-bottom: 10px solid var(--theme-logo-color);
 }
 
 /* Navbar Mobile Drawer */
