@@ -51,11 +51,11 @@ const Header = () => {
                 to="/allcollections"
                 end
                 className={({ isActive }) =>
-                  `${
-                    isActive || isDropdownOpen
-                      ? "nav-active-link-with-border uniq-navbar-nav-link"
-                      : "uniq-navbar-nav-link"
-                  }`
+                  isActive
+                    ? "uniq-navbar-nav-link nav-active-link" 
+                    : isDropdownOpen
+                    ? "uniq-navbar-nav-link nav-active-link-with-border" 
+                    : "uniq-navbar-nav-link" 
                 }
               >
                 All Collections
