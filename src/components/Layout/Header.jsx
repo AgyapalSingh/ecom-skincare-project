@@ -14,7 +14,6 @@ const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(null);
 
   const totalItems =
     cart.length > 0 ? cart.reduce((acc, item) => acc + item.quantity, 0) : 0;
@@ -40,37 +39,58 @@ const Header = () => {
         </div>
 
         <div className="uniq-navbar-menus">
-          <ul className="uniq-navbar-menus-list ">
-            <li
-              onMouseEnter={() => setIsDropdownOpen("Allcollections")}
-              onMouseLeave={() => setIsDropdownOpen(null)}
-              className={`nav-link ${
-                isDropdownOpen === "Allcollections" ? "active" : ""
-              }`}
-            >
-              <NavLink to="/allcollections">All Collections</NavLink>
-              {isDropdownOpen === "Allcollections" && (
-                <div
-                  onMouseEnter={() => setIsDropdownOpen("Allcollections")}
-                  onMouseLeave={() => setIsDropdownOpen(null)}
-                  className={`uniq-navbar-dropdown-menu ${
-                    isDropdownOpen === "Allcollections" ? "dropDownOpen" : ""
-                  }`}
-                >
-                  <Link to="/allcollections/bestsellers">Best Sellers</Link>
-                  <Link to="/products">All Products</Link>
-                </div>
-              )}
+          <ul className="uniq-navbar-menus-list">
+            <li>
+              <NavLink
+                to="/allcollections"
+                end
+                className={({ isActive }) =>
+                  isActive
+                    ? "uniq-navbar-nav-link nav-active-link"
+                    : "uniq-navbar-nav-link"
+                }
+              >
+                All Collections
+              </NavLink>
             </li>
 
             <li>
-              <NavLink to="/products">All Products</NavLink>
+              <NavLink
+                to="/products"
+                className={({ isActive }) =>
+                  isActive
+                    ? "uniq-navbar-nav-link nav-active-link"
+                    : "uniq-navbar-nav-link"
+                }
+              >
+                All Products
+              </NavLink>
             </li>
+
             <li>
-              <NavLink to="/allcollections/bestsellers">Best Sellers</NavLink>
+              <NavLink
+                to="/allcollections/bestsellers"
+                className={({ isActive }) =>
+                  isActive
+                    ? "uniq-navbar-nav-link nav-active-link"
+                    : "uniq-navbar-nav-link"
+                }
+              >
+                Best Sellers
+              </NavLink>
             </li>
+
             <li>
-              <NavLink to="/blogs">Blogs</NavLink>
+              <NavLink
+                to="/blogs"
+                className={({ isActive }) =>
+                  isActive
+                    ? "uniq-navbar-nav-link nav-active-link"
+                    : "uniq-navbar-nav-link"
+                }
+              >
+                Blogs
+              </NavLink>
             </li>
           </ul>
         </div>
