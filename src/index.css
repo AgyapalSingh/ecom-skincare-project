@@ -705,16 +705,15 @@ body {
   justify-self: center;
   height: 100%;
   padding: 0px 5px;
-  border-bottom: 2px solid var(--theme-primary-color);
 }
 
 .uniq-navbar-nav-link {
-  transition: border-bottom 0.2s ease-in-out;
+  transition: border-bottom 0.3s ease-in-out;
   border-bottom: 2px solid var(--theme-primary-color);
 }
 
 .nav-active-link {
-  border-bottom: 2px solid var(--theme-logo-color); /* Change color as needed */
+  border-bottom: 10px solid var(--theme-logo-color); /* Change color as needed */
 }
 
 /* Navbar Mobile Drawer */
