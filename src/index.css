@@ -709,7 +709,7 @@ body {
 }
 
 .uniq-navbar-nav-link {
-  transition: border-bottom 0.3s ease-in-out;
+  transition: border-bottom 0.2s ease-in-out;
   border-bottom: 2px solid var(--theme-primary-color);
 }
 
