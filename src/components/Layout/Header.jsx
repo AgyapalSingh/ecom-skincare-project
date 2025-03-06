@@ -15,6 +15,8 @@ const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(true);
+
   const totalItems =
     cart.length > 0 ? cart.reduce((acc, item) => acc + item.quantity, 0) : 0;
   const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
@@ -40,18 +42,40 @@ const Header = () => {
 
         <div className="uniq-navbar-menus">
           <ul className="uniq-navbar-menus-list">
-            <li>
+            <li
+              className="uniq-navbar-dropdown"
+              onMouseEnter={() => setIsDropdownOpen(true)}
+              onMouseLeave={() => setIsDropdownOpen(false)}
+            >
               <NavLink
                 to="/allcollections"
                 end
                 className={({ isActive }) =>
-                  isActive
-                    ? "uniq-navbar-nav-link nav-active-link"
-                    : "uniq-navbar-nav-link"
+                  `${
+                    isActive || isDropdownOpen
+                      ? "nav-active-link-with-border uniq-navbar-nav-link"
+                      : "uniq-navbar-nav-link"
+                  }`
                 }
               >
                 All Collections
               </NavLink>
+
+              {isDropdownOpen && (
+                <div className="uniq-dropdown-menu">
+                  <li>
+                    <NavLink to="/allcollections/new-arrivals">
+                      New Arrivals
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/allcollections/sale">Sale</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/allcollections/featured">Featured</NavLink>
+                  </li>
+                </div>
+              )}
             </li>
 
             <li>
