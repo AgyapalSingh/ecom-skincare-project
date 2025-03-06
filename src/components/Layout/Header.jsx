@@ -57,6 +57,7 @@ const Header = () => {
             <li>
               <NavLink
                 to="/products"
+                end
                 className={({ isActive }) =>
                   isActive
                     ? "uniq-navbar-nav-link nav-active-link"
@@ -70,6 +71,7 @@ const Header = () => {
             <li>
               <NavLink
                 to="/allcollections/bestsellers"
+                end
                 className={({ isActive }) =>
                   isActive
                     ? "uniq-navbar-nav-link nav-active-link"
@@ -83,6 +85,7 @@ const Header = () => {
             <li>
               <NavLink
                 to="/blogs"
+                end
                 className={({ isActive }) =>
                   isActive
                     ? "uniq-navbar-nav-link nav-active-link"
