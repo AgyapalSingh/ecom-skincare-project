@@ -1,48 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-const BodyButter = ({ product, selectedVariant, setSelectedVariant, addToCart, openCartDrawer }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedImage, setSelectedImage] = useState(""); // Track selected image
+const BodyButter = ({
+  product,
+  selectedVariant,
+  setSelectedVariant,
+  addToCart,
+  openCartDrawer,
+}) => {
+  const [searchParams] = useSearchParams();
+  const [variantId, setVariantId] = useState(searchParams.get("variant"));
 
   // Extract Variants
   const variants = product?.variants?.edges?.map((edge) => edge.node) || [];
 
-  // Extract Images
-  const images = product?.images?.edges.map(({ node }) => node.src) || [];
-
-  // Get variantId from URL
-  const variantIdFromURL = searchParams.get("variant");
-
-  // Set default selected variant when page loads
+  // Set correct variant when the page loads
   useEffect(() => {
-    if (variantIdFromURL) {
-      const variantFromURL = variants.find((v) => v.id === variantIdFromURL);
-      if (variantFromURL) {
-        setSelectedVariant(variantFromURL);
-      }
+    const variantFromURL = variants.find((v) => v.id === variantId);
+    if (variantFromURL) {
+      setSelectedVariant(variantFromURL);
     } else if (variants.length > 0) {
       setSelectedVariant(variants[0]); // Default to first variant
     }
-  }, [variantIdFromURL, variants, setSelectedVariant]);
+  }, [variantId, variants, setSelectedVariant]);
 
-  // Set default selected image when the product changes
-  useEffect(() => {
-    if (images.length > 0) {
-      setSelectedImage(images[0]); // Set first image as default
-    }
-  }, [product]); // <- Depend on `product`, not `images`
-
-  // Ensure image updates properly
-  const handleImageClick = (img) => {
-    console.log("Clicked image:", img); // Debugging
-    setSelectedImage(img);
-  };
-
-  // Update URL when a variant is selected
+  // Handle Variant Selection
   const handleVariantSelect = (variant) => {
+    if (selectedVariant?.id === variant.id) return; // Prevent unnecessary updates
+
     setSelectedVariant(variant);
-    setSearchParams({ variant: variant.id }); // Update URL
+    setVariantId(variant.id);
+
+    // Update URL without causing a re-render
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}?variant=${variant.id}`
+    );
   };
 
   // Handle Add to Cart
@@ -52,7 +46,7 @@ const BodyButter = ({ product, selectedVariant, setSelectedVariant, addToCart, o
         id: selectedVariant.id,
         title: `${product.title} - ${selectedVariant.title}`,
         price: selectedVariant.price.amount,
-        image: selectedImage,
+        image: product.images.edges[0]?.node.src,
       });
       openCartDrawer();
     }
@@ -63,27 +57,12 @@ const BodyButter = ({ product, selectedVariant, setSelectedVariant, addToCart, o
       <h1>Body Butter Component</h1>
       <h1 className="text-4xl font-bold text-orange-700">{product.title}</h1>
 
-      {/* Main Selected Image */}
+      {/* Product Image */}
       <img
-        src={selectedImage || "default-image.jpg"}
-        alt={product.title}
-        className="w-full max-w-sm mt-4 rounded-md border border-gray-300 transition-all duration-300 ease-in-out"
+        src={product.images.edges[0]?.node.src || "default-image.jpg"}
+        alt={product.images.edges[0]?.node.altText || product.title}
+        className="w-full max-w-sm mt-4 rounded-md"
       />
-
-      {/* Thumbnail Images */}
-      <div className="flex flex-wrap gap-4 mt-4">
-        {images.map((img, index) => (
-          <img
-            key={index}
-            src={img}
-            alt={`Product Image ${index + 1}`}
-            className={`w-24 h-24 object-cover rounded-md cursor-pointer border-2 transition-all duration-300 ease-in-out ${
-              selectedImage === img ? "border-orange-600 scale-110" : "border-gray-200"
-            }`}
-            onClick={() => handleImageClick(img)}
-          />
-        ))}
-      </div>
 
       <p className="text-gray-800 mt-4">{product.description}</p>
 
