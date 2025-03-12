@@ -63,17 +63,17 @@ const Header = () => {
 
               {isDropdownOpen && (
                 <div className="uniq-dropdown-menu">
-                  <li>
+                  <span>
                     <NavLink to="/allcollections/new-arrivals">
                       New Arrivals
                     </NavLink>
-                  </li>
-                  <li>
+                  </span>
+                  <span>
                     <NavLink to="/allcollections/sale">Sale</NavLink>
-                  </li>
-                  <li>
+                  </span>
+                  <span>
                     <NavLink to="/allcollections/featured">Featured</NavLink>
-                  </li>
+                  </span>
                 </div>
               )}
             </li>
