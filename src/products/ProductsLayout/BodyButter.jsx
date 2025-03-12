@@ -1,11 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const BodyButter = ({ product, selectedVariant, setSelectedVariant, addToCart, openCartDrawer }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedImage, setSelectedImage] = useState(null); // Track selected image
 
   // Extract Variants
   const variants = product?.variants?.edges?.map((edge) => edge.node) || [];
+
+  // Extract Images
+  const images = product?.images?.edges.map(({ node }) => node.src) || [];
 
   // Get variantId from URL
   const variantIdFromURL = searchParams.get("variant");
@@ -22,6 +26,13 @@ const BodyButter = ({ product, selectedVariant, setSelectedVariant, addToCart, o
     }
   }, [variantIdFromURL, variants, setSelectedVariant]);
 
+  // Set default selected image
+  useEffect(() => {
+    if (images.length > 0) {
+      setSelectedImage(images[0]); // Default to the first image
+    }
+  }, [images]);
+
   // Update URL when a variant is selected
   const handleVariantSelect = (variant) => {
     setSelectedVariant(variant);
@@ -35,7 +46,7 @@ const BodyButter = ({ product, selectedVariant, setSelectedVariant, addToCart, o
         id: selectedVariant.id,
         title: `${product.title} - ${selectedVariant.title}`,
         price: selectedVariant.price.amount,
-        image: product.images.edges[0]?.node.src,
+        image: selectedImage,
       });
       openCartDrawer();
     }
@@ -44,13 +55,28 @@ const BodyButter = ({ product, selectedVariant, setSelectedVariant, addToCart, o
   return (
     <div className="bg-orange-50 p-6 rounded-lg shadow-lg">
       <h1 className="text-4xl font-bold text-orange-700">{product.title}</h1>
-      
 
+      {/* Main Selected Image */}
       <img
-        src={product.images.edges[0]?.node.src || "default-image.jpg"}
-        alt={product.images.edges[0]?.node.altText || product.title}
-        className="w-full max-w-sm mt-4 rounded-md"
+        src={selectedImage || "default-image.jpg"}
+        alt={product.title}
+        className="w-full max-w-sm mt-4 rounded-md border border-gray-300"
       />
+
+      {/* Thumbnail Images */}
+      <div className="flex flex-wrap gap-4 mt-4">
+        {images.map((img, index) => (
+          <img
+            key={index}
+            src={img}
+            alt={`Product Image ${index + 1}`}
+            className={`w-24 h-24 object-cover rounded-md cursor-pointer border-2 ${
+              selectedImage === img ? "border-orange-600" : "border-gray-200"
+            }`}
+            onClick={() => setSelectedImage(img)}
+          />
+        ))}
+      </div>
 
       <p className="text-gray-800 mt-4">{product.description}</p>
 
@@ -73,7 +99,7 @@ const BodyButter = ({ product, selectedVariant, setSelectedVariant, addToCart, o
         </div>
       )}
 
-<p className="text-gray-600 mt-2">
+      <p className="text-gray-600 mt-2">
         Rs.{" "}
         {selectedVariant
           ? selectedVariant.price.amount

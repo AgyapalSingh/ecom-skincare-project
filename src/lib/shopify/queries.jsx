@@ -13,7 +13,7 @@ export const GET_PRODUCTS = `
               amount
             }
           }
-          images(first: 2) {
+          images(first: 10) {
             edges {
               node {
                 src
@@ -181,7 +181,7 @@ export const GET_PRODUCT_BY_HANDLE = `
           amount
         }
       }
-      images(first: 1) {
+      images(first: 10) {
         edges {
           node {
             src
