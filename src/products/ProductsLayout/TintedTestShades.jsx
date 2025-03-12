@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
-const TintedTestShades = ({
-  product,
-  setSelectedVariant,
-  addToCart,
-  openCartDrawer,
-}) => {
+const TintedTestShades = ({ product, setSelectedVariant, addToCart, openCartDrawer }) => {
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
   // Extract Variants
   const variants = product?.variants?.edges?.map((edge) => edge.node) || [];
 
   // Extract Color and Size from Title
-  const colorOptions = [
-    ...new Set(variants.map((v) => v.title.split(" / ")[0]).filter(Boolean)),
-  ];
-  const sizeOptions = [
-    ...new Set(variants.map((v) => v.title.split(" / ")[1]).filter(Boolean)),
-  ];
+  const colorOptions = [...new Set(variants.map((v) => v.title.split(" / ")[0]).filter(Boolean))];
+  const sizeOptions = [...new Set(variants.map((v) => v.title.split(" / ")[1]).filter(Boolean))];
 
-  // State for selected options
-  const [selectedColor, setSelectedColor] = useState(colorOptions[0] || null);
-  const [selectedSize, setSelectedSize] = useState(sizeOptions[0] || null);
+  // Get selected color and size from URL, fallback to first available
+  const initialColor = searchParams.get("color") || colorOptions[0] || null;
+  const initialSize = searchParams.get("size") || sizeOptions[0] || null;
+
+  const [selectedColor, setSelectedColor] = useState(initialColor);
+  const [selectedSize, setSelectedSize] = useState(initialSize);
 
   // Find matching variant
   const matchedVariant =
@@ -28,12 +26,29 @@ const TintedTestShades = ({
       return color === selectedColor && size === selectedSize;
     }) || variants[0];
 
-  // Use useEffect to update selected variant only when matchedVariant changes
+  // Update selected variant when matchedVariant changes
   useEffect(() => {
     setSelectedVariant(matchedVariant);
   }, [matchedVariant, setSelectedVariant]);
 
-  // Use matchedVariant in Add to Cart
+  // Update URL when user selects a new option
+  const updateURL = (color, size) => {
+    setSearchParams({ color, size });
+  };
+
+  // Handle color selection
+  const handleColorSelect = (color) => {
+    setSelectedColor(color);
+    updateURL(color, selectedSize);
+  };
+
+  // Handle size selection
+  const handleSizeSelect = (size) => {
+    setSelectedSize(size);
+    updateURL(selectedColor, size);
+  };
+
+  // Handle Add to Cart
   const handleAddToCart = () => {
     if (matchedVariant) {
       addToCart({
@@ -46,7 +61,7 @@ const TintedTestShades = ({
     }
   };
 
-  // Map colors to hex values
+  // Color mapping
   const colorMap = {
     ivorydawn: "#fdcea4",
     sunkissed: "#faaf75",
@@ -55,11 +70,9 @@ const TintedTestShades = ({
 
   return (
     <div className="bg-orange-50 p-6 rounded-lg shadow-lg">
-      <h1>Tinted Test Shades Component</h1>
-      <h1 className="text-4xl font-bold text-orange-700">{product.title}</h1>
-      <p className="text-gray-600 mt-2">
-        Rs. {matchedVariant ? matchedVariant.price.amount : "N/A"}
-      </p>
+      <h1>Tinted Test Component</h1>
+      <h1 className="text-4xl font-bold text-orange-300">{product.title}</h1>
+      <p className="text-gray-600 mt-2">Rs. {matchedVariant ? matchedVariant.price.amount : "N/A"}</p>
 
       <img
         src={product.images.edges[0]?.node.src || "default-image.jpg"}
@@ -78,16 +91,13 @@ const TintedTestShades = ({
               return (
                 <span
                   key={color}
-                  onClick={() => setSelectedColor(color)}
+                  onClick={() => handleColorSelect(color)}
                   style={{
                     display: "inline-block",
                     width: "40px",
                     height: "40px",
                     backgroundColor: bgColor,
-                    border:
-                      selectedColor === color
-                        ? "3px solid black"
-                        : "1px solid gray",
+                    border: selectedColor === color ? "3px solid black" : "1px solid gray",
                     cursor: "pointer",
                     margin: "5px",
                     borderRadius: "50%",
@@ -106,12 +116,8 @@ const TintedTestShades = ({
             {sizeOptions.map((size) => (
               <button
                 key={size}
-                onClick={() => setSelectedSize(size)}
-                className={`${
-                  selectedSize === size
-                    ? "uniq-col-prod-varient-btn-select"
-                    : "uniq-col-prod-varient-btn"
-                }`}
+                onClick={() => handleSizeSelect(size)}
+                className={`${selectedSize === size ? "uniq-col-prod-varient-btn-select" : "uniq-col-prod-varient-btn"}`}
               >
                 {size}
               </button>
@@ -122,11 +128,7 @@ const TintedTestShades = ({
 
       <button
         onClick={handleAddToCart}
-        className={`${
-          matchedVariant?.availableForSale
-            ? "uniq-col-prod-atc-btn"
-            : "uniq-col-prod-atc-btn-others"
-        }`}
+        className={`${matchedVariant?.availableForSale ? "uniq-col-prod-atc-btn" : "uniq-col-prod-atc-btn-others"}`}
         disabled={!matchedVariant?.availableForSale}
       >
         {matchedVariant?.availableForSale ? "Add to Cart" : "Restocking"}
