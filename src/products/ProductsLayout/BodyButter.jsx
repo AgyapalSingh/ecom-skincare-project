@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import "./ProductLayoutCSS/DefaultProductLayout.css"
+import "./ProductLayoutCSS/DefaultProductLayout.css";
 
 const BodyButter = ({
   product,
@@ -10,7 +10,12 @@ const BodyButter = ({
   openCartDrawer,
 }) => {
   const [searchParams] = useSearchParams();
-  const [variantId, setVariantId] = useState(searchParams.get("variant"));
+  
+  // Extract numeric variant ID from URL
+  const [variantId, setVariantId] = useState(
+    searchParams.get("variant")?.match(/\d+$/)?.[0] || null
+  );
+
   const images = product?.images?.edges?.map((edge) => edge.node) || [];
 
   // State for selected main image
@@ -21,7 +26,7 @@ const BodyButter = ({
 
   // Set correct variant when the page loads
   useEffect(() => {
-    const variantFromURL = variants.find((v) => v.id === variantId);
+    const variantFromURL = variants.find((v) => v.id.endsWith(variantId));
     if (variantFromURL) {
       setSelectedVariant(variantFromURL);
     } else if (variants.length > 0) {
@@ -34,13 +39,13 @@ const BodyButter = ({
     if (selectedVariant?.id === variant.id) return; // Prevent unnecessary updates
 
     setSelectedVariant(variant);
-    setVariantId(variant.id);
+    setVariantId(variant.id.match(/\d+$/)?.[0]); // Store numeric ID
 
     // Update URL without causing a re-render
     window.history.replaceState(
       null,
       "",
-      `${window.location.pathname}?variant=${variant.id}`
+      `${window.location.pathname}?variant=${variant.id.match(/\d+$/)?.[0]}`
     );
   };
 
@@ -87,8 +92,7 @@ const BodyButter = ({
         </div>
       </div>
 
-      <p className="text-gray-800 mt-4">{product.description}</p>
-
+      
       {/* Variant Selection */}
       {variants.length > 1 && (
         <div className="flex flex-wrap gap-2 mt-4">
@@ -126,6 +130,10 @@ const BodyButter = ({
       >
         {selectedVariant?.availableForSale ? "Add to Cart" : "Restocking"}
       </button>
+
+
+      <p className="text-gray-800 mt-4">{product.description}</p>
+
     </div>
   );
 };
