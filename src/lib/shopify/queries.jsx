@@ -30,6 +30,10 @@ export const GET_PRODUCTS = `
                 price {
                   amount
                 }
+                selectedOptions {
+                  name
+                  value
+                }
               }
             }
           }
@@ -38,6 +42,7 @@ export const GET_PRODUCTS = `
     }
   }
 `;
+
 
 // 2. QUERY TO FETCH ALL COLLECTIONS
 export const GET_COLLECTIONS = `{

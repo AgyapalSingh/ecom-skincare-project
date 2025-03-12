@@ -7,21 +7,49 @@ const ProductCard = ({ product, openCartDrawer }) => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
-  // UNIQ - Change Image on Hover
+  // Handle Image Hover
   const [isHovered, setIsHovered] = useState(false);
   const firstImage = product.images.edges[0]?.node.src || "default-image.jpg";
   const secondImage = product.images.edges[1]?.node.src || null;
   const imageSrc = isHovered && secondImage ? secondImage : firstImage;
 
-  // UNIQ - Handle variant selection
+  // Extract Variants and Options
   const variants = product.variants.edges.map((edge) => edge.node);
-  const [selectedVariant, setSelectedVariant] = useState(
-    variants.length > 0 ? variants[0] : null
-  );
-  const handleVariantChange = (event) => {
-    const variant = variants.find((v) => v.id === event.target.value);
-    setSelectedVariant(variant);
-  };
+  const colorOptions = [
+    ...new Set(
+      variants
+        .map(
+          (v) => v.selectedOptions?.find((opt) => opt.name === "Color")?.value
+        )
+        .filter(Boolean)
+    ),
+  ];
+
+  const sizeOptions = [
+    ...new Set(
+      variants
+        .map(
+          (v) => v.selectedOptions?.find((opt) => opt.name === "Size")?.value
+        )
+        .filter(Boolean)
+    ),
+  ];
+
+  // State for selected options
+  const [selectedColor, setSelectedColor] = useState(colorOptions[0] || null);
+  const [selectedSize, setSelectedSize] = useState(sizeOptions[0] || null);
+
+  // Find matching variant
+  const selectedVariant =
+    variants.find(
+      (variant) =>
+        variant.selectedOptions.some(
+          (opt) => opt.name === "Color" && opt.value === selectedColor
+        ) &&
+        variant.selectedOptions.some(
+          (opt) => opt.name === "Size" && opt.value === selectedSize
+        )
+    ) || variants[0];
 
   const handleAddToCart = () => {
     if (selectedVariant) {
@@ -33,6 +61,12 @@ const ProductCard = ({ product, openCartDrawer }) => {
       });
       openCartDrawer();
     }
+  };
+
+  const colorMap = {
+    ivorydawn: "#fdcea4",
+    sunkissed: "#faaf75",
+    bronzebliss: "#dd8e53",
   };
 
   return (
@@ -50,6 +84,7 @@ const ProductCard = ({ product, openCartDrawer }) => {
           height={"350px"}
         />
       </div>
+
       <div className="uniq-col-prod-titl-pric">
         <h3
           className="uniq-col-prod-title"
@@ -58,31 +93,64 @@ const ProductCard = ({ product, openCartDrawer }) => {
           {product.title}
         </h3>
         <p className="uniq-col-prod-price">
-          Rs. {selectedVariant ? selectedVariant.price.amount : "N/A"}
+          Rs. {selectedVariant?.price?.amount || "N/A"}
         </p>
       </div>
 
-      {variants.length > 1 && (
+      {/* Color Selection (Swatches) */}
+      {colorOptions.length > 1 && (
         <div className="uniq-col-prod-varient">
-          {variants.map((variant) => (
-            <button
-              key={variant.id}
-              onClick={() => setSelectedVariant(variant)}
-              className={` ${
-                selectedVariant?.id === variant.id
-                  ? "uniq-col-prod-varient-btn-select"
-                  : "uniq-col-prod-varient-btn"
-              }`}
-            >
-              {variant.title}
-            </button>
-          ))}
+          <div className="color-swatches">
+            {colorOptions.map((color) => {
+              const bgColor = colorMap[color] || color.toLowerCase();
+              return (
+                <span
+                  key={color}
+                  onClick={() => setSelectedColor(color)}
+                  style={{
+                    display: "inline-block",
+                    width: "30px",
+                    height: "30px",
+                    backgroundColor: bgColor,
+                    border:
+                      selectedColor === color
+                        ? "2px solid black"
+                        : "1px solid gray",
+                    cursor: "pointer",
+                    margin: "5px",
+                    borderRadius: "50%",
+                  }}
+                ></span>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Size Selection (Buttons) */}
+      {sizeOptions.length > 1 && (
+        <div className="uniq-col-prod-varient">
+          <div className="size-buttons">
+            {sizeOptions.map((size) => (
+              <button
+                key={size}
+                onClick={() => setSelectedSize(size)}
+                className={`${
+                  selectedSize === size
+                    ? "uniq-col-prod-varient-btn-select"
+                    : "uniq-col-prod-varient-btn"
+                }`}
+              >
+                {size}
+              </button>
+            ))}
+          </div>
         </div>
       )}
 
       <button
         onClick={handleAddToCart}
-        className={` ${
+        className={`${
           selectedVariant?.availableForSale
             ? "uniq-col-prod-atc-btn"
             : "uniq-col-prod-atc-btn-others"
