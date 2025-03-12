@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const TintedTestShades = ({
   product,
@@ -28,8 +28,10 @@ const TintedTestShades = ({
       return color === selectedColor && size === selectedSize;
     }) || variants[0];
 
-  // Update selected variant
-  setSelectedVariant(matchedVariant);
+  // Use useEffect to update selected variant only when matchedVariant changes
+  useEffect(() => {
+    setSelectedVariant(matchedVariant);
+  }, [matchedVariant, setSelectedVariant]);
 
   // Use matchedVariant in Add to Cart
   const handleAddToCart = () => {
