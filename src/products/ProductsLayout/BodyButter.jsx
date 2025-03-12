@@ -19,7 +19,7 @@ const BodyButter = ({
   // Set the correct variant when the page loads
   useEffect(() => {
     if (variantIdFromURL) {
-      const fullVariantId = `${import.meta.env.VITE_FULL_VARIANT_ID}/${variantIdFromURL}`;
+      const fullVariantId = `${variantIdFromURL}`;
       const variantFromURL = variants.find((v) => v.id === fullVariantId);
       if (variantFromURL) {
         setSelectedVariant(variantFromURL);
