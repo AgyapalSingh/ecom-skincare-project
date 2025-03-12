@@ -1,32 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 
 const TintedTestShades = ({
   product,
-  selectedVariant,
   setSelectedVariant,
   addToCart,
   openCartDrawer,
 }) => {
+  // Extract Variants
+  const variants = product?.variants?.edges?.map((edge) => edge.node) || [];
+
+  // Extract Color and Size from Title
+  const colorOptions = [
+    ...new Set(variants.map((v) => v.title.split(" / ")[0]).filter(Boolean)),
+  ];
+  const sizeOptions = [
+    ...new Set(variants.map((v) => v.title.split(" / ")[1]).filter(Boolean)),
+  ];
+
+  // State for selected options
+  const [selectedColor, setSelectedColor] = useState(colorOptions[0] || null);
+  const [selectedSize, setSelectedSize] = useState(sizeOptions[0] || null);
+
+  // Find matching variant
+  const matchedVariant =
+    variants.find((variant) => {
+      const [color, size] = variant.title.split(" / ");
+      return color === selectedColor && size === selectedSize;
+    }) || variants[0];
+
+  // Update selected variant
+  setSelectedVariant(matchedVariant);
+
+  // Use matchedVariant in Add to Cart
   const handleAddToCart = () => {
-    if (selectedVariant) {
+    if (matchedVariant) {
       addToCart({
-        id: selectedVariant.id,
-        title: `${product.title} - ${selectedVariant.title}`,
-        price: selectedVariant.price.amount,
+        id: matchedVariant.id,
+        title: `${product.title} - ${matchedVariant.title}`,
+        price: matchedVariant.price.amount,
         image: product.images.edges[0]?.node.src,
       });
       openCartDrawer();
     }
   };
+
+  // Map colors to hex values
+  const colorMap = {
+    ivorydawn: "#fdcea4",
+    sunkissed: "#faaf75",
+    bronzebliss: "#dd8e53",
+  };
+
   return (
     <div className="bg-orange-50 p-6 rounded-lg shadow-lg">
       <h1>Tinted Test Shades Component</h1>
       <h1 className="text-4xl font-bold text-orange-700">{product.title}</h1>
       <p className="text-gray-600 mt-2">
-        Rs.{" "}
-        {selectedVariant
-          ? selectedVariant.price.amount
-          : product.priceRange.minVariantPrice.amount}
+        Rs. {matchedVariant ? matchedVariant.price.amount : "N/A"}
       </p>
 
       <img
@@ -37,34 +67,67 @@ const TintedTestShades = ({
 
       <p className="text-gray-800 mt-4">{product.description}</p>
 
-      {product.variants.edges.length > 1 && (
-        <div className="flex flex-wrap gap-2 mt-4">
-          {product.variants.edges.map(({ node: variant }) => (
-            <button
-              key={variant.id}
-              onClick={() => setSelectedVariant(variant)}
-              className={`px-4 py-2 rounded border ${
-                selectedVariant?.id === variant.id
-                  ? "bg-orange-600 text-white"
-                  : "bg-gray-200 hover:bg-gray-300"
-              }`}
-            >
-              {variant.title} - Rs. {variant.price.amount}
-            </button>
-          ))}
+      {/* Color Selection */}
+      {colorOptions.length > 1 && (
+        <div className="uniq-col-prod-varient">
+          <div className="color-swatches">
+            {colorOptions.map((color) => {
+              const bgColor = colorMap[color] || color.toLowerCase();
+              return (
+                <span
+                  key={color}
+                  onClick={() => setSelectedColor(color)}
+                  style={{
+                    display: "inline-block",
+                    width: "40px",
+                    height: "40px",
+                    backgroundColor: bgColor,
+                    border:
+                      selectedColor === color
+                        ? "3px solid black"
+                        : "1px solid gray",
+                    cursor: "pointer",
+                    margin: "5px",
+                    borderRadius: "50%",
+                  }}
+                ></span>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Size Selection */}
+      {sizeOptions.length > 1 && (
+        <div className="uniq-col-prod-varient">
+          <div className="size-buttons">
+            {sizeOptions.map((size) => (
+              <button
+                key={size}
+                onClick={() => setSelectedSize(size)}
+                className={`${
+                  selectedSize === size
+                    ? "uniq-col-prod-varient-btn-select"
+                    : "uniq-col-prod-varient-btn"
+                }`}
+              >
+                {size}
+              </button>
+            ))}
+          </div>
         </div>
       )}
 
       <button
         onClick={handleAddToCart}
-        className={`mt-6 px-6 py-3 rounded text-white w-full ${
-          selectedVariant?.availableForSale
-            ? "bg-orange-600 hover:bg-orange-700"
-            : "bg-gray-500 cursor-not-allowed"
+        className={`${
+          matchedVariant?.availableForSale
+            ? "uniq-col-prod-atc-btn"
+            : "uniq-col-prod-atc-btn-others"
         }`}
-        disabled={!selectedVariant?.availableForSale}
+        disabled={!matchedVariant?.availableForSale}
       >
-        {selectedVariant?.availableForSale ? "Add to Cart" : "Restocking"}
+        {matchedVariant?.availableForSale ? "Add to Cart" : "Restocking"}
       </button>
     </div>
   );
