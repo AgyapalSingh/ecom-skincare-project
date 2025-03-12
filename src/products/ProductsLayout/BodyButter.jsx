@@ -10,6 +10,10 @@ const BodyButter = ({
 }) => {
   const [searchParams] = useSearchParams();
   const [variantId, setVariantId] = useState(searchParams.get("variant"));
+  const images = product?.images?.edges?.map((edge) => edge.node) || [];
+
+  // State for selected main image
+  const [mainImage, setMainImage] = useState(images[0]?.src || "default-image.jpg");
 
   // Extract Variants
   const variants = product?.variants?.edges?.map((edge) => edge.node) || [];
@@ -46,7 +50,7 @@ const BodyButter = ({
         id: selectedVariant.id,
         title: `${product.title} - ${selectedVariant.title}`,
         price: selectedVariant.price.amount,
-        image: product.images.edges[0]?.node.src,
+        image: product.images.edges[0]?.node.src, 
       });
       openCartDrawer();
     }
@@ -54,15 +58,33 @@ const BodyButter = ({
 
   return (
     <div className="bg-orange-50 p-6 rounded-lg shadow-lg">
-      <h1>Body Butter Component</h1>
       <h1 className="text-4xl font-bold text-orange-700">{product.title}</h1>
 
       {/* Product Image */}
-      <img
-        src={product.images.edges[0]?.node.src || "default-image.jpg"}
-        alt={product.images.edges[0]?.node.altText || product.title}
-        className="w-full max-w-sm mt-4 rounded-md"
-      />
+      <div className="uniq-ag-product-display">
+        <div className="uniq-ag-product-main-thumbnail">
+          <img
+            src={mainImage}
+            alt={product.title}
+            className="w-full max-w-sm mt-4 rounded-md"
+          />
+        </div>
+
+        {/* Secondary Images - Clickable */}
+        <div className="uniq-ag-product-sec-images flex gap-2 mt-4">
+          {images.map((image, index) => (
+            <img
+              key={index}
+              src={image.src || "default-image.jpg"}
+              alt={image.altText || product.title}
+              className={`w-20 h-20 object-cover cursor-pointer border rounded-md hover:opacity-80 transition ${
+                mainImage === image.src ? "border-orange-600 border-2" : ""
+              }`}
+              onClick={() => setMainImage(image.src)}
+            />
+          ))}
+        </div>
+      </div>
 
       <p className="text-gray-800 mt-4">{product.description}</p>
 
