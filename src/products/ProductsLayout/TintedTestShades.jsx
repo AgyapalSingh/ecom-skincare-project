@@ -1,51 +1,41 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 const TintedTestShades = ({ product, setSelectedVariant, addToCart, openCartDrawer }) => {
-  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Extract Variants
   const variants = product?.variants?.edges?.map((edge) => edge.node) || [];
 
-  // Extract Color and Size from Title
-  const colorOptions = [...new Set(variants.map((v) => v.title.split(" / ")[0]).filter(Boolean))];
-  const sizeOptions = [...new Set(variants.map((v) => v.title.split(" / ")[1]).filter(Boolean))];
+  // Get variantId from URL
+  const variantIdFromURL = searchParams.get("variant");
 
-  // Get selected color and size from URL, fallback to first available
-  const initialColor = searchParams.get("color") || colorOptions[0] || null;
-  const initialSize = searchParams.get("size") || sizeOptions[0] || null;
+  // Find the selected variant based on URL or default to the first variant
+  const matchedVariant = variants.find((v) => v.id === variantIdFromURL) || variants[0];
 
-  const [selectedColor, setSelectedColor] = useState(initialColor);
-  const [selectedSize, setSelectedSize] = useState(initialSize);
-
-  // Find matching variant
-  const matchedVariant =
-    variants.find((variant) => {
-      const [color, size] = variant.title.split(" / ");
-      return color === selectedColor && size === selectedSize;
-    }) || variants[0];
+  // Extract color and size from variant title (assuming format "Color / Size")
+  const [selectedColor, selectedSize] = matchedVariant?.title.split(" / ") || ["", ""];
 
   // Update selected variant when matchedVariant changes
   useEffect(() => {
     setSelectedVariant(matchedVariant);
   }, [matchedVariant, setSelectedVariant]);
 
-  // Update URL when user selects a new option
-  const updateURL = (color, size) => {
-    setSearchParams({ color, size });
+  // Update URL when user selects a new variant
+  const updateURL = (variantId) => {
+    setSearchParams({ variant: variantId });
   };
 
-  // Handle color selection
-  const handleColorSelect = (color) => {
-    setSelectedColor(color);
-    updateURL(color, selectedSize);
-  };
+  // Handle variant selection
+  const handleVariantSelect = (color, size) => {
+    const selectedVariant = variants.find((v) => {
+      const [variantColor, variantSize] = v.title.split(" / ");
+      return variantColor === color && variantSize === size;
+    });
 
-  // Handle size selection
-  const handleSizeSelect = (size) => {
-    setSelectedSize(size);
-    updateURL(selectedColor, size);
+    if (selectedVariant) {
+      updateURL(selectedVariant.id);
+    }
   };
 
   // Handle Add to Cart
@@ -61,7 +51,11 @@ const TintedTestShades = ({ product, setSelectedVariant, addToCart, openCartDraw
     }
   };
 
-  // Color mapping
+  // Extract unique colors and sizes
+  const colorOptions = [...new Set(variants.map((v) => v.title.split(" / ")[0]))];
+  const sizeOptions = [...new Set(variants.map((v) => v.title.split(" / ")[1]))];
+
+  // Map colors to hex values
   const colorMap = {
     ivorydawn: "#fdcea4",
     sunkissed: "#faaf75",
@@ -70,8 +64,7 @@ const TintedTestShades = ({ product, setSelectedVariant, addToCart, openCartDraw
 
   return (
     <div className="bg-orange-50 p-6 rounded-lg shadow-lg">
-      <h1>Tinted Test Component</h1>
-      <h1 className="text-4xl font-bold text-orange-300">{product.title}</h1>
+      <h1 className="text-4xl font-bold text-orange-700">{product.title}</h1>
       <p className="text-gray-600 mt-2">Rs. {matchedVariant ? matchedVariant.price.amount : "N/A"}</p>
 
       <img
@@ -91,7 +84,7 @@ const TintedTestShades = ({ product, setSelectedVariant, addToCart, openCartDraw
               return (
                 <span
                   key={color}
-                  onClick={() => handleColorSelect(color)}
+                  onClick={() => handleVariantSelect(color, selectedSize)}
                   style={{
                     display: "inline-block",
                     width: "40px",
@@ -116,7 +109,7 @@ const TintedTestShades = ({ product, setSelectedVariant, addToCart, openCartDraw
             {sizeOptions.map((size) => (
               <button
                 key={size}
-                onClick={() => handleSizeSelect(size)}
+                onClick={() => handleVariantSelect(selectedColor, size)}
                 className={`${selectedSize === size ? "uniq-col-prod-varient-btn-select" : "uniq-col-prod-varient-btn"}`}
               >
                 {size}
