@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 
 const BodyButter = ({ product, selectedVariant, setSelectedVariant, addToCart, openCartDrawer }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedImage, setSelectedImage] = useState(null); // Track selected image
+  const [selectedImage, setSelectedImage] = useState(""); // Track selected image
 
   // Extract Variants
   const variants = product?.variants?.edges?.map((edge) => edge.node) || [];
@@ -14,7 +14,7 @@ const BodyButter = ({ product, selectedVariant, setSelectedVariant, addToCart, o
   // Get variantId from URL
   const variantIdFromURL = searchParams.get("variant");
 
-  // Set the correct variant when the page loads
+  // Set default selected variant when page loads
   useEffect(() => {
     if (variantIdFromURL) {
       const variantFromURL = variants.find((v) => v.id === variantIdFromURL);
@@ -22,16 +22,22 @@ const BodyButter = ({ product, selectedVariant, setSelectedVariant, addToCart, o
         setSelectedVariant(variantFromURL);
       }
     } else if (variants.length > 0) {
-      setSelectedVariant(variants[0]); // Default to the first variant
+      setSelectedVariant(variants[0]); // Default to first variant
     }
   }, [variantIdFromURL, variants, setSelectedVariant]);
 
-  // Set default selected image
+  // Set default selected image when the product changes
   useEffect(() => {
     if (images.length > 0) {
-      setSelectedImage(images[0]); // Default to the first image
+      setSelectedImage(images[0]); // Set first image as default
     }
-  }, [images]);
+  }, [product]); // <- Depend on `product`, not `images`
+
+  // Ensure image updates properly
+  const handleImageClick = (img) => {
+    console.log("Clicked image:", img); // Debugging
+    setSelectedImage(img);
+  };
 
   // Update URL when a variant is selected
   const handleVariantSelect = (variant) => {
@@ -54,13 +60,14 @@ const BodyButter = ({ product, selectedVariant, setSelectedVariant, addToCart, o
 
   return (
     <div className="bg-orange-50 p-6 rounded-lg shadow-lg">
+      <h1>Body Butter Component</h1>
       <h1 className="text-4xl font-bold text-orange-700">{product.title}</h1>
 
       {/* Main Selected Image */}
       <img
         src={selectedImage || "default-image.jpg"}
         alt={product.title}
-        className="w-full max-w-sm mt-4 rounded-md border border-gray-300"
+        className="w-full max-w-sm mt-4 rounded-md border border-gray-300 transition-all duration-300 ease-in-out"
       />
 
       {/* Thumbnail Images */}
@@ -70,10 +77,10 @@ const BodyButter = ({ product, selectedVariant, setSelectedVariant, addToCart, o
             key={index}
             src={img}
             alt={`Product Image ${index + 1}`}
-            className={`w-24 h-24 object-cover rounded-md cursor-pointer border-2 ${
-              selectedImage === img ? "border-orange-600" : "border-gray-200"
+            className={`w-24 h-24 object-cover rounded-md cursor-pointer border-2 transition-all duration-300 ease-in-out ${
+              selectedImage === img ? "border-orange-600 scale-110" : "border-gray-200"
             }`}
-            onClick={() => setSelectedImage(img)}
+            onClick={() => handleImageClick(img)}
           />
         ))}
       </div>
