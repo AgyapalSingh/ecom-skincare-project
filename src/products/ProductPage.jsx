@@ -17,6 +17,7 @@ import CalmingSunscreen from "./ProductsLayout/CalmingSunscreen";
 import BodyButter from "./ProductsLayout/BodyButter";
 import DeTan from "./ProductsLayout/DeTan";
 import CartDrawer from "../components/Layout/CartDrawer";
+import TintedTestShades from "./ProductsLayout/TintedTestShades";
 
 const ProductPage = () => {
   const { handle } = useParams();
@@ -27,7 +28,7 @@ const ProductPage = () => {
   const [error, setError] = useState(null);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-      const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
+  const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
 
   const fetchProduct = async () => {
     try {
@@ -169,6 +170,18 @@ const ProductPage = () => {
       case "de-tan-mask-for-instant-tan-removal-with-niacinamide-glycolic-acid":
         return (
           <DeTan
+            product={product}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
+            addToCart={addToCart}
+            openCartDrawer={toggleDrawer}
+          />
+        );
+
+        //11. Tinted Test Shades
+      case "tinted-test-shades":
+        return (
+          <TintedTestShades
             product={product}
             selectedVariant={selectedVariant}
             setSelectedVariant={setSelectedVariant}
