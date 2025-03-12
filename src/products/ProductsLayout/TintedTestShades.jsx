@@ -1,39 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const TintedTestShades = ({ product, setSelectedVariant, addToCart, openCartDrawer }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const [variantId, setVariantId] = useState(searchParams.get("variant"));
 
   // Extract Variants
   const variants = product?.variants?.edges?.map((edge) => edge.node) || [];
 
-  // Get variantId from URL
-  const variantIdFromURL = searchParams.get("variant");
-
-  // Find the selected variant based on URL or default to the first variant
-  const matchedVariant = variants.find((v) => v.id === variantIdFromURL) || variants[0];
+  // Find selected variant based on URL or default to first variant
+  const matchedVariant = variants.find((v) => v.id === variantId) || variants[0];
 
   // Extract color and size from variant title (assuming format "Color / Size")
   const [selectedColor, selectedSize] = matchedVariant?.title.split(" / ") || ["", ""];
 
-  // Update selected variant when matchedVariant changes
+  // Update the selected variant without triggering unnecessary re-renders
   useEffect(() => {
     setSelectedVariant(matchedVariant);
   }, [matchedVariant, setSelectedVariant]);
 
-  // Update URL when user selects a new variant
+  // Update URL without re-rendering
   const updateURL = (variantId) => {
-    setSearchParams({ variant: variantId });
+    setVariantId(variantId); // Update state
+    window.history.replaceState(null, "", `${window.location.pathname}?variant=${variantId}`);
   };
 
-  // Handle variant selection
+  // Handle Variant Selection
   const handleVariantSelect = (color, size) => {
     const selectedVariant = variants.find((v) => {
       const [variantColor, variantSize] = v.title.split(" / ");
       return variantColor === color && variantSize === size;
     });
 
-    if (selectedVariant) {
+    if (selectedVariant && selectedVariant.id !== variantId) {
       updateURL(selectedVariant.id);
     }
   };
