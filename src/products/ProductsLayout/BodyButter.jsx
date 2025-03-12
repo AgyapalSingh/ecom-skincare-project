@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import "./ProductLayoutCSS/DefaultProductLayout.css"
 
 const BodyButter = ({
   product,
@@ -58,6 +59,7 @@ const BodyButter = ({
 
   return (
     <div className="bg-orange-50 p-6 rounded-lg shadow-lg">
+      <h1>Body Butter Component</h1>
       <h1 className="text-4xl font-bold text-orange-700">{product.title}</h1>
 
       {/* Product Image */}
@@ -66,19 +68,18 @@ const BodyButter = ({
           <img
             src={mainImage}
             alt={product.title}
-            className="w-full max-w-sm mt-4 rounded-md"
           />
         </div>
 
         {/* Secondary Images - Clickable */}
-        <div className="uniq-ag-product-sec-images flex gap-2 mt-4">
+        <div className="uniq-ag-product-sec-images gap-2 mt-4">
           {images.map((image, index) => (
             <img
               key={index}
               src={image.src || "default-image.jpg"}
               alt={image.altText || product.title}
-              className={`w-20 h-20 object-cover cursor-pointer border rounded-md hover:opacity-80 transition ${
-                mainImage === image.src ? "border-orange-600 border-2" : ""
+              className={`uniq-ag-product-sec-image ${
+                mainImage === image.src ? " uniq-ag-product-sec-image-active" : ""
               }`}
               onClick={() => setMainImage(image.src)}
             />
