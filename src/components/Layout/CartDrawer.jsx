@@ -3,6 +3,7 @@ import { useCart } from "../../context/CartContext";
 import { RxCross2 } from "react-icons/rx";
 import { TfiFaceSad } from "react-icons/tfi";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const CartDrawer = ({ isOpen, closeDrawer }) => {
   const {
@@ -51,7 +52,9 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
                     >
                       -
                     </button>
-                    <span className="uniq-ag-cart-quantity">{item.quantity}</span>
+                    <span className="uniq-ag-cart-quantity">
+                      {item.quantity}
+                    </span>
                     <button
                       onClick={() => increaseQuantity(item.id)}
                       className="uniq-ag-cart-quantity-inc-btn"
@@ -63,7 +66,12 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
 
                 <div className="uniq-ag-cart-drawer-products-card-right">
                   <div className="uniq-ag-cart-drawer-products-card-title">
-                    <p className="text-sm">{item.title}</p>
+                    <Link
+                      to={item.url}
+                      className="text-blue-600 hover:underline"
+                    >
+                      <p className="text-sm">{item.title}</p>
+                    </Link>
                   </div>
                   <div className="uniq-ag-cart-drawer-products-card-btn">
                     <p className="uniq-ag-cart-drawer-products-card-p">

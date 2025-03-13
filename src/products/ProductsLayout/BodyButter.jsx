@@ -52,11 +52,14 @@ const BodyButter = ({
   // Handle Add to Cart
   const handleAddToCart = () => {
     if (selectedVariant) {
+      const variantId = selectedVariant.id.split("/").pop();
+      const productUrl = `${window.location.origin}${window.location.pathname}?variant=${variantId}`;
       addToCart({
-        id: selectedVariant.id,
+        id: variantId, 
         title: `${product.title} - ${selectedVariant.title}`,
         price: selectedVariant.price.amount,
-        image: product.images.edges[0]?.node.src, 
+        image: product.images.edges[0]?.node.src,
+        url: productUrl,
       });
       openCartDrawer();
     }
