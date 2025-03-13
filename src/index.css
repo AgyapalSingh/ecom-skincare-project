@@ -287,10 +287,11 @@ body {
 }
 
 .uniq-ag-cart-drawer-products {
-  min-height: 80vh;
+  height: 80vh;
   padding: 5px 10px;
   font-family: var(--font-fam-primary);
   color: var(--font-color-primary);
+  overflow: scroll;
 }
 
 .uniq-ag-cart-drawer-products-card {
@@ -348,6 +349,10 @@ body {
 
 .uniq-ag-cart-drawer-products-card-title {
   height: 70%;
+}
+
+.uniq-ag-cart-drawer-products-card-title{
+  font-size: 12px;
 }
 
 .uniq-ag-cart-drawer-products-card-btn {

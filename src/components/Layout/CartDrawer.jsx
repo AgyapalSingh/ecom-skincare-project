@@ -68,9 +68,9 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
                   <div className="uniq-ag-cart-drawer-products-card-title">
                     <Link
                       to={item.url}
-                      className="text-blue-600 hover:underline"
+                     
                     >
-                      <p className="text-sm">{item.title}</p>
+                      <p className="uniq-ag-cart-drawer-product-title">{item.title}</p>
                     </Link>
                   </div>
                   <div className="uniq-ag-cart-drawer-products-card-btn">
