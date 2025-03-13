@@ -77,7 +77,7 @@ const DeTan = ({
   
     return (
       <div className="bg-orange-50 p-6 rounded-lg shadow-lg">
-        <h1>Body Butter Component</h1>
+        <h1>DeTan Component</h1>
         <h1 className="text-4xl font-bold text-orange-700">{product.title}</h1>
   
         <div className="uniq-ag-product-display">
