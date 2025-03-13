@@ -33,6 +33,15 @@ const BodyButter = ({
       setSelectedVariant(variants[0]); // Default to first variant
     }
   }, [variantId, variants, setSelectedVariant]);
+  
+  useEffect(() => {
+    if (selectedVariant) {
+      // Check if the selected variant has an associated image, else use first product image
+      const variantImage = selectedVariant.image?.src || images[0]?.src || "default-image.jpg";
+      setMainImage(variantImage);
+    }
+  }, [selectedVariant, images]); // Depend on selectedVariant and images
+  
 
   // Handle Variant Selection
   const handleVariantSelect = (variant) => {
