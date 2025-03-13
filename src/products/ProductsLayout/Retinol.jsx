@@ -10,7 +10,7 @@ const Retinol = ({
   openCartDrawer,
 }) => {
   const [searchParams] = useSearchParams();
-  
+
   // Extract numeric variant ID from URL
   const [variantId, setVariantId] = useState(
     searchParams.get("variant")?.match(/\d+$/)?.[0] || null
@@ -19,12 +19,14 @@ const Retinol = ({
   const images = product?.images?.edges?.map((edge) => edge.node) || [];
 
   // State for selected main image
-  const [mainImage, setMainImage] = useState(images[0]?.src || "default-image.jpg");
+  const [mainImage, setMainImage] = useState(
+    images[0]?.src || "default-image.jpg"
+  );
 
   // Extract Variants
   const variants = product?.variants?.edges?.map((edge) => edge.node) || [];
 
-  // Set correct variant when the page loads
+  /// Set correct variant when the page loads
   useEffect(() => {
     const variantFromURL = variants.find((v) => v.id.endsWith(variantId));
     if (variantFromURL) {
@@ -33,6 +35,15 @@ const Retinol = ({
       setSelectedVariant(variants[0]); // Default to first variant
     }
   }, [variantId, variants, setSelectedVariant]);
+
+  useEffect(() => {
+    if (selectedVariant) {
+      // Check if the selected variant has an associated image, else use first product image
+      const variantImage =
+        selectedVariant.image?.src || images[0]?.src || "default-image.jpg";
+      setMainImage(variantImage);
+    }
+  }, [selectedVariant, images]); // Depend on selectedVariant and images
 
   // Handle Variant Selection
   const handleVariantSelect = (variant) => {
@@ -56,7 +67,7 @@ const Retinol = ({
       const productUrl = `${window.location.origin}${window.location.pathname}?variant=${variantId}`;
       // console.log(productUrl, "Product Url from Product Page")
       addToCart({
-        id: variantId, 
+        id: variantId,
         title: `${product.title} - ${selectedVariant.title}`,
         price: selectedVariant.price.amount,
         image: product.images.edges[0]?.node.src,
@@ -74,10 +85,7 @@ const Retinol = ({
       {/* Product Image */}
       <div className="uniq-ag-product-display">
         <div className="uniq-ag-product-main-thumbnail">
-          <img
-            src={mainImage}
-            alt={product.title}
-          />
+          <img src={mainImage} alt={product.title} />
         </div>
 
         {/* Secondary Images - Clickable */}
@@ -88,7 +96,9 @@ const Retinol = ({
               src={image.src || "default-image.jpg"}
               alt={image.altText || product.title}
               className={`uniq-ag-product-sec-image ${
-                mainImage === image.src ? " uniq-ag-product-sec-image-active" : ""
+                mainImage === image.src
+                  ? " uniq-ag-product-sec-image-active"
+                  : ""
               }`}
               onClick={() => setMainImage(image.src)}
             />
@@ -96,7 +106,6 @@ const Retinol = ({
         </div>
       </div>
 
-      
       {/* Variant Selection */}
       {variants.length > 1 && (
         <div className="flex flex-wrap gap-2 mt-4">
@@ -135,9 +144,7 @@ const Retinol = ({
         {selectedVariant?.availableForSale ? "Add to Cart" : "Restocking"}
       </button>
 
-
       <p className="text-gray-800 mt-4">{product.description}</p>
-
     </div>
   );
 };
