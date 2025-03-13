@@ -10,47 +10,43 @@ const BodyButter = ({
   openCartDrawer,
 }) => {
   const [searchParams] = useSearchParams();
-  
-  // Extract numeric variant ID from URL
+
   const [variantId, setVariantId] = useState(
     searchParams.get("variant")?.match(/\d+$/)?.[0] || null
   );
 
   const images = product?.images?.edges?.map((edge) => edge.node) || [];
 
-  // State for selected main image
-  const [mainImage, setMainImage] = useState(images[0]?.src || "default-image.jpg");
+  const [mainImage, setMainImage] = useState(
+    images[0]?.src || "default-image.jpg"
+  );
+  const [manualImageSelected, setManualImageSelected] = useState(false);
 
-  // Extract Variants
   const variants = product?.variants?.edges?.map((edge) => edge.node) || [];
 
-  // Set correct variant when the page loads
   useEffect(() => {
     const variantFromURL = variants.find((v) => v.id.endsWith(variantId));
     if (variantFromURL) {
       setSelectedVariant(variantFromURL);
     } else if (variants.length > 0) {
-      setSelectedVariant(variants[0]); // Default to first variant
+      setSelectedVariant(variants[0]);
     }
   }, [variantId, variants, setSelectedVariant]);
-  
+
   useEffect(() => {
-    if (selectedVariant) {
-      // Check if the selected variant has an associated image, else use first product image
-      const variantImage = selectedVariant.image?.src || images[0]?.src || "default-image.jpg";
+    if (selectedVariant && !manualImageSelected) {
+      const variantImage =
+        selectedVariant.image?.src || images[0]?.src || "default-image.jpg";
       setMainImage(variantImage);
     }
-  }, [selectedVariant, images]); // Depend on selectedVariant and images
-  
+  }, [selectedVariant, images, manualImageSelected]);
 
-  // Handle Variant Selection
   const handleVariantSelect = (variant) => {
-    if (selectedVariant?.id === variant.id) return; // Prevent unnecessary updates
-
+    if (selectedVariant?.id === variant.id) return;
     setSelectedVariant(variant);
-    setVariantId(variant.id.match(/\d+$/)?.[0]); // Store numeric ID
+    setVariantId(variant.id.match(/\d+$/)?.[0]);
+    setManualImageSelected(false);
 
-    // Update URL without causing a re-render
     window.history.replaceState(
       null,
       "",
@@ -58,17 +54,21 @@ const BodyButter = ({
     );
   };
 
-  // Handle Add to Cart
+  const handleImageClick = (imageSrc) => {
+    setMainImage(imageSrc);
+    setManualImageSelected(true);
+  };
+
   const handleAddToCart = () => {
     if (selectedVariant) {
       const variantId = selectedVariant.id.split("/").pop();
       const productUrl = `${window.location.origin}${window.location.pathname}?variant=${variantId}`;
-      // console.log(productUrl, "Product Url from Product Page")
+
       addToCart({
-        id: variantId, 
+        id: variantId,
         title: `${product.title} - ${selectedVariant.title}`,
         price: selectedVariant.price.amount,
-        image: product.images.edges[0]?.node.src,
+        image: selectedVariant.image?.src || product.images.edges[0]?.node.src,
         url: productUrl,
       });
       openCartDrawer();
@@ -80,16 +80,11 @@ const BodyButter = ({
       <h1>Body Butter Component</h1>
       <h1 className="text-4xl font-bold text-orange-700">{product.title}</h1>
 
-      {/* Product Image */}
       <div className="uniq-ag-product-display">
         <div className="uniq-ag-product-main-thumbnail">
-          <img
-            src={mainImage}
-            alt={product.title}
-          />
+          <img src={mainImage} alt={product.title} />
         </div>
 
-        {/* Secondary Images - Clickable */}
         <div className="uniq-ag-product-sec-images gap-2 mt-4">
           {images.map((image, index) => (
             <img
@@ -97,16 +92,16 @@ const BodyButter = ({
               src={image.src || "default-image.jpg"}
               alt={image.altText || product.title}
               className={`uniq-ag-product-sec-image ${
-                mainImage === image.src ? " uniq-ag-product-sec-image-active" : ""
+                mainImage === image.src
+                  ? " uniq-ag-product-sec-image-active"
+                  : ""
               }`}
-              onClick={() => setMainImage(image.src)}
+              onClick={() => handleImageClick(image.src)}
             />
           ))}
         </div>
       </div>
 
-      
-      {/* Variant Selection */}
       {variants.length > 1 && (
         <div className="flex flex-wrap gap-2 mt-4">
           {variants.map((variant) => (
@@ -144,9 +139,7 @@ const BodyButter = ({
         {selectedVariant?.availableForSale ? "Add to Cart" : "Restocking"}
       </button>
 
-
       <p className="text-gray-800 mt-4">{product.description}</p>
-
     </div>
   );
 };
