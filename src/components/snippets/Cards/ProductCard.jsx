@@ -7,14 +7,14 @@ const ProductCard = ({ product, openCartDrawer }) => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
-  // Handle Image Hover
   const [isHovered, setIsHovered] = useState(false);
   const firstImage = product.images.edges[0]?.node.src || "default-image.jpg";
   const secondImage = product.images.edges[1]?.node.src || null;
   const imageSrc = isHovered && secondImage ? secondImage : firstImage;
 
-  // Extract Variants and Options
+  
   const variants = product.variants.edges.map((edge) => edge.node);
+
   const colorOptions = [
     ...new Set(
       variants
@@ -35,21 +35,44 @@ const ProductCard = ({ product, openCartDrawer }) => {
     ),
   ];
 
-  // State for selected options
+  
   const [selectedColor, setSelectedColor] = useState(colorOptions[0] || null);
   const [selectedSize, setSelectedSize] = useState(sizeOptions[0] || null);
 
-  // Find matching variant
+ 
   const selectedVariant =
-    variants.find(
-      (variant) =>
+    variants.find((variant) => {
+      const colorMatch = selectedColor
+        ? variant.selectedOptions.some(
+            (opt) => opt.name === "Color" && opt.value === selectedColor
+          )
+        : true; 
+
+      const sizeMatch = selectedSize
+        ? variant.selectedOptions.some(
+            (opt) => opt.name === "Size" && opt.value === selectedSize
+          )
+        : true; 
+
+      return colorMatch && sizeMatch;
+    }) || variants[0];
+
+  const handleSizeSelection = (size) => {
+    setSelectedSize(size);
+    if (!colorOptions.length) {
+      
+      const newSelectedVariant = variants.find((variant) =>
         variant.selectedOptions.some(
-          (opt) => opt.name === "Color" && opt.value === selectedColor
-        ) &&
-        variant.selectedOptions.some(
-          (opt) => opt.name === "Size" && opt.value === selectedSize
+          (opt) => opt.name === "Size" && opt.value === size
         )
-    ) || variants[0];
+      );
+      setSelectedColor(null); 
+    }
+  };
+
+  const handleColorSelection = (color) => {
+    setSelectedColor(color);
+  };
 
   const handleAddToCart = () => {
     if (selectedVariant) {
@@ -57,11 +80,12 @@ const ProductCard = ({ product, openCartDrawer }) => {
         id: selectedVariant.id,
         title: `${product.title} - ${selectedVariant.title}`,
         price: selectedVariant.price.amount,
-        image: product.images.edges[0]?.node.src || "default-image.jpg",
+        image: firstImage,
       });
       openCartDrawer();
     }
   };
+
 
   const colorMap = {
     ivorydawn: "#fdcea4",
@@ -97,7 +121,6 @@ const ProductCard = ({ product, openCartDrawer }) => {
         </p>
       </div>
 
-      {/* Color Selection (Swatches) */}
       {colorOptions.length > 1 && (
         <div className="uniq-col-prod-varient">
           <div className="color-swatches">
@@ -106,7 +129,7 @@ const ProductCard = ({ product, openCartDrawer }) => {
               return (
                 <span
                   key={color}
-                  onClick={() => setSelectedColor(color)}
+                  onClick={() => handleColorSelection(color)}
                   style={{
                     display: "inline-block",
                     width: "30px",
@@ -127,14 +150,13 @@ const ProductCard = ({ product, openCartDrawer }) => {
         </div>
       )}
 
-      {/* Size Selection (Buttons) */}
       {sizeOptions.length > 1 && (
         <div className="uniq-col-prod-varient">
           <div className="size-buttons">
             {sizeOptions.map((size) => (
               <button
                 key={size}
-                onClick={() => setSelectedSize(size)}
+                onClick={() => handleSizeSelection(size)}
                 className={`${
                   selectedSize === size
                     ? "uniq-col-prod-varient-btn-select"
