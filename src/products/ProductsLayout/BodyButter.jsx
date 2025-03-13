@@ -54,8 +54,7 @@ const BodyButter = ({
     if (selectedVariant) {
       const variantId = selectedVariant.id.split("/").pop();
       const productUrl = `${window.location.origin}${window.location.pathname}?variant=${variantId}`;
-      console.log(productUrl);
-      console.log(product.title , "Product ")
+      // console.log(productUrl, "Product Url from Product Page")
       addToCart({
         id: variantId, 
         title: `${product.title} - ${selectedVariant.title}`,

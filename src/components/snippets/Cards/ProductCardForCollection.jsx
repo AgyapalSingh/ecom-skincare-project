@@ -28,15 +28,25 @@ const ProductCardForCollection = ({
 
   const handleAddToCart = () => {
     if (selectedVariant) {
+      // Extract numeric ID from Shopify's Base64 ID
+      const variantId = selectedVariant.id.split("/").pop();
+  
+      // Construct the product URL with the selected variant
+      const productUrl = `${window.location.origin}/allcollections/${collectionHandle}/${product.handle}?variant=${variantId}`;
+      // console.log(productUrl, "Product Url from Product Card of Collection")
+
       addToCart({
-        id: selectedVariant.id,
+        id: variantId, // Use numeric ID only
         title: `${product.title} - ${selectedVariant.title}`,
         price: selectedVariant.price.amount,
         image: firstImage,
+        url: productUrl, // Send URL to cart
       });
+  
       openCartDrawer();
     }
   };
+  
 
   return (
     <div key={product.id} className="uniq-prod-for-col">
