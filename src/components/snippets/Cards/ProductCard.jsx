@@ -12,7 +12,6 @@ const ProductCard = ({ product, openCartDrawer }) => {
   const secondImage = product.images.edges[1]?.node.src || null;
   const imageSrc = isHovered && secondImage ? secondImage : firstImage;
 
-  
   const variants = product.variants.edges.map((edge) => edge.node);
 
   const colorOptions = [
@@ -35,24 +34,22 @@ const ProductCard = ({ product, openCartDrawer }) => {
     ),
   ];
 
-  
   const [selectedColor, setSelectedColor] = useState(colorOptions[0] || null);
   const [selectedSize, setSelectedSize] = useState(sizeOptions[0] || null);
 
- 
   const selectedVariant =
     variants.find((variant) => {
       const colorMatch = selectedColor
         ? variant.selectedOptions.some(
             (opt) => opt.name === "Color" && opt.value === selectedColor
           )
-        : true; 
+        : true;
 
       const sizeMatch = selectedSize
         ? variant.selectedOptions.some(
             (opt) => opt.name === "Size" && opt.value === selectedSize
           )
-        : true; 
+        : true;
 
       return colorMatch && sizeMatch;
     }) || variants[0];
@@ -60,13 +57,12 @@ const ProductCard = ({ product, openCartDrawer }) => {
   const handleSizeSelection = (size) => {
     setSelectedSize(size);
     if (!colorOptions.length) {
-      
       const newSelectedVariant = variants.find((variant) =>
         variant.selectedOptions.some(
           (opt) => opt.name === "Size" && opt.value === size
         )
       );
-      setSelectedColor(null); 
+      setSelectedColor(null);
     }
   };
 
@@ -78,14 +74,14 @@ const ProductCard = ({ product, openCartDrawer }) => {
     if (selectedVariant) {
       addToCart({
         id: selectedVariant.id,
-        title: `${product.title} - ${selectedVariant.title}`,
+        title: product.title,
+        variantTitle: selectedVariant.title,
         price: selectedVariant.price.amount,
         image: firstImage,
       });
       openCartDrawer();
     }
   };
-
 
   const colorMap = {
     ivorydawn: "#fdcea4",
