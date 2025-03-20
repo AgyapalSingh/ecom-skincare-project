@@ -9,7 +9,7 @@ const DefaultLayout = ({
   addToCart,
   openCartDrawer,
 }) => {
-  cconst [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   
     const [variantId, setVariantId] = useState(
       searchParams.get("variant")?.match(/\d+$/)?.[0] || null
