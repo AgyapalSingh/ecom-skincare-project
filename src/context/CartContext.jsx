@@ -15,25 +15,124 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  // Add to Cart
+  // Free Products Fetching
+  const [freeProducts, setFreeProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchFreeProducts = async () => {
+      try {
+        const response = await fetch(
+          `https://${
+            import.meta.env.VITE_SHOPIFY_APP_URL
+          }/api/2023-01/graphql.json`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Shopify-Storefront-Access-Token": import.meta.env
+                .VITE_APP_SHOPIFY_PUBLIC_ACCESS_TOKEN,
+            },
+            body: JSON.stringify({
+              query: `{
+                  collection(id: "${import.meta.env.VITE_FREE_PRODUCTS_GID}") {
+                    products(first: 20) {
+                      edges {
+                        node {
+                          id
+                          title
+                          handle
+                          images(first: 1) {
+                            edges {
+                              node {
+                                url
+                              }
+                            }
+                          }
+                          variants(first: 1) {  
+                            edges {
+                              node {
+                                id
+                                title
+                                availableForSale  
+                                price {
+                                  amount
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }`,
+            }),
+          }
+        );
+
+        const data = await response.json();
+        const freeProductsData =
+          data?.data?.collection?.products?.edges.map((edge) => ({
+            id: edge.node.variants.edges[0].node.id,
+            title: edge.node.title,
+            variantTitle: edge.node.variants.edges[0]?.node?.title,
+            image: edge.node.images.edges[0]?.node?.url || "default-image.jpg",
+            price: 0,
+            quantity: 1,
+          })) || [];
+
+        setFreeProducts(freeProductsData);
+      } catch (error) {
+        console.error("Error fetching free products:", error);
+      }
+    };
+
+    fetchFreeProducts();
+  }, []);
+
   const addToCart = (product) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
+      let updatedCart;
+
       if (existingItem) {
-        return prevCart.map((item) =>
+        updatedCart = prevCart.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
-        return [...prevCart, { ...product, quantity: 1 }];
+        updatedCart = [...prevCart, { ...product, quantity: 1 }];
       }
+
+      const paidItemsCount = updatedCart.filter(
+        (item) => item.price > 0
+      ).length;
+      if (paidItemsCount >= 2) {
+        freeProducts.forEach((freeProduct) => {
+          if (!updatedCart.find((item) => item.id === freeProduct.id)) {
+            updatedCart.push(freeProduct);
+          }
+        });
+      }
+
+      return updatedCart;
     });
   };
 
-  // Remove from Cart
+  // Remove Product From Cart
   const removeFromCart = (id) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+    setCart((prevCart) => {
+      const updatedCart = prevCart.filter((item) => item.id !== id);
+
+      const paidItemsCount = updatedCart.filter(
+        (item) => item.price > 0
+      ).length;
+      if (paidItemsCount < 2) {
+        return updatedCart.filter((item) => item.price > 0);
+      }
+
+      return updatedCart;
+    });
   };
 
   // Clear complete cart
@@ -42,7 +141,7 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify([]));
   };
 
-  // Increase quantity 
+  // Increase quantity
   const increaseQuantity = (id) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
@@ -66,7 +165,9 @@ export const CartProvider = ({ children }) => {
   const createCheckout = async () => {
     try {
       const lineItems = cart.map((item) => ({
-        variantId: `gid://shopify/ProductVariant/${item.id}`,
+        variantId: item.id.startsWith("gid://")
+          ? item.id
+          : `gid://shopify/ProductVariant/${item.id}`, // ✅ Fix
         quantity: item.quantity,
       }));
 
@@ -119,8 +220,6 @@ export const CartProvider = ({ children }) => {
       console.error("Error creating checkout:", error);
     }
   };
-
-  // Free Products Fetching
 
   return (
     <CartContext.Provider
