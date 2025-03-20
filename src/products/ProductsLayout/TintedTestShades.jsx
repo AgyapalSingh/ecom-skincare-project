@@ -15,8 +15,12 @@ const TintedTestShades = ({
   const variants = product?.variants?.edges?.map((edge) => edge.node) || [];
 
   // Extract unique colors and sizes
-  const colorOptions = [...new Set(variants.map((v) => v.title.split(" / ")[0]))];
-  const sizeOptions = [...new Set(variants.map((v) => v.title.split(" / ")[1]))];
+  const colorOptions = [
+    ...new Set(variants.map((v) => v.title.split(" / ")[0])),
+  ];
+  const sizeOptions = [
+    ...new Set(variants.map((v) => v.title.split(" / ")[1])),
+  ];
 
   // Map colors to hex values
   const colorMap = {
@@ -26,10 +30,14 @@ const TintedTestShades = ({
   };
 
   // Find the matching variant or default to the first one
-  const matchedVariant = variants.find((v) => v.id === variantId) || variants[0];
+  const matchedVariant =
+    variants.find((v) => v.id === variantId) || variants[0];
 
   // Extract color and size from the variant title (assuming format "Color / Size")
-  const [selectedColor, selectedSize] = matchedVariant?.title.split(" / ") || ["", ""];
+  const [selectedColor, selectedSize] = matchedVariant?.title.split(" / ") || [
+    "",
+    "",
+  ];
 
   // Update the selected variant
   useEffect(() => {
@@ -42,7 +50,11 @@ const TintedTestShades = ({
   const updateURL = (variantId) => {
     const numericId = variantId.split("/").pop();
     setVariantId(variantId);
-    window.history.replaceState(null, "", `${window.location.pathname}?variant=${numericId}`);
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}?variant=${numericId}`
+    );
   };
 
   // Handle Variant Selection
@@ -63,9 +75,13 @@ const TintedTestShades = ({
 
     addToCart({
       id: matchedVariant.id,
-      title: `${product.title} - ${matchedVariant.title}`,
+      title: product.title,
+      variantTitle: matchedVariant.title,
       price: matchedVariant.price.amount,
-      image: matchedVariant.image?.src || product.images.edges[0]?.node.src || "default-image.jpg",
+      image:
+        matchedVariant.image?.src ||
+        product.images.edges[0]?.node.src ||
+        "default-image.jpg",
     });
 
     openCartDrawer();
@@ -74,11 +90,17 @@ const TintedTestShades = ({
   return (
     <div className="bg-orange-50 p-6 rounded-lg shadow-lg">
       <h1 className="text-4xl font-bold text-orange-700">{product.title}</h1>
-      <p className="text-gray-600 mt-2">Rs. {matchedVariant?.price.amount || "N/A"}</p>
+      <p className="text-gray-600 mt-2">
+        Rs. {matchedVariant?.price.amount || "N/A"}
+      </p>
 
       {/* Product Image */}
       <img
-        src={matchedVariant?.image?.src || product.images.edges[0]?.node.src || "default-image.jpg"}
+        src={
+          matchedVariant?.image?.src ||
+          product.images.edges[0]?.node.src ||
+          "default-image.jpg"
+        }
         alt={product.images.edges[0]?.node.altText || product.title}
         className="w-full max-w-sm mt-4 rounded-md"
       />
@@ -97,7 +119,10 @@ const TintedTestShades = ({
                   width: "40px",
                   height: "40px",
                   backgroundColor: colorMap[color] || color.toLowerCase(),
-                  border: selectedColor === color ? "3px solid black" : "1px solid gray",
+                  border:
+                    selectedColor === color
+                      ? "3px solid black"
+                      : "1px solid gray",
                   cursor: "pointer",
                   borderRadius: "50%",
                 }}

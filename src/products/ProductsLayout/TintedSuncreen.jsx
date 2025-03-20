@@ -66,7 +66,8 @@ const TintedSuncreen = ({
 
       addToCart({
         id: variantId,
-        title: `${product.title} - ${selectedVariant.title}`,
+        title: product.title,
+        variantTitle: selectedVariant.title,
         price: selectedVariant.price.amount,
         image: selectedVariant.image?.src || product.images.edges[0]?.node.src,
         url: productUrl,
