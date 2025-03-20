@@ -10,13 +10,11 @@ export const CartProvider = ({ children }) => {
 
   const [cart, setCart] = useState(loadCartFromLocalStorage);
   const [checkoutUrl, setCheckoutUrl] = useState(null);
+  const [freeProducts, setFreeProducts] = useState([]);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
-
-  // Free Products Fetching
-  const [freeProducts, setFreeProducts] = useState([]);
 
   useEffect(() => {
     const fetchFreeProducts = async () => {
@@ -34,29 +32,28 @@ export const CartProvider = ({ children }) => {
             },
             body: JSON.stringify({
               query: `{
-                  collection(id: "${import.meta.env.VITE_FREE_PRODUCTS_GID}") {
-                    products(first: 20) {
-                      edges {
-                        node {
-                          id
-                          title
-                          handle
-                          images(first: 1) {
-                            edges {
-                              node {
-                                url
-                              }
+                collection(id: "${import.meta.env.VITE_FREE_PRODUCTS_GID}") {
+                  products(first: 20) {
+                    edges {
+                      node {
+                        id
+                        title
+                        handle
+                        images(first: 1) {
+                          edges {
+                            node {
+                              url
                             }
                           }
-                          variants(first: 1) {  
-                            edges {
-                              node {
-                                id
-                                title
-                                availableForSale  
-                                price {
-                                  amount
-                                }
+                        }
+                        variants(first: 1) {  
+                          edges {
+                            node {
+                              id
+                              title
+                              availableForSale  
+                              price {
+                                amount
                               }
                             }
                           }
@@ -64,7 +61,8 @@ export const CartProvider = ({ children }) => {
                       }
                     }
                   }
-                }`,
+                }
+              }`,
             }),
           }
         );
@@ -89,10 +87,29 @@ export const CartProvider = ({ children }) => {
     fetchFreeProducts();
   }, []);
 
+  const updateCartWithFreeProducts = (cart) => {
+    const totalPaidItemsQty = cart
+      .filter((item) => item.price > 0)
+      .reduce((sum, item) => sum + item.quantity, 0);
+
+    let updatedCart = cart.filter((item) => item.price > 0);
+
+    if (totalPaidItemsQty >= 2) {
+      const freeProductsToAdd = freeProducts.slice(0, 4);
+      freeProductsToAdd.forEach((freeProduct) => {
+        if (!updatedCart.find((item) => item.id === freeProduct.id)) {
+          updatedCart.push(freeProduct);
+        }
+      });
+    }
+
+    return updatedCart;
+  };
+
   const addToCart = (product) => {
     setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.id);
       let updatedCart;
+      const existingItem = prevCart.find((item) => item.id === product.id);
 
       if (existingItem) {
         updatedCart = prevCart.map((item) =>
@@ -104,70 +121,52 @@ export const CartProvider = ({ children }) => {
         updatedCart = [...prevCart, { ...product, quantity: 1 }];
       }
 
-      const paidItemsCount = updatedCart.filter(
-        (item) => item.price > 0
-      ).length;
-      if (paidItemsCount >= 2) {
-        freeProducts.forEach((freeProduct) => {
-          if (!updatedCart.find((item) => item.id === freeProduct.id)) {
-            updatedCart.push(freeProduct);
-          }
-        });
-      }
-
-      return updatedCart;
+      return updateCartWithFreeProducts(updatedCart);
     });
   };
 
-  // Remove Product From Cart
+  const increaseQuantity = (id) => {
+    setCart((prevCart) => {
+      const updatedCart = prevCart.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+
+      return updateCartWithFreeProducts(updatedCart);
+    });
+  };
+
+  const decreaseQuantity = (id) => {
+    setCart((prevCart) => {
+      const updatedCart = prevCart
+        .map((item) =>
+          item.id === id && item.quantity > 1
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0);
+
+      return updateCartWithFreeProducts(updatedCart);
+    });
+  };
+
   const removeFromCart = (id) => {
     setCart((prevCart) => {
       const updatedCart = prevCart.filter((item) => item.id !== id);
-
-      const paidItemsCount = updatedCart.filter(
-        (item) => item.price > 0
-      ).length;
-      if (paidItemsCount < 2) {
-        return updatedCart.filter((item) => item.price > 0);
-      }
-
-      return updatedCart;
+      return updateCartWithFreeProducts(updatedCart);
     });
   };
 
-  // Clear complete cart
   const clearCart = () => {
     setCart([]);
     localStorage.setItem("cart", JSON.stringify([]));
   };
 
-  // Increase quantity
-  const increaseQuantity = (id) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
-  };
-
-  // Decrease quantity
-  const decreaseQuantity = (id) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-    );
-  };
-
-  // Checkout
   const createCheckout = async () => {
     try {
       const lineItems = cart.map((item) => ({
         variantId: item.id.startsWith("gid://")
           ? item.id
-          : `gid://shopify/ProductVariant/${item.id}`, 
+          : `gid://shopify/ProductVariant/${item.id}`,
         quantity: item.quantity,
       }));
 
@@ -201,7 +200,6 @@ export const CartProvider = ({ children }) => {
       );
 
       const data = await response.json();
-
       const url = data.data?.checkoutCreate?.checkout?.webUrl;
       const errors = data.data?.checkoutCreate?.checkoutUserErrors;
 
@@ -241,4 +239,3 @@ export const CartProvider = ({ children }) => {
 export const useCart = () => {
   return useContext(CartContext);
 };
-
