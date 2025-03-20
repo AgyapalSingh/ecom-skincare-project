@@ -72,6 +72,8 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
                     >
                       <p className="uniq-ag-cart-drawer-product-title">{item.title}</p>
                     </Link>
+
+                    <span>{item.variantTitle}</span>
                   </div>
                   <div className="uniq-ag-cart-drawer-products-card-btn">
                     <p className="uniq-ag-cart-drawer-products-card-p">
