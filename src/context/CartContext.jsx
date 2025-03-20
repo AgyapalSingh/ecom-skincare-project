@@ -69,14 +69,22 @@ export const CartProvider = ({ children }) => {
 
         const data = await response.json();
         const freeProductsData =
-          data?.data?.collection?.products?.edges.map((edge) => ({
-            id: edge.node.variants.edges[0].node.id,
-            title: edge.node.title,
-            variantTitle: edge.node.variants.edges[0]?.node?.title,
-            image: edge.node.images.edges[0]?.node?.url || "default-image.jpg",
-            price: 0,
-            quantity: 1,
-          })) || [];
+          data?.data?.collection?.products?.edges.map((edge) => {
+            const variant = edge.node.variants.edges[0]?.node;
+            const variantId = variant?.id.split("/").pop();
+            const productUrl = `${window.location.origin}/products/${edge.node.handle}?variant=${variantId}`; // Construct URL
+
+            return {
+              id: variantId,
+              title: edge.node.title,
+              variantTitle: variant?.title,
+              image:
+                edge.node.images.edges[0]?.node?.url || "default-image.jpg",
+              price: 0,
+              quantity: 1,
+              url: productUrl,
+            };
+          }) || [];
 
         setFreeProducts(freeProductsData);
       } catch (error) {
