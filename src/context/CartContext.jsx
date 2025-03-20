@@ -39,7 +39,6 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify([]));
   };
 
-
   const increaseQuantity = (id) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
@@ -47,7 +46,7 @@ export const CartProvider = ({ children }) => {
       )
     );
   };
-  
+
   const decreaseQuantity = (id) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
@@ -58,12 +57,10 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  
-
   const createCheckout = async () => {
     try {
       const lineItems = cart.map((item) => ({
-        variantId: item.id,
+        variantId: `gid://shopify/ProductVariant/${item.id}`,
         quantity: item.quantity,
       }));
 
@@ -97,11 +94,20 @@ export const CartProvider = ({ children }) => {
       );
 
       const data = await response.json();
+
       const url = data.data?.checkoutCreate?.checkout?.webUrl;
+      const errors = data.data?.checkoutCreate?.checkoutUserErrors;
+
+      if (errors && errors.length > 0) {
+        console.error("Checkout Errors:", errors);
+        return;
+      }
 
       if (url) {
         setCheckoutUrl(url);
         window.location.href = url;
+      } else {
+        console.error("Checkout URL not received:", data);
       }
     } catch (error) {
       console.error("Error creating checkout:", error);
@@ -110,7 +116,15 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, clearCart, increaseQuantity, decreaseQuantity, createCheckout }}
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        clearCart,
+        increaseQuantity,
+        decreaseQuantity,
+        createCheckout,
+      }}
     >
       {children}
     </CartContext.Provider>
