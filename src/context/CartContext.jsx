@@ -167,7 +167,7 @@ export const CartProvider = ({ children }) => {
       const lineItems = cart.map((item) => ({
         variantId: item.id.startsWith("gid://")
           ? item.id
-          : `gid://shopify/ProductVariant/${item.id}`, // ✅ Fix
+          : `gid://shopify/ProductVariant/${item.id}`, 
         quantity: item.quantity,
       }));
 
