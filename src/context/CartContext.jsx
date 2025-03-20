@@ -15,6 +15,7 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  // Add to Cart
   const addToCart = (product) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
@@ -30,15 +31,18 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  // Remove from Cart
   const removeFromCart = (id) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
+  // Clear complete cart
   const clearCart = () => {
     setCart([]);
     localStorage.setItem("cart", JSON.stringify([]));
   };
 
+  // Increase quantity 
   const increaseQuantity = (id) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
@@ -47,6 +51,7 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  // Decrease quantity
   const decreaseQuantity = (id) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
@@ -57,6 +62,7 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  // Checkout
   const createCheckout = async () => {
     try {
       const lineItems = cart.map((item) => ({
@@ -113,6 +119,8 @@ export const CartProvider = ({ children }) => {
       console.error("Error creating checkout:", error);
     }
   };
+
+  // Free Products Fetching
 
   return (
     <CartContext.Provider

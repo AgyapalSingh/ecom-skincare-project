@@ -364,3 +364,56 @@ export const GET_PAGINATED_ARTICLES = `
     }
   }
 `;
+
+
+
+// FREE PRODUCTS COLLECTION
+const FREE_PRODUCTS_GID = import.meta.env.VITE_FREE_PRODUCTS_GID;
+export const GET_COLLECTION_FREE_PRODUCTS_BY_ID = `{
+  collection(id: "${FREE_PRODUCTS_GID}") {
+    id
+    handle
+    title
+    description
+    image {
+      id
+      url
+    }
+    products(first: 20) {
+      edges {
+        node {
+          id
+          title
+          handle
+          images(first: 10) {
+            edges {
+              node {
+                altText
+                src
+              }
+            }
+          }
+            priceRange {
+            minVariantPrice {
+              amount
+            }
+          }
+            variants(first: 10) {  
+              edges {
+                node {
+                  id
+                  title
+                  availableForSale  
+                  price {
+                    amount
+                    currencyCode
+                  }
+                }
+              }
+            }
+        }
+      }
+    }
+  }
+}
+`;
