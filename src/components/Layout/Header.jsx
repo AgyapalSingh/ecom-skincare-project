@@ -169,7 +169,7 @@ const Header = () => {
           </li>
         </ul>
         <div className="uniq-navbar-user-mobile">
-          <div>
+          <div className="uniq-navbar-user-mobile-list">
             <span>
               <LuUserRound className="nav-icon" />
             </span>
