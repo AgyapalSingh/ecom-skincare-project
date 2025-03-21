@@ -20,9 +20,9 @@ export const CartProvider = ({ children }) => {
     const fetchFreeProducts = async () => {
       try {
         const response = await fetch(
-          `https://${
-            import.meta.env.VITE_SHOPIFY_APP_URL
-          }/api/2023-01/graphql.json`,
+          `https://${import.meta.env.VITE_SHOPIFY_APP_URL}/api/${
+            import.meta.env.VITE_SHOPIFY_API_VERSION
+          }/graphql.json`,
           {
             method: "POST",
             headers: {
