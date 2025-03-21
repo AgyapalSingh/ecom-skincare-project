@@ -66,20 +66,24 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
 
                 <div className="uniq-ag-cart-drawer-products-card-right">
                   <div className="uniq-ag-cart-drawer-products-card-title">
-                    <Link
-                      to={item.url}
-                     
-                    >
-                      <p className="uniq-ag-cart-drawer-product-title">{item.title}</p>
+                    <Link to={item.url}>
+                      <p className="uniq-ag-cart-drawer-product-title">
+                        {item.title}
+                      </p>
                     </Link>
 
-                    <span className="uniq-ag-cart-drawer-product-varient">{item.variantTitle}</span>
+                    <span className="uniq-ag-cart-drawer-product-varient">
+                      {item.variantTitle}
+                    </span>
                   </div>
                   <div className="uniq-ag-cart-drawer-products-card-btn">
                     <p className="uniq-ag-cart-drawer-products-card-p">
                       <span>Rs. {item.quantity * item.price}</span>
                     </p>
-                    <button className="uniq-ag-cart-drawer-products-card-del-btn" onClick={() => removeFromCart(item.id)}>
+                    <button
+                      className="uniq-ag-cart-drawer-products-card-del-btn"
+                      onClick={() => removeFromCart(item.id)}
+                    >
                       <RiDeleteBin6Line />
                     </button>
                   </div>
@@ -95,24 +99,25 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
         </div>
 
         {cart.length > 0 && (
-          <div className="mt-4 text-black">
-            <div className="flex justify-between items-center">
-              <p className="font-semibold">Total</p>
-              <p className="font-semibold">Rs. {totalPrice}</p>
+          <div className="uniq-ag-cart-drawer-footer">
+            <div className="uniq-ag-cart-drawer-footer-price ">
+              <p>Subtotal</p>
+              <p>Rs. {totalPrice}</p>
             </div>
 
-            <div className="flex justify-between items-center mt-4">
-              <button
-                onClick={clearCart}
-                className="w-full bg-red-500 text-white py-2 rounded"
-              >
-                Clear Cart
-              </button>
+            <div className="uniq-ag-cart-drawer-footer-btns">
               <button
                 onClick={createCheckout}
-                className="w-full bg-green-500 text-white py-2 rounded"
+                className="uniq-ag-checkout-btn "
               >
-                Checkout
+                Checkout →
+              </button>
+
+              <button
+                onClick={clearCart}
+                className="uniq-ag-clearCart-btn py-2 rounded"
+              >
+                Clear Cart
               </button>
             </div>
           </div>
