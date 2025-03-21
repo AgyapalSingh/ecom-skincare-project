@@ -73,13 +73,13 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
                       <p className="uniq-ag-cart-drawer-product-title">{item.title}</p>
                     </Link>
 
-                    <span>{item.variantTitle}</span>
+                    <span className="uniq-ag-cart-drawer-product-varient">{item.variantTitle}</span>
                   </div>
                   <div className="uniq-ag-cart-drawer-products-card-btn">
                     <p className="uniq-ag-cart-drawer-products-card-p">
                       <span>Rs. {item.quantity * item.price}</span>
                     </p>
-                    <button onClick={() => removeFromCart(item.id)}>
+                    <button className="uniq-ag-cart-drawer-products-card-del-btn" onClick={() => removeFromCart(item.id)}>
                       <RiDeleteBin6Line />
                     </button>
                   </div>
