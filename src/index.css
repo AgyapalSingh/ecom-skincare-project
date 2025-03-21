@@ -982,6 +982,42 @@ body {
   }
 }
 
+/* UNIQ FOOTER PAGE **********************************************************************************************************************************************************/
+
+footer{
+  background-color: #F5F2EE;
+  font-family: var(--font-fam-primary);
+  padding-top: 20px;
+}
+
+.uniq-ag-footer-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 20px;
+}
+
+.uniq-ag-footer-container-div{
+  width: 150px;
+}
+
+.uniq-ag-footer-nav-title{
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.uniq-ag-footer-nav{
+  font-size: 14px;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+
+
+
+
 /* UNIQ HOME PAGE **********************************************************************************************************************************************************/
 
 .uniq-home-container {
