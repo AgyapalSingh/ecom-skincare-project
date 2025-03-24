@@ -31,7 +31,7 @@ const CartDrawer = ({ isOpen, closeDrawer }) => {
         <div className="uniq-ag-cart-drawer-header">
           <h2>Your Cart</h2>
           <button className="cursor-pointer" onClick={closeDrawer}>
-            <RxCross2 />
+            X
           </button>
         </div>
 
