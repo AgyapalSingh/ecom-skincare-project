@@ -11,6 +11,7 @@
     width: 100%;
     aspect-ratio: 1/1;
     margin-bottom: 5px;
+    cursor: pointer;
 }
 
 .uniq-col-prod-img-div img{
@@ -32,6 +33,7 @@
     font-size: 14px;
     font-weight: 400;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 .uniq-col-prod-price{
@@ -84,6 +86,7 @@
     padding: 10px 0px;
     text-transform: uppercase;
     margin-top: 10px;
+    cursor: pointer;
 }
 
 .uniq-col-prod-atc-btn-others{
