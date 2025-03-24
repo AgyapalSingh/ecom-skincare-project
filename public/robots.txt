@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /cart
+Allow: /
+Sitemap: https://ecom-skincare-project.vercel.app/sitemap.xml
