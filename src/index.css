@@ -984,13 +984,13 @@ body {
 
 /* UNIQ FOOTER PAGE **********************************************************************************************************************************************************/
 
-footer{
-  background-color: #F5F2EE;
+footer {
+  background-color: #f5f2ee;
   font-family: var(--font-fam-primary);
   padding-top: 20px;
 }
 
-.uniq-ag-footer-container{
+.uniq-ag-footer-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -998,25 +998,21 @@ footer{
   padding: 20px;
 }
 
-.uniq-ag-footer-container-div{
+.uniq-ag-footer-container-div {
   width: 150px;
 }
 
-.uniq-ag-footer-nav-title{
+.uniq-ag-footer-nav-title {
   text-transform: uppercase;
   margin-bottom: 20px;
   font-weight: 600;
 }
 
-.uniq-ag-footer-nav{
+.uniq-ag-footer-nav {
   font-size: 14px;
   margin-bottom: 20px;
   font-weight: 300;
 }
-
-
-
-
 
 /* UNIQ HOME PAGE **********************************************************************************************************************************************************/
 
@@ -1426,4 +1422,28 @@ footer{
 .uniq-ag-all-blogs-next-btn:disabled {
   opacity: 70%;
   cursor: not-allowed;
+}
+
+/* VIDEO Component */
+.uniq-ag-video-component {
+  width: 100%;
+  height: 100%;
+}
+
+.uniq-ag-large-vid {
+  display: none;
+}
+
+.uniq-ag-small-vid {
+  width: 100%;
+}
+
+@media screen and (min-width: 769px) {
+  .uniq-ag-large-vid {
+    display: block;
+    width: 100%;
+  }
+  .uniq-ag-small-vid {
+    display: none;
+  }
 }
