@@ -1447,3 +1447,27 @@ footer {
     display: none;
   }
 }
+
+/* VIDEO Component */
+.uniq-ag-image-component {
+  width: 100%;
+  height: 100%;
+}
+
+.uniq-ag-large-img {
+  display: none;
+}
+
+.uniq-ag-small-img {
+  width: 100%;
+}
+
+@media screen and (min-width: 769px) {
+  .uniq-ag-large-img {
+    display: block;
+    width: 100%;
+  }
+  .uniq-ag-small-img {
+    display: none;
+  }
+}
