@@ -1014,14 +1014,6 @@ footer {
   font-weight: 300;
 }
 
-/* UNIQ HOME PAGE **********************************************************************************************************************************************************/
-
-.uniq-home-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 15px;
-}
 
 /* MARQUEE of Images **********************************************************************************************************************************************************/
 .uniq-marquee-container {
@@ -1470,4 +1462,33 @@ footer {
   .uniq-ag-small-img {
     display: none;
   }
+}
+
+
+
+/* UNIQ HOME PAGE **********************************************************************************************************************************************************/
+
+
+.uniq-img-banner-slider-sec{
+  margin-bottom: 0px;
+}
+
+.uniq-newlyLaunched-sec {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  margin-bottom: 40px;
+}
+
+.uniq-marquee-container{
+  margin-bottom: 40px;
+}
+
+.uniq-video-highlight{
+  margin-bottom: 40px;
+}
+
+.uniq-image-highlight{
+  margin-bottom: 40px;
 }

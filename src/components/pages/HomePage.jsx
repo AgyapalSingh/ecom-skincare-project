@@ -15,7 +15,7 @@ const HomePage = () => {
         <ImageSlider />
       </section>
 
-      <section className="uniq-newlyLaunched-sec uniq-home-container">
+      <section className="uniq-newlyLaunched-sec">
         <NewlyLaunchedCollection />
       </section>
 
