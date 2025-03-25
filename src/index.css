@@ -1019,6 +1019,35 @@ footer {
 }
 
 
+@media screen and (min-width: 768px) {
+  footer {
+    background-color: #f5f2ee;
+    font-family: var(--font-fam-primary);
+    padding-top: 20px;
+  }
+  
+  .uniq-ag-footer-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .uniq-ag-footer-container-div {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .uniq-ag-footer-nav li{
+    margin-bottom: 5px;
+    text-align: center;
+  }
+}
+
 /* MARQUEE of Images **********************************************************************************************************************************************************/
 .uniq-marquee-container {
   display: flex;
