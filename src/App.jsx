@@ -17,6 +17,7 @@ import ContactUs from "./components/pages/FooterPages/ContactUs";
 import FAQs from "./components/pages/FooterPages/FAQs";
 import TrackOrder from "./components/pages/FooterPages/TrackOrder";
 import AllProductsPage from "./components/pages/AllProductsPage";
+import SmoothScrolling from "./lib/Utils/SmoothScrolling";
 
 function App() {
   const [showTopButton, setShowTopButton] = useState(false);
@@ -40,36 +41,38 @@ function App() {
           <IoIosArrowUp />
         </button>
       )}
-      <AutoScrollToTop>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/products" element={<AllProductsPage />} />
-          <Route path="/products/:handle" element={<ProductPage />} />
-          <Route path="/allcollections" element={<CollectionPage />} />
-          <Route
-            path="/allcollections/:handle"
-            element={<CollectionPageFromAllCollections />}
-          />
-          <Route
-            path="/allcollections/:handle/:handle"
-            element={<ProductPage />}
-          />
-          <Route
-            path="/allcollections/bestsellers"
-            element={<BestSellerPage />}
-          />
+      <SmoothScrolling>
+        <AutoScrollToTop>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/products" element={<AllProductsPage />} />
+            <Route path="/products/:handle" element={<ProductPage />} />
+            <Route path="/allcollections" element={<CollectionPage />} />
+            <Route
+              path="/allcollections/:handle"
+              element={<CollectionPageFromAllCollections />}
+            />
+            <Route
+              path="/allcollections/:handle/:handle"
+              element={<ProductPage />}
+            />
+            <Route
+              path="/allcollections/bestsellers"
+              element={<BestSellerPage />}
+            />
 
-          {/* BLogs */}
-          <Route path="/blogs" element={<AllBlogsPage />} />
+            {/* BLogs */}
+            <Route path="/blogs" element={<AllBlogsPage />} />
 
-          {/* Footer Routes */}
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/faqs" element={<FAQs />} />
-          <Route path="/track-order" element={<TrackOrder />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </AutoScrollToTop>
+            {/* Footer Routes */}
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/faqs" element={<FAQs />} />
+            <Route path="/track-order" element={<TrackOrder />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </AutoScrollToTop>
+      </SmoothScrolling>
       <Footer />
     </>
   );
