@@ -1,7 +1,7 @@
 import { ReactLenis } from "lenis/react";
 function SmoothScrolling({ children }) {
   return (
-    <ReactLenis root options={{ lerp: 0.1, duration: 2, smoothTouch: 1, syncTouch: true }}>
+    <ReactLenis root options={{ lerp: 0.5, duration: 2, smoothTouch: true }}>
       {children}
     </ReactLenis>
   );
